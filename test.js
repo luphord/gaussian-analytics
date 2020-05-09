@@ -6,6 +6,11 @@ function round(value, digits) {
     return Math.round(value * pot) / pot;
 }
 
+let positive_example_values = [];
+for (let i=0; i<20; i++) {
+    positive_example_values.push(Math.exp(0.1*i) - 1);
+}
+
 describe('pdf()', function() {
 
     const pdf_example_values = [
@@ -19,10 +24,9 @@ describe('pdf()', function() {
     ];
 
     it('should be symmetric', function() {
-        for (let i=0; i<20; i++) {
-            let x = Math.exp(0.1*i) - 1;
-            assert.strictEqual(gauss.pdf(x), gauss.pdf(-x));
-        }
+        positive_example_values.forEach(
+            x => assert.strictEqual(gauss.pdf(x), gauss.pdf(-x))
+        );
     });
 
     it('should match example values', function() {
