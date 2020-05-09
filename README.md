@@ -1,5 +1,8 @@
 # gaussian-analytics
 
+[![npm version](http://img.shields.io/npm/v/gaussian-analytics.svg)](https://npmjs.org/package/gaussian-analytics "View gaussian-analytics on npm")
+[![Build status](https://img.shields.io/travis/luphord/gaussian-analytics)](https://travis-ci.org/luphord/gaussian-analytics)
+
 JavaScript library for analytical pricings of financial derivatives under (log)normal distribution assumptions.
 
 ## Usage
