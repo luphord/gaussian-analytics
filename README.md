@@ -29,14 +29,15 @@ This should work at least for Firefox and Chrome.
 
 <a name="pdf"></a>
 
-#### pdf(x)
+#### pdf(x) ⇒
 Probability density function (pdf) for a standard normal distribution.
 
 **Kind**: global function  
+**Returns**: density of standard normal distribution  
 
-| Param | Type |
-| --- | --- |
-| x | <code>number</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | value for which the density is to be calculated |
 
 ## History
 
