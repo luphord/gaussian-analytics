@@ -41,6 +41,11 @@ Probability density function (pdf) for a standard normal distribution.
 
 ## History
 
+### 0.1.3 (2020-05-09)
+* extract normalizing constant for improved performance
+* test pdf example values
+* set up `eslint` linting (also on [Travis CI](https://travis-ci.org/luphord/gaussian-analytics))
+
 ### 0.1.2 (2020-05-09)
 * integrate API doc in README
 * API doc in README can automatically be updated by running `npm run update-docs`
