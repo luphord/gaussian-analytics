@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
-    "update-docs": "./node_modules/.bin/jsdoc2md -d 4 gaussian-analytics.js"
+    "update-docs": "./update-api-docs.sh"
   },
   "repository": {
     "type": "git",
