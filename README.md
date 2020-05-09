@@ -38,7 +38,6 @@ Probability density function (pdf) for a standard normal distribution.
 | --- | --- |
 | x | <code>number</code> | 
 
-
 ## History
 
 ### 0.1.1 (2020-05-09)

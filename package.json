@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
-    "update-docs": "./update-api-docs.sh"
+    "update-docs": "./update-api-docs.py"
   },
   "repository": {
     "type": "git",
