@@ -26,6 +26,9 @@ const p = 0.2316419,
  * @returns cumulative distribution of standard normal distribution
  */
 export function cdf(x) {
+    if (x === 0) {
+        return 0.5;
+    }
     let intercept = 1,
         slope = -1;
     if (x <= 0) {
