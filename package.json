@@ -4,7 +4,7 @@
   "description": "Library for analytical pricings of financial derivatives under (log)normal distribution assumptions",
   "main": "gaussian-analytics.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/luphord/gaussian-analytics/issues"
   },
-  "homepage": "https://github.com/luphord/gaussian-analytics#readme"
+  "homepage": "https://github.com/luphord/gaussian-analytics#readme",
+  "devDependencies": {
+    "mocha": "^7.1.2"
+  }
 }
