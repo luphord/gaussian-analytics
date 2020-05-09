@@ -6,6 +6,14 @@ function round(value, digits) {
     return Math.round(value * pot) / pot;
 }
 
+const eps = 2.2 * 1E-16;
+const sqrt_eps = Math.sqrt(eps);
+const two_sqrt_eps = 2 * sqrt_eps;
+
+function diffquot(f, x) {
+    return (f(x + sqrt_eps) - f(x - sqrt_eps)) / two_sqrt_eps;
+}
+
 let positive_example_values = [];
 for (let i=1; i<20; i++) {
     positive_example_values.push(Math.exp(0.1*i) - 1);
@@ -57,5 +65,15 @@ describe('cdf()', function() {
         for (let i=0; i<cdf_example_values.length; i++) {
             assert.strictEqual(round(gauss.cdf(i), 6), cdf_example_values[i]);
         }
+    });
+
+    it('should arrivate at pdf by differentiation', function() {
+        const digits = 5;
+        positive_example_values.forEach(
+            x => assert.strictEqual(
+                round(diffquot(gauss.cdf, x), digits),
+                round(gauss.pdf(x), digits)
+            )
+        );
     });
 });
