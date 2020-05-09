@@ -27,6 +27,19 @@ This should work at least for Firefox and Chrome.
 
 ## API Documentation
 
+#### Functions
+
+<dl>
+<dt><a href="#pdf">pdf(x)</a> ⇒</dt>
+<dd><p>Probability density function (pdf) for a standard normal distribution.</p>
+</dd>
+<dt><a href="#cdf">cdf(x)</a> ⇒</dt>
+<dd><p>Cumulative distribution function (cdf) for a standard normal distribution.
+Approximation by Zelen, Marvin and Severo, Norman C. (1964),
+<a href="http://people.math.sfu.ca/~cbm/aands/page_932.htm">formula 26.2.17</a>.</p>
+</dd>
+</dl>
+
 <a name="pdf"></a>
 
 #### pdf(x) ⇒
@@ -38,6 +51,20 @@ Probability density function (pdf) for a standard normal distribution.
 | Param | Type | Description |
 | --- | --- | --- |
 | x | <code>number</code> | value for which the density is to be calculated |
+
+<a name="cdf"></a>
+
+#### cdf(x) ⇒
+Cumulative distribution function (cdf) for a standard normal distribution.
+Approximation by Zelen, Marvin and Severo, Norman C. (1964),
+[formula 26.2.17](http://people.math.sfu.ca/~cbm/aands/page_932.htm).
+
+**Kind**: global function  
+**Returns**: cumulative distribution of standard normal distribution  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| x | <code>number</code> | value for which the cumulative distribution is to be calculated |
 
 ## History
 
