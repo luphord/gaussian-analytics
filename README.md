@@ -27,6 +27,10 @@ This should work at least for Firefox and Chrome.
 
 ## History
 
+### 0.1.1 (2020-05-09)
+* add first tests
+* set up CI infrastructure with [Travis CI](https://travis-ci.org/luphord/gaussian-analytics) for testing
+
 ### 0.1.0 (2020-05-09)
 * `pdf` (probability density function) for a standard normal distribution
 * First release on [npm](https://www.npmjs.com/package/gaussian-analytics)
