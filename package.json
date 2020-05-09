@@ -5,7 +5,8 @@
   "main": "gaussian-analytics.js",
   "type": "module",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha",
+    "update-docs": "./node_modules/.bin/jsdoc2md -d 4 gaussian-analytics.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   },
   "homepage": "https://github.com/luphord/gaussian-analytics#readme",
   "devDependencies": {
+    "jsdoc-to-markdown": "^5.0.3",
     "mocha": "^7.1.2"
   }
 }

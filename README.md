@@ -25,6 +25,20 @@ gauss.pdf(0);
 
 This should work at least for Firefox and Chrome.
 
+## API Documentation
+
+<a name="pdf"></a>
+
+#### pdf(x)
+Probability density function (pdf) for a standard normal distribution.
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| x | <code>number</code> | 
+
+
 ## History
 
 ### 0.1.1 (2020-05-09)
