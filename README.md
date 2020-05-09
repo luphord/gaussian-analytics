@@ -68,6 +68,10 @@ Approximation by Zelen, Marvin and Severo, Norman C. (1964),
 
 ## History
 
+### 0.2.0 (2020-05-09)
+* `cdf` (cumulative distribution function) for a standard normal distribution
+* test case for relationship between `cdf` and `pdf`
+
 ### 0.1.3 (2020-05-09)
 * extract normalizing constant for improved performance
 * test pdf example values
