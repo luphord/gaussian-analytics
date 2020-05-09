@@ -40,6 +40,11 @@ Probability density function (pdf) for a standard normal distribution.
 
 ## History
 
+### 0.1.2 (2020-05-09)
+* integrate API doc in README
+* API doc in README can automatically be updated by running `npm run update-docs`
+* set up `.npmignore`
+
 ### 0.1.1 (2020-05-09)
 * add first tests
 * set up CI infrastructure with [Travis CI](https://travis-ci.org/luphord/gaussian-analytics) for testing
