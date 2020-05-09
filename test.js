@@ -3,6 +3,9 @@ import * as gauss from './gaussian-analytics.js';
 
 describe('pdf()', function() {
     it('should be symmetric', function() {
-        assert.strictEqual(gauss.pdf(1.23), gauss.pdf(1.23));
+        for (let i=0; i<20; i++) {
+            let x = Math.exp(0.1*i) - 1;
+            assert.strictEqual(gauss.pdf(x), gauss.pdf(-x));
+        }
     });
 });
