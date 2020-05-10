@@ -77,3 +77,24 @@ describe('cdf()', function() {
         );
     });
 });
+
+
+describe('margrabesFormula()', function() {
+    it('should match example from https://xplaind.com/793334/black-scholes', function() {
+        const S1 = 52,
+            S2 = 50,
+            T = 0.5,
+            sigma1 = 0.12,
+            sigma2 = 0,
+            rho = 0,
+            q1 = 0,
+            q2 = 0.05;
+        const res = gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2);
+        assert.strictEqual(round(res.price, 3), 3.788);
+        assert.strictEqual(round(res.d1, 4), 0.7993);
+        assert.strictEqual(round(res.d2, 4), 0.7144);
+        assert.strictEqual(round(res.N_d1, 4), 0.7879);
+        assert.strictEqual(round(res.N_d2, 4), 0.7625);
+    });
+
+});
