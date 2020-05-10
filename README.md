@@ -38,6 +38,11 @@ This should work at least for Firefox and Chrome.
 Approximation by Zelen, Marvin and Severo, Norman C. (1964),
 <a href="http://people.math.sfu.ca/~cbm/aands/page_932.htm">formula 26.2.17</a>.</p>
 </dd>
+<dt><a href="#margrabesFormula">margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2)</a></dt>
+<dd><p>Margrabe&#39;s formula for pricing the exchange option between two risky assets.</p>
+<p>See William  Margrabe, <a href="http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf">The Value of an Option to Exchange One Asset for Another</a>,
+Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.</p>
+</dd>
 </dl>
 
 <a name="pdf"></a>
@@ -65,6 +70,27 @@ Approximation by Zelen, Marvin and Severo, Norman C. (1964),
 | Param | Type | Description |
 | --- | --- | --- |
 | x | <code>number</code> | value for which the cumulative distribution is to be calculated |
+
+<a name="margrabesFormula"></a>
+
+#### margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2)
+Margrabe's formula for pricing the exchange option between two risky assets.
+
+See William  Margrabe, [The Value of an Option to Exchange One Asset for Another](http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf),
+Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| S1 | <code>number</code> | spot value of the first asset |
+| S2 | <code>number</code> | spot value of the second asset |
+| T | <code>number</code> | time to maturity (typically expressed in years) |
+| sigma1 | <code>number</code> | volatility of the first asset |
+| sigma2 | <code>number</code> | volatility of the second asset |
+| rho | <code>number</code> | correlation of the Brownian motions driving the asset prices |
+| q1 | <code>number</code> | dividend yield of the first asset |
+| q2 | <code>number</code> | dividend yield of the second asset |
 
 ## History
 

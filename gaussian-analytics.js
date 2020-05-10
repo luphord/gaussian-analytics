@@ -50,14 +50,14 @@ function discountFactor(r, t) {
  * See William  Margrabe, [The Value of an Option to Exchange One Asset for Another](http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf),
  * Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.
  * 
- * @param {number} S1 
- * @param {number} S2 
- * @param {number} T 
- * @param {number} sigma1 
- * @param {number} sigma2 
- * @param {number} rho 
- * @param {number} q1 
- * @param {number} q2 
+ * @param {number} S1 spot value of the first asset
+ * @param {number} S2 spot value of the second asset
+ * @param {number} T time to maturity (typically expressed in years)
+ * @param {number} sigma1 volatility of the first asset
+ * @param {number} sigma2 volatility of the second asset
+ * @param {number} rho correlation of the Brownian motions driving the asset prices
+ * @param {number} q1 dividend yield of the first asset
+ * @param {number} q2 dividend yield of the second asset
  */
 export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
     const sigmaSquare = sigma1**2 + sigma2**2 - 2*sigma1*sigma2*rho;
