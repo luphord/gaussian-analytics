@@ -39,3 +39,41 @@ export function cdf(x) {
     let t = 1 / (1 + p*x);
     return intercept + slope * pdf(x) * (b1*t + b2*t**2 + b3*t**3 + b4*t**4 + b5*t**5);
 }
+
+function discountFactor(r, t) {
+    return Math.exp(-r*t);
+}
+
+/**
+ * Margrabe's formula for pricing the exchange option between two risky assets.
+ * 
+ * See William  Margrabe, [The Value of an Option to Exchange One Asset for Another](http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf),
+ * Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.
+ * 
+ * @param {number} S1 
+ * @param {number} S2 
+ * @param {number} T 
+ * @param {number} sigma1 
+ * @param {number} sigma2 
+ * @param {number} rho 
+ * @param {number} q1 
+ * @param {number} q2 
+ */
+export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
+    const sigmaSquare = sigma1**2 + sigma2**2 - 2*sigma1*sigma2*rho;
+    const sigma = Math.sqrt(sigmaSquare);
+    const sigmaSqrtT = sigma * Math.sqrt(T);
+    const d1 = (Math.log(S1 / S2) + (q2 - q1 + sigmaSquare/2)*T) / sigmaSqrtT;
+    const d2 = d1 - sigmaSqrtT;
+    const N_d1 = cdf(d1);
+    const N_d2 = cdf(d2);
+    const price = discountFactor(q1, T)*S1*N_d1 - discountFactor(q2, T)*S2*N_d2;
+    return {
+        price: price,
+        N_d1: N_d1,
+        N_d2: N_d2,
+        d1: d1,
+        d2: d2,
+        sigma: sigma
+    };
+}
