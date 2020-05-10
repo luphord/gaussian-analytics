@@ -47,8 +47,8 @@ function discountFactor(r, t) {
 /**
  * @typedef {Object} PricingResult
  * @property {number} price price of the derivative
- * @property {number} N_d1 cumulative probability of d1
- * @property {number} N_d2 cumulative probability of d2
+ * @property {number} N_d1 cumulative probability of `d1`
+ * @property {number} N_d2 cumulative probability of `d2`
  * @property {number} d1
  * @property {number} d2
  * @property {number} sigma pricing volatility

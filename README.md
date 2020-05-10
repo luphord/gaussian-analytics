@@ -132,13 +132,17 @@ to the ratio `S1/S2` instead of their individual volatilities.
 | Name | Type | Description |
 | --- | --- | --- |
 | price | <code>number</code> | price of the derivative |
-| N_d1 | <code>number</code> | cumulative probability of d1 |
-| N_d2 | <code>number</code> | cumulative probability of d2 |
+| N_d1 | <code>number</code> | cumulative probability of `d1` |
+| N_d2 | <code>number</code> | cumulative probability of `d2` |
 | d1 | <code>number</code> |  |
 | d2 | <code>number</code> |  |
 | sigma | <code>number</code> | pricing volatility |
 
 ## History
+
+### 0.3.0 (2020-05-10)
+* implement [`margrabesFormula`](#margrabesFormula) and [`margrabesFormulaShort`](#margrabesFormulaShort)
+* first test cases for the correctness of Margrabe's formula implementation
 
 ### 0.2.0 (2020-05-09)
 * `cdf` (cumulative distribution function) for a standard normal distribution
