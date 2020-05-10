@@ -4,7 +4,7 @@ const stdnormalNormalizingConstant = 1 / Math.sqrt(2 * Math.PI);
  * Probability density function (pdf) for a standard normal distribution.
  * 
  * @param {number} x value for which the density is to be calculated
- * @returns density of standard normal distribution
+ * @returns {number} density of standard normal distribution
  */
 export function pdf(x) {
     return stdnormalNormalizingConstant * Math.exp(-0.5*x**2);
@@ -23,7 +23,7 @@ const p = 0.2316419,
  * [formula 26.2.17](http://people.math.sfu.ca/~cbm/aands/page_932.htm).
  * 
  * @param {number} x value for which the cumulative distribution is to be calculated
- * @returns cumulative distribution of standard normal distribution
+ * @returns {number} cumulative distribution of standard normal distribution
  */
 export function cdf(x) {
     if (x === 0) {
@@ -45,6 +45,16 @@ function discountFactor(r, t) {
 }
 
 /**
+ * @typedef {Object} PricingResult
+ * @property {number} price price of the derivative
+ * @property {number} N_d1 cumulative probability of d1
+ * @property {number} N_d2 cumulative probability of d2
+ * @property {number} d1
+ * @property {number} d2
+ * @property {number} sigma pricing volatility
+ */
+
+/**
  * Margrabe's formula for pricing the exchange option between two risky assets.
  * 
  * See William  Margrabe, [The Value of an Option to Exchange One Asset for Another](http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf),
@@ -58,6 +68,7 @@ function discountFactor(r, t) {
  * @param {number} rho correlation of the Brownian motions driving the asset prices
  * @param {number} q1 dividend yield of the first asset
  * @param {number} q2 dividend yield of the second asset
+ * @returns {PricingResult}
  */
 export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
     const sigma = Math.sqrt(sigma1**2 + sigma2**2 - 2*sigma1*sigma2*rho);
@@ -76,6 +87,7 @@ export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
  * @param {number} sigma volatility of the ratio of both assets
  * @param {number} q1 dividend yield of the first asset
  * @param {number} q2 dividend yield of the second asset
+ * @returns {PricingResult}
  */
 export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
     const sigmaSqrtT = sigma * Math.sqrt(T);

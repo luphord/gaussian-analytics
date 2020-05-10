@@ -30,33 +30,40 @@ This should work at least for Firefox and Chrome.
 #### Functions
 
 <dl>
-<dt><a href="#pdf">pdf(x)</a> ⇒</dt>
+<dt><a href="#pdf">pdf(x)</a> ⇒ <code>number</code></dt>
 <dd><p>Probability density function (pdf) for a standard normal distribution.</p>
 </dd>
-<dt><a href="#cdf">cdf(x)</a> ⇒</dt>
+<dt><a href="#cdf">cdf(x)</a> ⇒ <code>number</code></dt>
 <dd><p>Cumulative distribution function (cdf) for a standard normal distribution.
 Approximation by Zelen, Marvin and Severo, Norman C. (1964),
 <a href="http://people.math.sfu.ca/~cbm/aands/page_932.htm">formula 26.2.17</a>.</p>
 </dd>
-<dt><a href="#margrabesFormula">margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2)</a></dt>
+<dt><a href="#margrabesFormula">margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Margrabe&#39;s formula for pricing the exchange option between two risky assets.</p>
 <p>See William  Margrabe, <a href="http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf">The Value of an Option to Exchange One Asset for Another</a>,
 Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.</p>
 </dd>
-<dt><a href="#margrabesFormulaShort">margrabesFormulaShort(S1, S2, T, sigma, q1, q2)</a></dt>
+<dt><a href="#margrabesFormulaShort">margrabesFormulaShort(S1, S2, T, sigma, q1, q2)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Margrabe&#39;s formula for pricing the exchange option between two risky assets.
 Equivalent to <code>margrabesFormula</code> but accepting only the volatility corresponding
 to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 </dd>
 </dl>
 
+#### Typedefs
+
+<dl>
+<dt><a href="#PricingResult">PricingResult</a> : <code>Object</code></dt>
+<dd></dd>
+</dl>
+
 <a name="pdf"></a>
 
-#### pdf(x) ⇒
+#### pdf(x) ⇒ <code>number</code>
 Probability density function (pdf) for a standard normal distribution.
 
 **Kind**: global function  
-**Returns**: density of standard normal distribution  
+**Returns**: <code>number</code> - density of standard normal distribution  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -64,13 +71,13 @@ Probability density function (pdf) for a standard normal distribution.
 
 <a name="cdf"></a>
 
-#### cdf(x) ⇒
+#### cdf(x) ⇒ <code>number</code>
 Cumulative distribution function (cdf) for a standard normal distribution.
 Approximation by Zelen, Marvin and Severo, Norman C. (1964),
 [formula 26.2.17](http://people.math.sfu.ca/~cbm/aands/page_932.htm).
 
 **Kind**: global function  
-**Returns**: cumulative distribution of standard normal distribution  
+**Returns**: <code>number</code> - cumulative distribution of standard normal distribution  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -78,7 +85,7 @@ Approximation by Zelen, Marvin and Severo, Norman C. (1964),
 
 <a name="margrabesFormula"></a>
 
-#### margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2)
+#### margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) ⇒ [<code>PricingResult</code>](#PricingResult)
 Margrabe's formula for pricing the exchange option between two risky assets.
 
 See William  Margrabe, [The Value of an Option to Exchange One Asset for Another](http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf),
@@ -99,7 +106,7 @@ Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.
 
 <a name="margrabesFormulaShort"></a>
 
-#### margrabesFormulaShort(S1, S2, T, sigma, q1, q2)
+#### margrabesFormulaShort(S1, S2, T, sigma, q1, q2) ⇒ [<code>PricingResult</code>](#PricingResult)
 Margrabe's formula for pricing the exchange option between two risky assets.
 Equivalent to `margrabesFormula` but accepting only the volatility corresponding
 to the ratio `S1/S2` instead of their individual volatilities.
@@ -115,6 +122,21 @@ to the ratio `S1/S2` instead of their individual volatilities.
 | sigma | <code>number</code> | volatility of the ratio of both assets |
 | q1 | <code>number</code> | dividend yield of the first asset |
 | q2 | <code>number</code> | dividend yield of the second asset |
+
+<a name="PricingResult"></a>
+
+#### PricingResult : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| price | <code>number</code> | price of the derivative |
+| N_d1 | <code>number</code> | cumulative probability of d1 |
+| N_d2 | <code>number</code> | cumulative probability of d2 |
+| d1 | <code>number</code> |  |
+| d2 | <code>number</code> |  |
+| sigma | <code>number</code> | pricing volatility |
 
 ## History
 
