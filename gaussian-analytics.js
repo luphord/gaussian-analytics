@@ -36,7 +36,7 @@ export function cdf(x) {
         intercept = 0;
         slope = 1;
     }
-    let t = 1 / (1 + p*x);
+    const t = 1 / (1 + p*x);
     return intercept + slope * pdf(x) * (b1*t + b2*t**2 + b3*t**3 + b4*t**4 + b5*t**5);
 }
 
