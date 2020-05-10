@@ -98,3 +98,28 @@ describe('margrabesFormula()', function() {
     });
 
 });
+
+describe('margrabesFormulaShort()', function() {
+    it('should be evuivalent to margrabesFormula', function() {
+        const S1 = 123,
+            S2 = 321,
+            T = 2.5,
+            q1 = 0.012,
+            q2 = 0.023;
+        for (let sigma=0; sigma<=0.5; sigma+=0.05) {
+            const actual = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2).price;
+            assert.strictEqual(
+                actual,
+                gauss.margrabesFormula(S1, S2, T, sigma, 0, 0.123, q1, q2).price
+            );
+            assert.strictEqual(
+                actual,
+                gauss.margrabesFormula(S1, S2, T, 0, sigma, 0.456, q1, q2).price
+            );
+            assert.strictEqual(
+                actual,
+                gauss.margrabesFormula(S1, S2, T, sigma, sigma, 0.5, q1, q2).price
+            );
+        }
+    });
+});

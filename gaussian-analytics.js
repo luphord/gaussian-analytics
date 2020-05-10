@@ -60,10 +60,26 @@ function discountFactor(r, t) {
  * @param {number} q2 dividend yield of the second asset
  */
 export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
-    const sigmaSquare = sigma1**2 + sigma2**2 - 2*sigma1*sigma2*rho;
-    const sigma = Math.sqrt(sigmaSquare);
+    const sigma = Math.sqrt(sigma1**2 + sigma2**2 - 2*sigma1*sigma2*rho);
+    return margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
+}
+
+/**
+ * Margrabe's formula for pricing the exchange option between two risky assets.
+ * Equivalent to `margrabesFormula` but accepting only the volatility corresponding
+ * to the ratio `S1/S2` instead of their individual volatilities.
+ * @see margrabesFormula
+ * 
+ * @param {number} S1 spot value of the first asset
+ * @param {number} S2 spot value of the second asset
+ * @param {number} T time to maturity (typically expressed in years)
+ * @param {number} sigma volatility of the ratio of both assets
+ * @param {number} q1 dividend yield of the first asset
+ * @param {number} q2 dividend yield of the second asset
+ */
+export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
     const sigmaSqrtT = sigma * Math.sqrt(T);
-    const d1 = (Math.log(S1 / S2) + (q2 - q1 + sigmaSquare/2)*T) / sigmaSqrtT;
+    const d1 = (Math.log(S1 / S2) + (q2 - q1 + sigma**2/2)*T) / sigmaSqrtT;
     const d2 = d1 - sigmaSqrtT;
     const N_d1 = cdf(d1);
     const N_d2 = cdf(d2);

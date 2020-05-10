@@ -43,6 +43,11 @@ Approximation by Zelen, Marvin and Severo, Norman C. (1964),
 <p>See William  Margrabe, <a href="http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf">The Value of an Option to Exchange One Asset for Another</a>,
 Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.</p>
 </dd>
+<dt><a href="#margrabesFormulaShort">margrabesFormulaShort(S1, S2, T, sigma, q1, q2)</a></dt>
+<dd><p>Margrabe&#39;s formula for pricing the exchange option between two risky assets.
+Equivalent to <code>margrabesFormula</code> but accepting only the volatility corresponding
+to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
+</dd>
 </dl>
 
 <a name="pdf"></a>
@@ -89,6 +94,25 @@ Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.
 | sigma1 | <code>number</code> | volatility of the first asset |
 | sigma2 | <code>number</code> | volatility of the second asset |
 | rho | <code>number</code> | correlation of the Brownian motions driving the asset prices |
+| q1 | <code>number</code> | dividend yield of the first asset |
+| q2 | <code>number</code> | dividend yield of the second asset |
+
+<a name="margrabesFormulaShort"></a>
+
+#### margrabesFormulaShort(S1, S2, T, sigma, q1, q2)
+Margrabe's formula for pricing the exchange option between two risky assets.
+Equivalent to `margrabesFormula` but accepting only the volatility corresponding
+to the ratio `S1/S2` instead of their individual volatilities.
+
+**Kind**: global function  
+**See**: margrabesFormula  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| S1 | <code>number</code> | spot value of the first asset |
+| S2 | <code>number</code> | spot value of the second asset |
+| T | <code>number</code> | time to maturity (typically expressed in years) |
+| sigma | <code>number</code> | volatility of the ratio of both assets |
 | q1 | <code>number</code> | dividend yield of the first asset |
 | q2 | <code>number</code> | dividend yield of the second asset |
 
