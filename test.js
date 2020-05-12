@@ -96,7 +96,6 @@ describe('margrabesFormula()', function() {
         assert.strictEqual(round(res.N_d1, 4), 0.7879);
         assert.strictEqual(round(res.N_d2, 4), 0.7625);
     });
-
 });
 
 describe('margrabesFormulaShort()', function() {
@@ -121,5 +120,21 @@ describe('margrabesFormulaShort()', function() {
                 gauss.margrabesFormula(S1, S2, T, sigma, sigma, 0.5, q1, q2).price
             );
         }
+    });
+});
+
+describe('eqBlackScholesCall', function() {
+    it('should match example from https://xplaind.com/793334/black-scholes', function() {
+        const S = 52,
+            K = 50,
+            T = 0.5,
+            sigma = 0.12,
+            r = 0.05;
+        const res = gauss.eqBlackScholesCall(S, K, T, sigma, r);
+        assert.strictEqual(round(res.price, 3), 3.788);
+        assert.strictEqual(round(res.d1, 4), 0.7993);
+        assert.strictEqual(round(res.d2, 4), 0.7144);
+        assert.strictEqual(round(res.N_d1, 4), 0.7879);
+        assert.strictEqual(round(res.N_d2, 4), 0.7625);
     });
 });

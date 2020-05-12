@@ -48,6 +48,9 @@ Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.</p>
 Equivalent to <code>margrabesFormula</code> but accepting only the volatility corresponding
 to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 </dd>
+<dt><a href="#eqBlackScholesCall">eqBlackScholesCall(S, K, T, sigma, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
+<dd><p>Black-Scholes formula for a European call option on a stock (asset class equity).</p>
+</dd>
 </dl>
 
 #### Typedefs
@@ -122,6 +125,21 @@ to the ratio `S1/S2` instead of their individual volatilities.
 | sigma | <code>number</code> | volatility of the ratio of both assets |
 | q1 | <code>number</code> | dividend yield of the first asset |
 | q2 | <code>number</code> | dividend yield of the second asset |
+
+<a name="eqBlackScholesCall"></a>
+
+#### eqBlackScholesCall(S, K, T, sigma, r) ⇒ [<code>PricingResult</code>](#PricingResult)
+Black-Scholes formula for a European call option on a stock (asset class equity).
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| S | <code>number</code> | spot value of the stock |
+| K | <code>number</code> | strike price of the option |
+| T | <code>number</code> | time to maturity (typically expressed in years) |
+| sigma | <code>number</code> | volatility of the underlying stock |
+| r | <code>number</code> | risk-less rate of return |
 
 <a name="PricingResult"></a>
 
