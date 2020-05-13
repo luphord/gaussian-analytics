@@ -137,4 +137,18 @@ describe('eqBlackScholesCall', function() {
         assert.strictEqual(round(res.N_d1, 4), 0.7879);
         assert.strictEqual(round(res.N_d2, 4), 0.7625);
     });
+
+    it('Put-Call-Parity should hold', function() {
+        const S = 123,
+            sigma = 0.23,
+            T = 2.5,
+            r = 0.012;
+        const digits = 12;
+        for (let K=80; K<=150; K+=2.7) {
+            const fwdPrice = S - Math.exp(-r*T)*K;
+            const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).price;
+            const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).price;
+            assert.strictEqual(round(callPrice - putPrice, digits), round(fwdPrice, digits));
+        }
+    });
 });
