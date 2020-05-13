@@ -138,6 +138,20 @@ describe('eqBlackScholesCall', function() {
         assert.strictEqual(round(res.N_d2, 4), 0.7625);
     });
 
+    it('should match example from http://www.maxi-pedia.com/Black+Scholes+model', function() {
+        // this is not a good example due to excessive rounding in the source
+        const S = 100,
+            K = 95,
+            T = 0.24,
+            sigma = 0.5,
+            r = 0.1;
+        const res = gauss.eqBlackScholesCall(S, K, T, sigma, r);
+        assert.strictEqual(round(res.d1, 2), 0.43);
+        assert.strictEqual(round(res.d2, 2), 0.18);
+        assert.strictEqual(round(res.N_d1, 2), round(0.6664, 2));
+        assert.strictEqual(round(res.N_d2, 2), round(0.5714, 2));
+    });
+
     it('Put-Call-Parity should hold', function() {
         const S = 123,
             sigma = 0.23,
