@@ -123,7 +123,7 @@ describe('margrabesFormulaShort()', function() {
     });
 });
 
-describe('eqBlackScholesCall', function() {
+describe('eqBlackScholes', function() {
     it('should match example from https://xplaind.com/793334/black-scholes', function() {
         const S = 52,
             K = 50,
@@ -150,6 +150,18 @@ describe('eqBlackScholesCall', function() {
         assert.strictEqual(round(res.d2, 2), 0.18);
         assert.strictEqual(round(res.N_d1, 2), round(0.6664, 2));
         assert.strictEqual(round(res.N_d2, 2), round(0.5714, 2));
+    });
+
+    it('should match example from http://sfb649.wiwi.hu-berlin.de/fedc_homepage/xplore/tutorials/xlghtmlnode62.html', function() {
+        const S = 100,
+            K = 120,
+            T = 0.5,
+            sigma = 0.25,
+            r = 0.05;
+        const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).price;
+        const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).price;
+        assert.strictEqual(round(callPrice, 3), 1.952);
+        assert.strictEqual(round(putPrice, 3), 18.989); // 18.898 in original source
     });
 
     it('Put-Call-Parity should hold', function() {
