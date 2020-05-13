@@ -164,6 +164,20 @@ describe('eqBlackScholes', function() {
         assert.strictEqual(round(putPrice, 3), 18.989); // 18.898 in original source
     });
 
+    it('should match example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
+        const F = 20,
+            K = 20,
+            r = .15,
+            T = 9 / 12,
+            sigma = 0.40;
+        const S = Math.exp(-r*T)*F;
+        const digits = 7;
+        const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).price;
+        const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).price;
+        assert.strictEqual(round(callPrice, digits), round(2.4575673110408576, digits));
+        assert.strictEqual(round(putPrice, digits), round(2.4575673110408576, digits));
+    });
+
     it('Put-Call-Parity should hold', function() {
         const S = 123,
             sigma = 0.23,
