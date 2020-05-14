@@ -167,7 +167,7 @@ Black-Scholes formula for a European put option on a stock (asset class equity).
 
 | Name | Type | Description |
 | --- | --- | --- |
-| price | <code>number</code> | price of the derivative |
+| callPrice | <code>number</code> | price of the call option |
 | N_d1 | <code>number</code> | cumulative probability of `d1` |
 | N_d2 | <code>number</code> | cumulative probability of `d2` |
 | d1 | <code>number</code> |  |
@@ -175,6 +175,9 @@ Black-Scholes formula for a European put option on a stock (asset class equity).
 | sigma | <code>number</code> | pricing volatility |
 
 ## History
+
+### 0.4.0 (not yet)
+* BREAKING CHANGE: renamce `price` to `callPrice` in the result of Margrabe's formulas
 
 ### 0.3.0 (2020-05-10)
 * implement [`margrabesFormula`](#margrabesFormula) and [`margrabesFormulaShort`](#margrabesFormulaShort)

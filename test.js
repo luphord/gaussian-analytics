@@ -90,7 +90,7 @@ describe('margrabesFormula()', function() {
             q1 = 0,
             q2 = 0.05;
         const res = gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2);
-        assert.strictEqual(round(res.price, 3), 3.788);
+        assert.strictEqual(round(res.callPrice, 3), 3.788);
         assert.strictEqual(round(res.d1, 4), 0.7993);
         assert.strictEqual(round(res.d2, 4), 0.7144);
         assert.strictEqual(round(res.N_d1, 4), 0.7879);
@@ -106,18 +106,18 @@ describe('margrabesFormulaShort()', function() {
             q1 = 0.012,
             q2 = 0.023;
         for (let sigma=0; sigma<=0.5; sigma+=0.05) {
-            const actual = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2).price;
+            const actual = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2).callPrice;
             assert.strictEqual(
                 actual,
-                gauss.margrabesFormula(S1, S2, T, sigma, 0, 0.123, q1, q2).price
+                gauss.margrabesFormula(S1, S2, T, sigma, 0, 0.123, q1, q2).callPrice
             );
             assert.strictEqual(
                 actual,
-                gauss.margrabesFormula(S1, S2, T, 0, sigma, 0.456, q1, q2).price
+                gauss.margrabesFormula(S1, S2, T, 0, sigma, 0.456, q1, q2).callPrice
             );
             assert.strictEqual(
                 actual,
-                gauss.margrabesFormula(S1, S2, T, sigma, sigma, 0.5, q1, q2).price
+                gauss.margrabesFormula(S1, S2, T, sigma, sigma, 0.5, q1, q2).callPrice
             );
         }
     });
@@ -131,7 +131,7 @@ describe('eqBlackScholes', function() {
             sigma = 0.12,
             r = 0.05;
         const res = gauss.eqBlackScholesCall(S, K, T, sigma, r);
-        assert.strictEqual(round(res.price, 3), 3.788);
+        assert.strictEqual(round(res.callPrice, 3), 3.788);
         assert.strictEqual(round(res.d1, 4), 0.7993);
         assert.strictEqual(round(res.d2, 4), 0.7144);
         assert.strictEqual(round(res.N_d1, 4), 0.7879);
@@ -158,8 +158,8 @@ describe('eqBlackScholes', function() {
             T = 0.5,
             sigma = 0.25,
             r = 0.05;
-        const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).price;
-        const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).price;
+        const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).callPrice;
+        const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).callPrice;
         assert.strictEqual(round(callPrice, 3), 1.952);
         assert.strictEqual(round(putPrice, 3), 18.989); // 18.898 in original source
     });
@@ -172,8 +172,8 @@ describe('eqBlackScholes', function() {
             sigma = 0.40;
         const S = Math.exp(-r*T)*F;
         const digits = 7;
-        const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).price;
-        const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).price;
+        const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).callPrice;
+        const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).callPrice;
         assert.strictEqual(round(callPrice, digits), round(2.4575673110408576, digits));
         assert.strictEqual(round(putPrice, digits), round(2.4575673110408576, digits));
     });
@@ -186,8 +186,8 @@ describe('eqBlackScholes', function() {
         const digits = 12;
         for (let K=80; K<=150; K+=2.7) {
             const fwdPrice = S - Math.exp(-r*T)*K;
-            const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).price;
-            const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).price;
+            const callPrice = gauss.eqBlackScholesCall(S, K, T, sigma, r).callPrice;
+            const putPrice = gauss.eqBlackScholesPut(S, K, T, sigma, r).callPrice;
             assert.strictEqual(round(callPrice - putPrice, digits), round(fwdPrice, digits));
         }
     });

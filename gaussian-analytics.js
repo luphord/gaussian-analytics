@@ -46,7 +46,7 @@ function discountFactor(r, t) {
 
 /**
  * @typedef {Object} PricingResult
- * @property {number} price price of the derivative
+ * @property {number} callPrice price of the call option
  * @property {number} N_d1 cumulative probability of `d1`
  * @property {number} N_d2 cumulative probability of `d2`
  * @property {number} d1
@@ -95,9 +95,9 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
     const d2 = d1 - sigmaSqrtT;
     const N_d1 = cdf(d1);
     const N_d2 = cdf(d2);
-    const price = discountFactor(q1, T)*S1*N_d1 - discountFactor(q2, T)*S2*N_d2;
+    const callPrice = discountFactor(q1, T)*S1*N_d1 - discountFactor(q2, T)*S2*N_d2;
     return {
-        price: price,
+        callPrice: callPrice,
         N_d1: N_d1,
         N_d2: N_d2,
         d1: d1,
