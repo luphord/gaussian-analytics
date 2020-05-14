@@ -99,7 +99,7 @@ describe('margrabesFormula()', function() {
 });
 
 describe('margrabesFormulaShort()', function() {
-    it('should be evuivalent to margrabesFormula', function() {
+    it('should be equivalent to margrabesFormula', function() {
         const S1 = 123,
             S2 = 321,
             T = 2.5,

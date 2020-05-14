@@ -9,7 +9,7 @@ JavaScript library for analytical pricings of financial derivatives under (log)n
 
 ### Experiment in browser console
 
-As `gaussian-analytics.js` is published as an [ES6 module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) your have to apply the following trick to play with it in your browser's dev console. First open the dev console (in Firefox press `F12`) and execute
+As `gaussian-analytics.js` is published as an [ES6 module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) you have to apply the following trick to play with it in your browser's dev console. First open the dev console (in Firefox press `F12`) and execute
 
 ```javascript
 // dynamically import ES6 module and store it as global variable gauss
