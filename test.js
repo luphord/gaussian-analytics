@@ -200,9 +200,19 @@ describe('eqBlackScholes', function() {
             T = 2.5,
             r = 0.012;
         const digits = 12;
+        // without dividends
         for (let K=80; K<=150; K+=2.7) {
             const fwdPrice = S - Math.exp(-r*T)*K;
             const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
+            const callPrice = res.callPrice;
+            const putPrice = res.putPrice;
+            assert.strictEqual(round(callPrice - putPrice, digits), round(fwdPrice, digits));
+        }
+        // with dividends
+        const q = 0.05;
+        for (let K=80; K<=150; K+=2.7) {
+            const fwdPrice = Math.exp(-q*T)*S - Math.exp(-r*T)*K;
+            const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
             const callPrice = res.callPrice;
             const putPrice = res.putPrice;
             assert.strictEqual(round(callPrice - putPrice, digits), round(fwdPrice, digits));
