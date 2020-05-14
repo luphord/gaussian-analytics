@@ -48,7 +48,7 @@ Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.</p>
 Equivalent to <code>margrabesFormula</code> but accepting only the volatility corresponding
 to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 </dd>
-<dt><a href="#eqBlackScholes">eqBlackScholes(S, K, T, sigma, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
+<dt><a href="#eqBlackScholes">eqBlackScholes(S, K, T, sigma, q, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for a European vanilla option on a stock (asset class equity).</p>
 </dd>
 </dl>
@@ -128,7 +128,7 @@ to the ratio `S1/S2` instead of their individual volatilities.
 
 <a name="eqBlackScholes"></a>
 
-#### eqBlackScholes(S, K, T, sigma, r) ⇒ [<code>PricingResult</code>](#PricingResult)
+#### eqBlackScholes(S, K, T, sigma, q, r) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black-Scholes formula for a European vanilla option on a stock (asset class equity).
 
 **Kind**: global function  
@@ -139,6 +139,7 @@ Black-Scholes formula for a European vanilla option on a stock (asset class equi
 | K | <code>number</code> | strike price of the option |
 | T | <code>number</code> | time to maturity (typically expressed in years) |
 | sigma | <code>number</code> | volatility of the underlying stock |
+| q | <code>number</code> | dividend rate of the underlying stock |
 | r | <code>number</code> | risk-less rate of return |
 
 <a name="PricingResult"></a>

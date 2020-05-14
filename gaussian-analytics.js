@@ -120,9 +120,10 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
  * @param {number} K strike price of the option
  * @param {number} T time to maturity (typically expressed in years)
  * @param {number} sigma volatility of the underlying stock
+ * @param {number} q dividend rate of the underlying stock
  * @param {number} r risk-less rate of return
  * @returns {PricingResult}
  */
-export function eqBlackScholes(S, K, T, sigma, r) {
-    return margrabesFormulaShort(S, K, T, sigma, 0, r);
+export function eqBlackScholes(S, K, T, sigma, q, r) {
+    return margrabesFormulaShort(S, K, T, sigma, q, r);
 }
