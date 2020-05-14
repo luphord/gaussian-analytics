@@ -114,7 +114,7 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
 }
 
 /**
- * Black-Scholes formula for a European call option on a stock (asset class equity).
+ * Black-Scholes formula for a European vanilla option on a stock (asset class equity).
  * 
  * @param {number} S spot value of the stock
  * @param {number} K strike price of the option
@@ -123,6 +123,6 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
  * @param {number} r risk-less rate of return
  * @returns {PricingResult}
  */
-export function eqBlackScholesCall(S, K, T, sigma, r) {
+export function eqBlackScholes(S, K, T, sigma, r) {
     return margrabesFormulaShort(S, K, T, sigma, 0, r);
 }
