@@ -121,6 +121,20 @@ describe('margrabesFormulaShort()', function() {
             );
         }
     });
+    
+    it('should be symmetric regarding switch of assets and put call', function() {
+        const S1 = 123,
+            S2 = 321,
+            T = 2.5,
+            q1 = 0.012,
+            q2 = 0.023,
+            sigma = 0.2;
+        const digits = 12;
+        const res1 = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
+        const res2 = gauss.margrabesFormulaShort(S2, S1, T, sigma, q2, q1);
+        assert.strictEqual(round(res1.callPrice, digits), round(res2.putPrice, digits));
+        assert.strictEqual(round(res1.putPrice, digits), round(res2.callPrice, digits));
+    });
 });
 
 describe('eqBlackScholes', function() {

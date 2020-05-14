@@ -168,6 +168,7 @@ Black-Scholes formula for a European put option on a stock (asset class equity).
 | Name | Type | Description |
 | --- | --- | --- |
 | callPrice | <code>number</code> | price of the call option |
+| putPrice | <code>number</code> | price of the put option |
 | N_d1 | <code>number</code> | cumulative probability of `d1` |
 | N_d2 | <code>number</code> | cumulative probability of `d2` |
 | d1 | <code>number</code> |  |
