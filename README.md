@@ -51,9 +51,6 @@ to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 <dt><a href="#eqBlackScholesCall">eqBlackScholesCall(S, K, T, sigma, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for a European call option on a stock (asset class equity).</p>
 </dd>
-<dt><a href="#eqBlackScholesPut">eqBlackScholesPut(S, K, T, sigma, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
-<dd><p>Black-Scholes formula for a European put option on a stock (asset class equity).</p>
-</dd>
 </dl>
 
 #### Typedefs
@@ -133,21 +130,6 @@ to the ratio `S1/S2` instead of their individual volatilities.
 
 #### eqBlackScholesCall(S, K, T, sigma, r) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black-Scholes formula for a European call option on a stock (asset class equity).
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| S | <code>number</code> | spot value of the stock |
-| K | <code>number</code> | strike price of the option |
-| T | <code>number</code> | time to maturity (typically expressed in years) |
-| sigma | <code>number</code> | volatility of the underlying stock |
-| r | <code>number</code> | risk-less rate of return |
-
-<a name="eqBlackScholesPut"></a>
-
-#### eqBlackScholesPut(S, K, T, sigma, r) ⇒ [<code>PricingResult</code>](#PricingResult)
-Black-Scholes formula for a European put option on a stock (asset class equity).
 
 **Kind**: global function  
 
