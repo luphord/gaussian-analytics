@@ -172,8 +172,9 @@ describe('eqBlackScholes', function() {
             T = 0.5,
             sigma = 0.25,
             r = 0.05;
-        const callPrice = gauss.eqBlackScholes(S, K, T, sigma, 0, r).callPrice;
-        const putPrice = gauss.eqBlackScholes(S, K, T, sigma, 0, r).putPrice;
+        const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
+        const callPrice = res.callPrice;
+        const putPrice = res.putPrice;
         assert.strictEqual(round(callPrice, 3), 1.952);
         assert.strictEqual(round(putPrice, 3), 18.989); // 18.898 in original source
     });
@@ -186,8 +187,9 @@ describe('eqBlackScholes', function() {
             sigma = 0.40;
         const S = Math.exp(-r*T)*F;
         const digits = 7;
-        const callPrice = gauss.eqBlackScholes(S, K, T, sigma, 0, r).callPrice;
-        const putPrice = gauss.eqBlackScholes(S, K, T, sigma, 0, r).putPrice;
+        const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
+        const callPrice = res.callPrice;
+        const putPrice = res.putPrice;
         assert.strictEqual(round(callPrice, digits), round(2.4575673110408576, digits));
         assert.strictEqual(round(putPrice, digits), round(2.4575673110408576, digits));
     });
@@ -200,8 +202,9 @@ describe('eqBlackScholes', function() {
         const digits = 12;
         for (let K=80; K<=150; K+=2.7) {
             const fwdPrice = S - Math.exp(-r*T)*K;
-            const callPrice = gauss.eqBlackScholes(S, K, T, sigma, 0, r).callPrice;
-            const putPrice = gauss.eqBlackScholes(S, K, T, sigma, 0, r).putPrice;
+            const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
+            const callPrice = res.callPrice;
+            const putPrice = res.putPrice;
             assert.strictEqual(round(callPrice - putPrice, digits), round(fwdPrice, digits));
         }
     });
