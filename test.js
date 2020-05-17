@@ -178,6 +178,20 @@ describe('eqBlackScholes', function() {
         assert.strictEqual(round(callPrice, 3), 1.952);
         assert.strictEqual(round(putPrice, 3), 18.989); // 18.898 in original source
     });
+    
+    it('should match examples from https://aaronschlegel.me/black-scholes-formula-python.html', function() {
+        const S = 50,
+            K = 100,
+            r = 0.05,
+            T = 1,
+            sigma = 0.25;
+        const digits = 5;
+        const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
+        const callPrice = res.callPrice;
+        const putPrice = res.putPrice;
+        assert.strictEqual(round(callPrice, digits), round(0.027352509369436617, digits));
+        assert.strictEqual(round(putPrice, digits), round(45.15029495944084, digits));
+    });
 
     it('should match example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
         const F = 20,
