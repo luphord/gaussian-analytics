@@ -44,6 +44,24 @@ function discountFactor(r, t) {
     return Math.exp(-r*t);
 }
 
+function assertPositive(value, name) {
+    if (typeof value !== 'number') {
+        throw name + ' must be a number';
+    }
+    if (value < 0) {
+        throw name + ' must be greater or equal to 0; got ' + value;
+    }
+}
+
+function assertCorrelation(value, name) {
+    if (typeof value !== 'number') {
+        throw name + ' must be a number';
+    }
+    if (value < -1 || value > 1) {
+        throw name + ' must be in interval [-1, 1]; got ' + value;
+    }
+}
+
 /**
  * @typedef {Object} PricingResult
  * @property {number} callPrice price of the call option
@@ -72,6 +90,9 @@ function discountFactor(r, t) {
  * @returns {PricingResult}
  */
 export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
+    assertPositive(sigma1);
+    assertPositive(sigma2);
+    assertCorrelation(rho);
     const sigma = Math.sqrt(sigma1**2 + sigma2**2 - 2*sigma1*sigma2*rho);
     return margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
 }
@@ -91,6 +112,10 @@ export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
  * @returns {PricingResult}
  */
 export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
+    assertPositive(S1);
+    assertPositive(S2);
+    assertPositive(T);
+    assertPositive(sigma);
     const sigmaSqrtT = sigma * Math.sqrt(T);
     const d1 = (Math.log(S1 / S2) + (q2 - q1 + sigma**2/2)*T) / sigmaSqrtT;
     const d2 = d1 - sigmaSqrtT;
