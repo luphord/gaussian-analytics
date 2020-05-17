@@ -14,6 +14,17 @@ function diffquot(f, x) {
     return (f(x + sqrt_eps) - f(x - sqrt_eps)) / two_sqrt_eps;
 }
 
+function invertFxParameters(S, K, T, sigma, rFor, rDom) {
+    return {
+        S: 1/S,
+        K: 1/K,
+        T: T,
+        sigma: sigma,
+        rFor: rDom,
+        rDom: rFor
+    };
+}
+
 let positive_example_values = [];
 for (let i=1; i<20; i++) {
     positive_example_values.push(Math.exp(0.1*i) - 1);
@@ -263,5 +274,21 @@ describe('fxBlackScholes', function() {
         const putPrice = res.putPrice;
         assert.strictEqual(round(callPrice, digits), round(0.005810283556875531, digits));
         assert.strictEqual(round(putPrice, digits), round(0.5225061853230608, digits));
+    });
+
+    it('should be symmetric with respect to currency switching', function() {
+        const S = 2.345,
+            sigma = 0.23,
+            T = 2.5,
+            rFor = 0.03,
+            rDom = 0.012;
+        const digits = 12;
+        for (let K=1.2; K<=3.5; K+=0.1) {
+            const resDom = gauss.fxBlackScholes(S, K, T, sigma, rFor, rDom);
+            const parFor = invertFxParameters(S, K, T, sigma, rFor, rDom);
+            const resFor = gauss.fxBlackScholes(parFor.S, parFor.K, parFor.T, parFor.sigma, parFor.rFor, parFor.rDom);
+            assert.strictEqual(round(resFor.putPrice, digits), round(resDom.callPrice/K/S, digits));
+            assert.strictEqual(round(resFor.callPrice, digits), round(resDom.putPrice/K/S, digits));
+        }
     });
 });
