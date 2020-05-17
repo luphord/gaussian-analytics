@@ -183,7 +183,7 @@ This is also known as the Garman–Kohlhagen model.
 ## History
 
 ### 0.4.0 (2020-05-17)
-* BREAKING CHANGE: renamce `price` to `callPrice` in the result of Margrabe's formulas
+* BREAKING CHANGE: rename `price` to `callPrice` in the result of Margrabe's formulas
 * implement [`eqBlackScholes`](#eqBlackScholes) (Black-Scholes formula for stock options) 
 * implement [`fxBlackScholes`](#fxBlackScholes) (Black-Scholes formula for currency options)
 
