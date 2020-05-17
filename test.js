@@ -208,7 +208,7 @@ describe('eqBlackScholes', function() {
         assert.strictEqual(round(putPrice, digits), round(2.4575673110408576, digits));
     });
 
-    it('should match seconda example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
+    it('should match second example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
         const S = 110,
             K = 100,
             r = 0.10,
@@ -246,5 +246,22 @@ describe('eqBlackScholes', function() {
             const putPrice = res.putPrice;
             assert.strictEqual(round(callPrice - putPrice, digits), round(fwdPrice, digits));
         }
+    });
+});
+
+describe('fxBlackScholes', function() {
+    it('should match fx example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
+        const S = 2,
+            K = 2.5,
+            T = 6 / 12,
+            rDom = 0.05,
+            rFor = 0.08,
+            sigma = 0.2;
+        const digits = 6;
+        const res = gauss.fxBlackScholes(S, K, T, sigma, rFor, rDom);
+        const callPrice = res.callPrice;
+        const putPrice = res.putPrice;
+        assert.strictEqual(round(callPrice, digits), round(0.005810283556875531, digits));
+        assert.strictEqual(round(putPrice, digits), round(0.5225061853230608, digits));
     });
 });
