@@ -92,9 +92,9 @@ function assertCorrelation(value, name) {
  * @returns {PricingResult}
  */
 export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
-    assertPositive(sigma1);
-    assertPositive(sigma2);
-    assertCorrelation(rho);
+    assertPositive(sigma1, 'sigma1');
+    assertPositive(sigma2, 'sigma2');
+    assertCorrelation(rho, 'rho');
     const sigma = Math.sqrt(sigma1**2 + sigma2**2 - 2*sigma1*sigma2*rho);
     return margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
 }
@@ -114,12 +114,12 @@ export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
  * @returns {PricingResult}
  */
 export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
-    assertPositive(S1);
-    assertPositive(S2);
-    assertPositive(T);
-    assertPositive(sigma);
-    assertNumber(q1);
-    assertNumber(q2);
+    assertPositive(S1, 'S1');
+    assertPositive(S2, 'S2');
+    assertPositive(T, 'T');
+    assertPositive(sigma, 'sigma');
+    assertNumber(q1, 'q1');
+    assertNumber(q2, 'q2');
     const sigmaSqrtT = sigma * Math.sqrt(T);
     const d1 = (Math.log(S1 / S2) + (q2 - q1 + sigma**2/2)*T) / sigmaSqrtT;
     const d2 = d1 - sigmaSqrtT;
