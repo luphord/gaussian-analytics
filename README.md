@@ -51,6 +51,10 @@ to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 <dt><a href="#eqBlackScholes">eqBlackScholes(S, K, T, sigma, q, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for a European vanilla option on a stock (asset class equity).</p>
 </dd>
+<dt><a href="#fxBlackScholes">fxBlackScholes(S, K, T, sigma, rFor, rDom)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
+<dd><p>Black-Scholes formula for a European vanilla currency option (asset class foreign exchange).
+This is also known as the Garman–Kohlhagen model.</p>
+</dd>
 </dl>
 
 #### Typedefs
@@ -141,6 +145,24 @@ Black-Scholes formula for a European vanilla option on a stock (asset class equi
 | sigma | <code>number</code> | volatility of the underlying stock |
 | q | <code>number</code> | dividend rate of the underlying stock |
 | r | <code>number</code> | risk-less rate of return |
+
+<a name="fxBlackScholes"></a>
+
+#### fxBlackScholes(S, K, T, sigma, rFor, rDom) ⇒ [<code>PricingResult</code>](#PricingResult)
+Black-Scholes formula for a European vanilla currency option (asset class foreign exchange).
+This is also known as the Garman–Kohlhagen model.
+
+**Kind**: global function  
+**Returns**: [<code>PricingResult</code>](#PricingResult) - prices in domestic currency  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| S | <code>number</code> | spot value of the currency exchange rate; this has to be expressed in unit of domestic currency / unit of foreign currency |
+| K | <code>number</code> | strike price of the option |
+| T | <code>number</code> | time to maturity (typically expressed in years) |
+| sigma | <code>number</code> | volatility of the currency exchange rate |
+| rFor | <code>number</code> | risk-less rate of return in the foreign currency |
+| rDom | <code>number</code> | risk-less rate of return in the domestic currency |
 
 <a name="PricingResult"></a>
 

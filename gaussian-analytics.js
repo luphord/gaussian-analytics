@@ -127,3 +127,19 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
 export function eqBlackScholes(S, K, T, sigma, q, r) {
     return margrabesFormulaShort(S, K, T, sigma, q, r);
 }
+
+/**
+ * Black-Scholes formula for a European vanilla currency option (asset class foreign exchange).
+ * This is also known as the Garman–Kohlhagen model.
+ * 
+ * @param {number} S spot value of the currency exchange rate; this has to be expressed in unit of domestic currency / unit of foreign currency
+ * @param {number} K strike price of the option
+ * @param {number} T time to maturity (typically expressed in years)
+ * @param {number} sigma volatility of the currency exchange rate
+ * @param {number} rFor risk-less rate of return in the foreign currency
+ * @param {number} rDom risk-less rate of return in the domestic currency
+ * @returns {PricingResult} prices in domestic currency
+ */
+export function fxBlackScholes(S, K, T, sigma, rFor, rDom) {
+    return margrabesFormulaShort(S, K, T, sigma, rFor, rDom);
+}
