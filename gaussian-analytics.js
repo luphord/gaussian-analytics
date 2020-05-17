@@ -44,19 +44,21 @@ function discountFactor(r, t) {
     return Math.exp(-r*t);
 }
 
-function assertPositive(value, name) {
+function assertNumber(value, name) {
     if (typeof value !== 'number') {
         throw name + ' must be a number';
     }
+}
+
+function assertPositive(value, name) {
+    assertNumber(value, name);
     if (value < 0) {
         throw name + ' must be greater or equal to 0; got ' + value;
     }
 }
 
 function assertCorrelation(value, name) {
-    if (typeof value !== 'number') {
-        throw name + ' must be a number';
-    }
+    assertNumber(value, name);
     if (value < -1 || value > 1) {
         throw name + ' must be in interval [-1, 1]; got ' + value;
     }
@@ -116,6 +118,8 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
     assertPositive(S2);
     assertPositive(T);
     assertPositive(sigma);
+    assertNumber(q1);
+    assertNumber(q2);
     const sigmaSqrtT = sigma * Math.sqrt(T);
     const d1 = (Math.log(S1 / S2) + (q2 - q1 + sigma**2/2)*T) / sigmaSqrtT;
     const d2 = d1 - sigmaSqrtT;

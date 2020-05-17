@@ -130,6 +130,8 @@ describe('margrabesFormula()', function() {
         assert.throws(() => gauss.margrabesFormula(S1, S2, T, '1', sigma2, rho, q1, q2));
         assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, '1', rho, q1, q2));
         assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, '1', q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, '1', q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, '1'));
     });
 });
 
