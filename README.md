@@ -191,6 +191,10 @@ This is also known as the Garman–Kohlhagen model.
 
 ## History
 
+### 0.4.1 (2020-05-17)
+* assertions for parameter types and numerical ranges
+* test for fx pricing symmetry under currency switching
+
 ### 0.4.0 (2020-05-17)
 * BREAKING CHANGE: rename `price` to `callPrice` in the result of Margrabe's formulas
 * implement [`eqBlackScholes`](#eqBlackScholes) (Black-Scholes formula for stock options) 
