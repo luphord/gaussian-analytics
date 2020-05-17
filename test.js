@@ -107,6 +107,30 @@ describe('margrabesFormula()', function() {
         assert.strictEqual(round(res.N_d1, 4), 0.7879);
         assert.strictEqual(round(res.N_d2, 4), 0.7625);
     });
+
+    it('should fail with bad parameters', function() {
+        const S1 = 52,
+            S2 = 50,
+            T = 0.5,
+            sigma1 = 0.12,
+            sigma2 = 0.1,
+            rho = 0,
+            q1 = 0,
+            q2 = 0.05;
+        assert.throws(() => gauss.margrabesFormula(-S1, S2, T, sigma1, sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, -S2, T, sigma1, sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, -T, sigma1, sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, -sigma1, sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, -sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, -1.1, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, 1.1, q1, q2));
+        assert.throws(() => gauss.margrabesFormula('1', S2, T, sigma1, sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, '1', T, sigma1, sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, '1', sigma1, sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, '1', sigma2, rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, '1', rho, q1, q2));
+        assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, '1', q1, q2));
+    });
 });
 
 describe('margrabesFormulaShort()', function() {
