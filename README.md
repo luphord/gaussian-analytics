@@ -22,14 +22,15 @@ Afterwards, the global variable `gauss` will contain the module and you can run 
 gauss.eqBlackScholes(100, 100, 1.0, 0.2, 0.0, 0.02);
 /* ->
 {
-    callPrice: 8.916035060662303,
-    putPrice: 6.935902391337827,
-    N_d1: 0.5792596877744174,
-    N_d2: 0.5000000005248086,
-    d1: 0.20000000000000004,
-    d2: 2.7755575615628914e-17,
-    sigma: 0.2
-} */
+  call: { price: 8.916035060662303 },
+  put: { price: 6.935902391337827 },
+  N_d1: 0.5792596877744174,
+  N_d2: 0.5000000005248086,
+  d1: 0.20000000000000004,
+  d2: 2.7755575615628914e-17,
+  sigma: 0.2
+}
+ */
 ```
 
 This should work at least for Firefox and Chrome.
