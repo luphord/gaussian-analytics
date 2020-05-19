@@ -75,6 +75,8 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 <dl>
 <dt><a href="#PricingResult">PricingResult</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#OptionPricingResult">OptionPricingResult</a> : <code>Object</code></dt>
+<dd></dd>
 </dl>
 
 <a name="pdf"></a>
@@ -191,13 +193,23 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| callPrice | <code>number</code> | price of the call option |
-| putPrice | <code>number</code> | price of the put option |
+| call | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for the call option |
+| put | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for the put option |
 | N_d1 | <code>number</code> | cumulative probability of `d1` |
 | N_d2 | <code>number</code> | cumulative probability of `d2` |
 | d1 | <code>number</code> |  |
 | d2 | <code>number</code> |  |
 | sigma | <code>number</code> | pricing volatility |
+
+<a name="OptionPricingResult"></a>
+
+#### OptionPricingResult : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| price | <code>number</code> | price of the option |
 
 ## History
 

@@ -101,7 +101,7 @@ describe('margrabesFormula()', function() {
             q1 = 0,
             q2 = 0.05;
         const res = gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2);
-        assert.strictEqual(round(res.callPrice, 3), 3.788);
+        assert.strictEqual(round(res.call.price, 3), 3.788);
         assert.strictEqual(round(res.d1, 4), 0.7993);
         assert.strictEqual(round(res.d2, 4), 0.7144);
         assert.strictEqual(round(res.N_d1, 4), 0.7879);
@@ -143,18 +143,18 @@ describe('margrabesFormulaShort()', function() {
             q1 = 0.012,
             q2 = 0.023;
         for (let sigma=0; sigma<=0.5; sigma+=0.05) {
-            const actual = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2).callPrice;
+            const actual = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2).call.price;
             assert.strictEqual(
                 actual,
-                gauss.margrabesFormula(S1, S2, T, sigma, 0, 0.123, q1, q2).callPrice
+                gauss.margrabesFormula(S1, S2, T, sigma, 0, 0.123, q1, q2).call.price
             );
             assert.strictEqual(
                 actual,
-                gauss.margrabesFormula(S1, S2, T, 0, sigma, 0.456, q1, q2).callPrice
+                gauss.margrabesFormula(S1, S2, T, 0, sigma, 0.456, q1, q2).call.price
             );
             assert.strictEqual(
                 actual,
-                gauss.margrabesFormula(S1, S2, T, sigma, sigma, 0.5, q1, q2).callPrice
+                gauss.margrabesFormula(S1, S2, T, sigma, sigma, 0.5, q1, q2).call.price
             );
         }
     });
@@ -169,8 +169,8 @@ describe('margrabesFormulaShort()', function() {
         const digits = 12;
         const res1 = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
         const res2 = gauss.margrabesFormulaShort(S2, S1, T, sigma, q2, q1);
-        assert.strictEqual(round(res1.callPrice, digits), round(res2.putPrice, digits));
-        assert.strictEqual(round(res1.putPrice, digits), round(res2.callPrice, digits));
+        assert.strictEqual(round(res1.call.price, digits), round(res2.put.price, digits));
+        assert.strictEqual(round(res1.put.price, digits), round(res2.call.price, digits));
     });
 });
 
@@ -182,7 +182,7 @@ describe('eqBlackScholes', function() {
             sigma = 0.12,
             r = 0.05;
         const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
-        assert.strictEqual(round(res.callPrice, 3), 3.788);
+        assert.strictEqual(round(res.call.price, 3), 3.788);
         assert.strictEqual(round(res.d1, 4), 0.7993);
         assert.strictEqual(round(res.d2, 4), 0.7144);
         assert.strictEqual(round(res.N_d1, 4), 0.7879);
@@ -210,10 +210,8 @@ describe('eqBlackScholes', function() {
             sigma = 0.25,
             r = 0.05;
         const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
-        const callPrice = res.callPrice;
-        const putPrice = res.putPrice;
-        assert.strictEqual(round(callPrice, 3), 1.952);
-        assert.strictEqual(round(putPrice, 3), 18.989); // 18.898 in original source
+        assert.strictEqual(round(res.call.price, 3), 1.952);
+        assert.strictEqual(round(res.put.price, 3), 18.989); // 18.898 in original source
     });
     
     it('should match examples from https://aaronschlegel.me/black-scholes-formula-python.html', function() {
@@ -224,10 +222,8 @@ describe('eqBlackScholes', function() {
             sigma = 0.25;
         const digits = 5;
         const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
-        const callPrice = res.callPrice;
-        const putPrice = res.putPrice;
-        assert.strictEqual(round(callPrice, digits), round(0.027352509369436617, digits));
-        assert.strictEqual(round(putPrice, digits), round(45.15029495944084, digits));
+        assert.strictEqual(round(res.call.price, digits), round(0.027352509369436617, digits));
+        assert.strictEqual(round(res.put.price, digits), round(45.15029495944084, digits));
     });
 
     it('should match first example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
@@ -239,10 +235,8 @@ describe('eqBlackScholes', function() {
         const S = Math.exp(-r*T)*F;
         const digits = 7;
         const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
-        const callPrice = res.callPrice;
-        const putPrice = res.putPrice;
-        assert.strictEqual(round(callPrice, digits), round(2.4575673110408576, digits));
-        assert.strictEqual(round(putPrice, digits), round(2.4575673110408576, digits));
+        assert.strictEqual(round(res.call.price, digits), round(2.4575673110408576, digits));
+        assert.strictEqual(round(res.put.price, digits), round(2.4575673110408576, digits));
     });
 
     it('should match second example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
@@ -254,10 +248,8 @@ describe('eqBlackScholes', function() {
             sigma = 0.25;
         const digits = 4;
         const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
-        const callPrice = res.callPrice;
-        const putPrice = res.putPrice;
-        assert.strictEqual(round(callPrice, digits), round(13.568091317729753, digits));
-        assert.strictEqual(round(putPrice, digits), round(3.0041954610456045, digits));
+        assert.strictEqual(round(res.call.price, digits), round(13.568091317729753, digits));
+        assert.strictEqual(round(res.put.price, digits), round(3.0041954610456045, digits));
     });
 
     it('Put-Call-Parity should hold', function() {
@@ -270,18 +262,14 @@ describe('eqBlackScholes', function() {
         for (let K=80; K<=150; K+=2.7) {
             const fwdPrice = S - Math.exp(-r*T)*K;
             const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
-            const callPrice = res.callPrice;
-            const putPrice = res.putPrice;
-            assert.strictEqual(round(callPrice - putPrice, digits), round(fwdPrice, digits));
+            assert.strictEqual(round(res.call.price - res.put.price, digits), round(fwdPrice, digits));
         }
         // with dividends
         const q = 0.05;
         for (let K=80; K<=150; K+=2.7) {
             const fwdPrice = Math.exp(-q*T)*S - Math.exp(-r*T)*K;
             const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
-            const callPrice = res.callPrice;
-            const putPrice = res.putPrice;
-            assert.strictEqual(round(callPrice - putPrice, digits), round(fwdPrice, digits));
+            assert.strictEqual(round(res.call.price - res.put.price, digits), round(fwdPrice, digits));
         }
     });
 });
@@ -296,10 +284,8 @@ describe('fxBlackScholes', function() {
             sigma = 0.2;
         const digits = 6;
         const res = gauss.fxBlackScholes(S, K, T, sigma, rFor, rDom);
-        const callPrice = res.callPrice;
-        const putPrice = res.putPrice;
-        assert.strictEqual(round(callPrice, digits), round(0.005810283556875531, digits));
-        assert.strictEqual(round(putPrice, digits), round(0.5225061853230608, digits));
+        assert.strictEqual(round(res.call.price, digits), round(0.005810283556875531, digits));
+        assert.strictEqual(round(res.put.price, digits), round(0.5225061853230608, digits));
     });
 
     it('should be symmetric with respect to currency switching', function() {
@@ -313,8 +299,8 @@ describe('fxBlackScholes', function() {
             const resDom = gauss.fxBlackScholes(S, K, T, sigma, rFor, rDom);
             const parFor = invertFxParameters(S, K, T, sigma, rFor, rDom);
             const resFor = gauss.fxBlackScholes(parFor.S, parFor.K, parFor.T, parFor.sigma, parFor.rFor, parFor.rDom);
-            assert.strictEqual(round(resFor.putPrice, digits), round(resDom.callPrice/K/S, digits));
-            assert.strictEqual(round(resFor.callPrice, digits), round(resDom.putPrice/K/S, digits));
+            assert.strictEqual(round(resFor.put.price, digits), round(resDom.call.price/K/S, digits));
+            assert.strictEqual(round(resFor.call.price, digits), round(resDom.put.price/K/S, digits));
         }
     });
 });
