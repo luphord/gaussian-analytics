@@ -145,6 +145,9 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
 /**
  * Black-Scholes formula for a European vanilla option on a stock (asset class equity).
  * 
+ * See Fischer Black and Myron Scholes, [The Pricing of Options and Corporate Liabilities](https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf),
+ * The Journal of Political Economy, Vol. 81, No. 3 (May - June 1973), pp. 637-654.
+ * 
  * @param {number} S spot value of the stock
  * @param {number} K strike price of the option
  * @param {number} T time to maturity (typically expressed in years)
@@ -160,6 +163,9 @@ export function eqBlackScholes(S, K, T, sigma, q, r) {
 /**
  * Black-Scholes formula for a European vanilla currency option (asset class foreign exchange).
  * This is also known as the Garman–Kohlhagen model.
+ * 
+ * See Mark B. Garman and Steven W. Kohlhagen [Foreign currency option values](https://www.sciencedirect.com/science/article/pii/S0261560683800011),
+ * Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
  * 
  * @param {number} S spot value of the currency exchange rate; this has to be expressed in unit of domestic currency / unit of foreign currency
  * @param {number} K strike price of the option

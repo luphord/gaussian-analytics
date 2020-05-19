@@ -59,10 +59,14 @@ to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 </dd>
 <dt><a href="#eqBlackScholes">eqBlackScholes(S, K, T, sigma, q, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for a European vanilla option on a stock (asset class equity).</p>
+<p>See Fischer Black and Myron Scholes, <a href="https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf">The Pricing of Options and Corporate Liabilities</a>,
+The Journal of Political Economy, Vol. 81, No. 3 (May - June 1973), pp. 637-654.</p>
 </dd>
 <dt><a href="#fxBlackScholes">fxBlackScholes(S, K, T, sigma, rFor, rDom)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for a European vanilla currency option (asset class foreign exchange).
 This is also known as the Garman–Kohlhagen model.</p>
+<p>See Mark B. Garman and Steven W. Kohlhagen <a href="https://www.sciencedirect.com/science/article/pii/S0261560683800011">Foreign currency option values</a>,
+Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.</p>
 </dd>
 </dl>
 
@@ -144,6 +148,9 @@ to the ratio `S1/S2` instead of their individual volatilities.
 #### eqBlackScholes(S, K, T, sigma, q, r) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black-Scholes formula for a European vanilla option on a stock (asset class equity).
 
+See Fischer Black and Myron Scholes, [The Pricing of Options and Corporate Liabilities](https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf),
+The Journal of Political Economy, Vol. 81, No. 3 (May - June 1973), pp. 637-654.
+
 **Kind**: global function  
 
 | Param | Type | Description |
@@ -160,6 +167,9 @@ Black-Scholes formula for a European vanilla option on a stock (asset class equi
 #### fxBlackScholes(S, K, T, sigma, rFor, rDom) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black-Scholes formula for a European vanilla currency option (asset class foreign exchange).
 This is also known as the Garman–Kohlhagen model.
+
+See Mark B. Garman and Steven W. Kohlhagen [Foreign currency option values](https://www.sciencedirect.com/science/article/pii/S0261560683800011),
+Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 **Kind**: global function  
 **Returns**: [<code>PricingResult</code>](#PricingResult) - prices in domestic currency  
