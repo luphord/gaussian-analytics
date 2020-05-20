@@ -135,10 +135,12 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
     const asset1OrNothingPut = discountFactor(q1, T)*S1*(1-N_d1);
     const asset2OrNothingPut = discountFactor(q2, T)*S2*(1-N_d2);
     const call = {
-        price: asset1OrNothingCall - asset2OrNothingCall
+        price: asset1OrNothingCall - asset2OrNothingCall,
+        delta: discountFactor(q1, T) * N_d1
     };
     const put = {
-        price: asset2OrNothingPut - asset1OrNothingPut
+        price: asset2OrNothingPut - asset1OrNothingPut,
+        delta: discountFactor(q1, T) * (N_d1 - 1)
     };
     return {
         call: call,
