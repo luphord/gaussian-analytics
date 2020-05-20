@@ -211,6 +211,7 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 | Name | Type | Description |
 | --- | --- | --- |
 | price | <code>number</code> | price of the option |
+| delta | <code>number</code> | delta, i.e. derivative by (first) underlying of the option |
 
 ## History
 

@@ -78,6 +78,7 @@ function assertCorrelation(value, name) {
 /**
  * @typedef {Object} OptionPricingResult
  * @property {number} price price of the option
+ * @property {number} delta delta, i.e. derivative by (first) underlying of the option
  */
 
 /**
