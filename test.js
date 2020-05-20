@@ -78,7 +78,7 @@ describe('cdf()', function() {
         }
     });
 
-    it('should arrivate at pdf by differentiation', function() {
+    it('should arrive at pdf by differentiation', function() {
         const digits = 5;
         positive_example_values.forEach(
             x => assert.strictEqual(
