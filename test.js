@@ -172,6 +172,32 @@ describe('margrabesFormulaShort()', function() {
         assert.strictEqual(round(res1.call.price, digits), round(res2.put.price, digits));
         assert.strictEqual(round(res1.put.price, digits), round(res2.call.price, digits));
     });
+
+    it('delta should be equal to differentation by S1', function() {
+        const S1 = 123,
+            T = 2.5,
+            sigma = 0.23,
+            q1 = 0.012,
+            q2 = 0.023;
+        const digits=3;
+        for (let S2=80; S2<=160; S2+=5) {
+            const res = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
+            const callPrice = function(s) {
+                return gauss.margrabesFormulaShort(s, S2, T, sigma, q1, q2).call.price;
+            };
+            const putPrice = function(s) {
+                return gauss.margrabesFormulaShort(s, S2, T, sigma, q1, q2).put.price;
+            };
+            assert.strictEqual(
+                round(res.call.delta, digits),
+                round(diffquot(callPrice, S1), digits)
+            );
+            assert.strictEqual(
+                round(res.put.delta, digits),
+                round(diffquot(putPrice, S1), digits)
+            );
+        }
+    });
 });
 
 describe('eqBlackScholes', function() {
