@@ -6,6 +6,10 @@ function round(value, digits) {
     return Math.round(value * pot) / pot;
 }
 
+function assertEqualRounded(actual, expected, digits) {
+    assert.strictEqual(round(actual, digits), round(actual, digits));
+}
+
 const eps = 2.2 * 1E-16;
 const sqrt_eps = Math.sqrt(eps);
 const two_sqrt_eps = 2 * sqrt_eps;
@@ -50,7 +54,7 @@ describe('pdf()', function() {
 
     it('should match example values', function() {
         for (let i=0; i<pdf_example_values.length; i++) {
-            assert.strictEqual(round(gauss.pdf(i), 6), pdf_example_values[i]);
+            assertEqualRounded(gauss.pdf(i), pdf_example_values[i], 6);
         }
     });
 });
@@ -74,17 +78,14 @@ describe('cdf()', function() {
 
     it('should match example values', function() {
         for (let i=0; i<cdf_example_values.length; i++) {
-            assert.strictEqual(round(gauss.cdf(i), 6), cdf_example_values[i]);
+            assertEqualRounded(gauss.cdf(i), cdf_example_values[i], 6);
         }
     });
 
     it('should arrive at pdf by differentiation', function() {
         const digits = 5;
         positive_example_values.forEach(
-            x => assert.strictEqual(
-                round(diffquot(gauss.cdf, x), digits),
-                round(gauss.pdf(x), digits)
-            )
+            x => assertEqualRounded(diffquot(gauss.cdf, x), gauss.pdf(x), digits)
         );
     });
 });
@@ -169,8 +170,8 @@ describe('margrabesFormulaShort()', function() {
         const digits = 12;
         const res1 = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
         const res2 = gauss.margrabesFormulaShort(S2, S1, T, sigma, q2, q1);
-        assert.strictEqual(round(res1.call.price, digits), round(res2.put.price, digits));
-        assert.strictEqual(round(res1.put.price, digits), round(res2.call.price, digits));
+        assertEqualRounded(res1.call.price, res2.put.price, digits);
+        assertEqualRounded(res1.put.price, res2.call.price, digits);
     });
 
     it('delta should be equal to differentation by S1', function() {
@@ -188,14 +189,8 @@ describe('margrabesFormulaShort()', function() {
             const putPrice = function(s) {
                 return gauss.margrabesFormulaShort(s, S2, T, sigma, q1, q2).put.price;
             };
-            assert.strictEqual(
-                round(res.call.delta, digits),
-                round(diffquot(callPrice, S1), digits)
-            );
-            assert.strictEqual(
-                round(res.put.delta, digits),
-                round(diffquot(putPrice, S1), digits)
-            );
+            assertEqualRounded(res.call.delta, diffquot(callPrice, S1), digits);
+            assertEqualRounded(res.put.delta, diffquot(putPrice, S1), digits);
         }
     });
 });
@@ -225,8 +220,8 @@ describe('eqBlackScholes', function() {
         const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
         assert.strictEqual(round(res.d1, 2), 0.43);
         assert.strictEqual(round(res.d2, 2), 0.18);
-        assert.strictEqual(round(res.N_d1, 2), round(0.6664, 2));
-        assert.strictEqual(round(res.N_d2, 2), round(0.5714, 2));
+        assertEqualRounded(res.N_d1, 0.6664, 2);
+        assertEqualRounded(res.N_d2, 0.5714, 2);
     });
 
     it('should match example from http://sfb649.wiwi.hu-berlin.de/fedc_homepage/xplore/tutorials/xlghtmlnode62.html', function() {
@@ -248,8 +243,8 @@ describe('eqBlackScholes', function() {
             sigma = 0.25;
         const digits = 5;
         const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
-        assert.strictEqual(round(res.call.price, digits), round(0.027352509369436617, digits));
-        assert.strictEqual(round(res.put.price, digits), round(45.15029495944084, digits));
+        assertEqualRounded(res.call.price, 0.027352509369436617, digits);
+        assertEqualRounded(res.put.price, 45.15029495944084, digits);
     });
 
     it('should match first example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
@@ -261,8 +256,8 @@ describe('eqBlackScholes', function() {
         const S = Math.exp(-r*T)*F;
         const digits = 7;
         const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
-        assert.strictEqual(round(res.call.price, digits), round(2.4575673110408576, digits));
-        assert.strictEqual(round(res.put.price, digits), round(2.4575673110408576, digits));
+        assertEqualRounded(res.call.price, 2.4575673110408576, digits);
+        assertEqualRounded(res.put.price, 2.4575673110408576, digits);
     });
 
     it('should match second example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
@@ -274,8 +269,8 @@ describe('eqBlackScholes', function() {
             sigma = 0.25;
         const digits = 4;
         const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
-        assert.strictEqual(round(res.call.price, digits), round(13.568091317729753, digits));
-        assert.strictEqual(round(res.put.price, digits), round(3.0041954610456045, digits));
+        assertEqualRounded(res.call.price, 13.568091317729753, digits);
+        assertEqualRounded(res.put.price, 3.0041954610456045, digits);
     });
 
     it('Put-Call-Parity should hold', function() {
@@ -288,14 +283,14 @@ describe('eqBlackScholes', function() {
         for (let K=80; K<=150; K+=2.7) {
             const fwdPrice = S - Math.exp(-r*T)*K;
             const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
-            assert.strictEqual(round(res.call.price - res.put.price, digits), round(fwdPrice, digits));
+            assertEqualRounded(res.call.price - res.put.price, fwdPrice, digits);
         }
         // with dividends
         const q = 0.05;
         for (let K=80; K<=150; K+=2.7) {
             const fwdPrice = Math.exp(-q*T)*S - Math.exp(-r*T)*K;
             const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
-            assert.strictEqual(round(res.call.price - res.put.price, digits), round(fwdPrice, digits));
+            assertEqualRounded(res.call.price - res.put.price, fwdPrice, digits);
         }
     });
 
@@ -322,8 +317,8 @@ describe('fxBlackScholes', function() {
             sigma = 0.2;
         const digits = 6;
         const res = gauss.fxBlackScholes(S, K, T, sigma, rFor, rDom);
-        assert.strictEqual(round(res.call.price, digits), round(0.005810283556875531, digits));
-        assert.strictEqual(round(res.put.price, digits), round(0.5225061853230608, digits));
+        assertEqualRounded(res.call.price, 0.005810283556875531, digits);
+        assertEqualRounded(res.put.price, 0.5225061853230608, digits);
     });
 
     it('should be symmetric with respect to currency switching', function() {
@@ -337,8 +332,8 @@ describe('fxBlackScholes', function() {
             const resDom = gauss.fxBlackScholes(S, K, T, sigma, rFor, rDom);
             const parFor = invertFxParameters(S, K, T, sigma, rFor, rDom);
             const resFor = gauss.fxBlackScholes(parFor.S, parFor.K, parFor.T, parFor.sigma, parFor.rFor, parFor.rDom);
-            assert.strictEqual(round(resFor.put.price, digits), round(resDom.call.price/K/S, digits));
-            assert.strictEqual(round(resFor.call.price, digits), round(resDom.put.price/K/S, digits));
+            assertEqualRounded(resFor.put.price, resDom.call.price/K/S, digits);
+            assertEqualRounded(resFor.call.price, resDom.put.price/K/S, digits);
         }
     });
 });
