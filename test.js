@@ -306,6 +306,17 @@ describe('eqBlackScholes', function() {
             assert.strictEqual(round(res.call.delta - res.put.delta, digits), 1);
         }
     });
+
+    it('should match digital call example from http://janroman.dhis.org/finance/Exotic%20Options/Presentation%20Exotics/L2note.pdf slide 3', function() {
+        const S = 480,
+            K = 500,
+            T = 0.5,
+            sigma = 0.2,
+            q = 0.03,
+            r = 0.08;
+        const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
+        assertEqualRounded(res.digitalCall.price, 0.4108, 4);
+    });
 });
 
 describe('fxBlackScholes', function() {

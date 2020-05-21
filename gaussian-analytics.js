@@ -67,7 +67,9 @@ function assertCorrelation(value, name) {
 /**
  * @typedef {Object} PricingResult
  * @property {OptionPricingResult} call results for the call option
- * @property {OptionPricingResult} put results for the put option
+ * @property {OptionPricingResult} put results for the put optionCall
+ * @property {OptionPricingResilt} digitalCall results for digital call option
+ * @property {OptionPricingResilt} digitalPut results for digital put option
  * @property {number} N_d1 cumulative probability of `d1`
  * @property {number} N_d2 cumulative probability of `d2`
  * @property {number} d1
@@ -143,9 +145,19 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
         price: asset2OrNothingPut - asset1OrNothingPut,
         delta: discountFactor(q1, T) * (N_d1 - 1)
     };
+    const digitalCall = {
+        price: discountFactor(q2, T) * N_d2,
+        delta: null
+    };
+    const digitalPut = {
+        price: discountFactor(q2, T) * (1 - N_d2),
+        delta: null
+    };
     return {
         call: call,
         put: put,
+        digitalCall: digitalCall,
+        digitalPut: digitalPut,
         N_d1: N_d1,
         N_d2: N_d2,
         d1: d1,

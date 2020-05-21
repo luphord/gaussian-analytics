@@ -195,7 +195,9 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 | Name | Type | Description |
 | --- | --- | --- |
 | call | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for the call option |
-| put | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for the put option |
+| put | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for the put optionCall |
+| digitalCall | <code>OptionPricingResilt</code> | results for digital call option |
+| digitalPut | <code>OptionPricingResilt</code> | results for digital put option |
 | N_d1 | <code>number</code> | cumulative probability of `d1` |
 | N_d2 | <code>number</code> | cumulative probability of `d2` |
 | d1 | <code>number</code> |  |
