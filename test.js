@@ -283,7 +283,7 @@ describe('eqBlackScholes', function() {
             sigma = 0.23,
             T = 2.5,
             r = 0.012;
-        const digits = 12;
+        const digits = 11;
         // without dividends
         for (let K=80; K<=150; K+=2.7) {
             const fwdPrice = S - Math.exp(-r*T)*K;
