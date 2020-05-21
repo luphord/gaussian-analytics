@@ -7,7 +7,7 @@ function round(value, digits) {
 }
 
 function assertEqualRounded(actual, expected, digits) {
-    assert.strictEqual(round(actual, digits), round(actual, digits));
+    assert.strictEqual(round(actual, digits), round(expected, digits));
 }
 
 const eps = 2.2 * 1E-16;
