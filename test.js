@@ -294,7 +294,8 @@ describe('eqBlackScholes', function() {
         }
     });
 
-    it('Synthetic forward should be delta 1', function() {
+    it('Synthetic forward without dividends should be delta 1', function() {
+        // this works only for 0 dividends as we compute spot delta, not forward delta
         const S = 123,
             sigma = 0.23,
             T = 2.5,
