@@ -298,6 +298,18 @@ describe('eqBlackScholes', function() {
             assert.strictEqual(round(res.call.price - res.put.price, digits), round(fwdPrice, digits));
         }
     });
+
+    it('Synthetic forward should be delta 1', function() {
+        const S = 123,
+            sigma = 0.23,
+            T = 2.5,
+            r = 0.012;
+        const digits = 12;
+        for (let K=80; K<=150; K+=2.7) {
+            const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
+            assert.strictEqual(round(res.call.delta - res.put.delta, digits), 1);
+        }
+    });
 });
 
 describe('fxBlackScholes', function() {
