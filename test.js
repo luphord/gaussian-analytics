@@ -203,8 +203,12 @@ describe('margrabesFormulaShort()', function() {
             const putPrice = function(s) {
                 return gauss.margrabesFormulaShort(s, S2, T, sigma, q1, q2).put.price;
             };
+            // delta
             assertEqualRounded(res.call.delta, diffquot(callPrice, S1), digits);
             assertEqualRounded(res.put.delta, diffquot(putPrice, S1), digits);
+            // gamma
+            assertEqualRounded(res.call.gamma, diffquot2(callPrice, S1), digits);
+            assertEqualRounded(res.put.gamma, diffquot2(callPrice, S1), digits);
         }
     });
 });
