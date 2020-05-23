@@ -81,6 +81,7 @@ function assertCorrelation(value, name) {
  * @typedef {Object} OptionPricingResult
  * @property {number} price price of the option
  * @property {number} delta delta, i.e. derivative by (first) underlying of the option
+ * @property {number} gamma gamma, i.e. second derivative by (first) underlying of the option
  */
 
 /**
@@ -141,19 +142,23 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
     const asset2OrNothingPut = df2 * S2 * (1-N_d2);
     const call = {
         price: asset1OrNothingCall - asset2OrNothingCall,
-        delta: df1 * N_d1
+        delta: df1 * N_d1,
+        gamma: df1 * pdf(d1) / sigmaSqrtT / S1
     };
     const put = {
         price: asset2OrNothingPut - asset1OrNothingPut,
-        delta: df1 * (N_d1 - 1)
+        delta: df1 * (N_d1 - 1),
+        gamma: call.gamma
     };
     const digitalCall = {
         price: df2 * N_d2,
-        delta: null
+        delta: null,
+        gamma: null
     };
     const digitalPut = {
         price: df2 * (1 - N_d2),
-        delta: null
+        delta: null,
+        gamma: null
     };
     return {
         call: call,
