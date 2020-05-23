@@ -12,11 +12,25 @@ function assertEqualRounded(actual, expected, digits) {
 
 const eps = 2.2 * 1E-16;
 const sqrt_eps = Math.sqrt(eps);
+const sqrt_sqrt_eps = Math.sqrt(sqrt_eps);
 const two_sqrt_eps = 2 * sqrt_eps;
 
 function diffquot(f, x) {
     return (f(x + sqrt_eps) - f(x - sqrt_eps)) / two_sqrt_eps;
 }
+
+function diffquot2(f, x) {
+    return (f(x + sqrt_sqrt_eps) - 2*f(x) + f(x - sqrt_sqrt_eps)) / sqrt_eps;
+}
+
+describe('diffquot', function() {
+    it('second derivative should be constant', function() {
+        const f = x => x**2;
+        for (let x=-2; x<=10; x+=0.1) {
+            assertEqualRounded(diffquot2(f, x), 2, 5);
+        }
+    });
+});
 
 function invertFxParameters(S, K, T, sigma, rFor, rDom) {
     return {
@@ -174,7 +188,7 @@ describe('margrabesFormulaShort()', function() {
         assertEqualRounded(res1.put.price, res2.call.price, digits);
     });
 
-    it('delta should be equal to differentation by S1', function() {
+    it('delta (gamma) should be equal to differentating (twice) by S1', function() {
         const S1 = 123,
             T = 2.5,
             sigma = 0.23,
