@@ -150,21 +150,9 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
         delta: df1 * (N_d1 - 1),
         gamma: call.gamma
     };
-    const digitalCall = {
-        price: df2 * N_d2,
-        delta: null,
-        gamma: null
-    };
-    const digitalPut = {
-        price: df2 * (1 - N_d2),
-        delta: null,
-        gamma: null
-    };
     return {
         call: call,
         put: put,
-        digitalCall: digitalCall,
-        digitalPut: digitalPut,
         N_d1: N_d1,
         N_d2: N_d2,
         d1: d1,
@@ -188,7 +176,21 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
  * @returns {PricingResult}
  */
 export function eqBlackScholes(S, K, T, sigma, q, r) {
-    return margrabesFormulaShort(S, K, T, sigma, q, r);
+    const res = margrabesFormulaShort(S, K, T, sigma, q, r);
+    const df = discountFactor(r, T);
+    const digitalCall = {
+        price: df * res.N_d2,
+        delta: null,
+        gamma: null
+    };
+    const digitalPut = {
+        price: df * (1 - res.N_d2),
+        delta: null,
+        gamma: null
+    };
+    res.digitalCall = digitalCall;
+    res.digitalPut = digitalPut;
+    return res;
 }
 
 /**
