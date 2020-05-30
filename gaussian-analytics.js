@@ -68,8 +68,8 @@ function assertCorrelation(value, name) {
  * @typedef {Object} PricingResult
  * @property {OptionPricingResult} call results for the call option
  * @property {OptionPricingResult} put results for the put optionCall
- * @property {OptionPricingResilt} digitalCall results for digital call option
- * @property {OptionPricingResilt} digitalPut results for digital put option
+ * @property {OptionPricingResult} digitalCall results for digital call option
+ * @property {OptionPricingResult} digitalPut results for digital put option
  * @property {number} N_d1 cumulative probability of `d1`
  * @property {number} N_d2 cumulative probability of `d2`
  * @property {number} d1
@@ -79,8 +79,8 @@ function assertCorrelation(value, name) {
 
 /**
  * @typedef {PricingResult} EqPricingResult
- * @property {OptionPricingResilt} digitalCall results for digital call option
- * @property {OptionPricingResilt} digitalPut results for digital put option
+ * @property {OptionPricingResult} digitalCall results for digital call option
+ * @property {OptionPricingResult} digitalPut results for digital put option
  */
 
 /**
