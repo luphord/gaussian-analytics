@@ -184,9 +184,10 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
 export function eqBlackScholes(S, K, T, sigma, q, r) {
     const res = margrabesFormulaShort(S, K, T, sigma, q, r);
     const df = discountFactor(r, T);
+    const sigmaSqrtT = sigma * Math.sqrt(T);
     const digitalCall = {
         price: df * res.N_d2,
-        delta: null,
+        delta: df * pdf(res.d2) / sigmaSqrtT / S,
         gamma: null
     };
     const digitalPut = {

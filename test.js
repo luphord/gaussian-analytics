@@ -335,6 +335,30 @@ describe('eqBlackScholes', function() {
         const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
         assertEqualRounded(res.digitalCall.price, 0.4108, 4);
     });
+
+    it('delta (gamma) of digital options should be equal to differentating (twice) by S1', function() {
+        const S = 123,
+            T = 2.5,
+            sigma = 0.23,
+            q = 0.012,
+            r = 0.023;
+        const digits = 7;
+        for (let K=80; K<=160; K+=5) {
+            const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
+            const digiCallPrice = function(s) {
+                return gauss.eqBlackScholes(s, K, T, sigma, q, r).digitalCall.price;
+            };
+            //const digiPutPrice = function(s) {
+            //    return gauss.eqBlackScholes(s, K, T, sigma, q, r).digitalPut.price;
+            //};
+            // delta
+            assertEqualRounded(res.digitalCall.delta, diffquot(digiCallPrice, S), digits);
+            //assertEqualRounded(res.digitalPut.delta, diffquot(digiPutPrice, S), digits);
+            // gamma
+            //assertEqualRounded(res.digitalCall.gamma, diffquot2(digiCallPrice, S), digits);
+            //assertEqualRounded(res.digitalPut.gamma, diffquot2(digiPutPrice, S), digits);
+        }
+    });
 });
 
 describe('fxBlackScholes', function() {
