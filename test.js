@@ -208,7 +208,7 @@ describe('margrabesFormulaShort()', function() {
             assertEqualRounded(res.put.delta, diffquot(putPrice, S1), digits);
             // gamma
             assertEqualRounded(res.call.gamma, diffquot2(callPrice, S1), digits);
-            assertEqualRounded(res.put.gamma, diffquot2(callPrice, S1), digits);
+            assertEqualRounded(res.put.gamma, diffquot2(putPrice, S1), digits);
         }
     });
 });
