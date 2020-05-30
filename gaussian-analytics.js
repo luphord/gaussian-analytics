@@ -195,9 +195,17 @@ export function eqBlackScholes(S, K, T, sigma, q, r) {
         delta: -digitalCall.delta,
         gamma: -digitalCall.gamma
     };
-    res.digitalCall = digitalCall;
-    res.digitalPut = digitalPut;
-    return res;
+    return {
+        call: res.call,
+        put: res.put,
+        digitalCall: digitalCall,
+        digitalPut: digitalPut,
+        N_d1: res.N_d1,
+        N_d2: res.N_d2,
+        d1: res.d1,
+        d2: res.d2,
+        sigma: res.sigma
+    };
 }
 
 /**
