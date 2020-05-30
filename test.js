@@ -343,6 +343,7 @@ describe('eqBlackScholes', function() {
             q = 0.012,
             r = 0.023;
         const digits = 7;
+        const digits2 = 3;
         for (let K=80; K<=160; K+=5) {
             const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
             const digiCallPrice = function(s) {
@@ -355,8 +356,8 @@ describe('eqBlackScholes', function() {
             assertEqualRounded(res.digitalCall.delta, diffquot(digiCallPrice, S), digits);
             assertEqualRounded(res.digitalPut.delta, diffquot(digiPutPrice, S), digits);
             // gamma
-            //assertEqualRounded(res.digitalCall.gamma, diffquot2(digiCallPrice, S), digits);
-            //assertEqualRounded(res.digitalPut.gamma, diffquot2(digiPutPrice, S), digits);
+            assertEqualRounded(res.digitalCall.gamma, diffquot2(digiCallPrice, S), digits2);
+            assertEqualRounded(res.digitalPut.gamma, diffquot2(digiPutPrice, S), digits2);
         }
     });
 });

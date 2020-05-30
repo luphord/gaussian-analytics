@@ -188,12 +188,12 @@ export function eqBlackScholes(S, K, T, sigma, q, r) {
     const digitalCall = {
         price: df * res.N_d2,
         delta: df * pdf(res.d2) / sigmaSqrtT / S,
-        gamma: null
+        gamma: -df * res.d1 * pdf(res.d1) / S / K / (sigmaSqrtT**2)
     };
     const digitalPut = {
         price: df * (1 - res.N_d2),
         delta: -digitalCall.delta,
-        gamma: null
+        gamma: -digitalCall.gamma
     };
     res.digitalCall = digitalCall;
     res.digitalPut = digitalPut;
