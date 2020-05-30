@@ -22,8 +22,26 @@ Afterwards, the global variable `gauss` will contain the module and you can run 
 gauss.eqBlackScholes(100, 100, 1.0, 0.2, 0.0, 0.02);
 /* ->
 {
-  call: { price: 8.916035060662303 },
-  put: { price: 6.935902391337827 },
+  call: {
+    price: 8.916035060662303,
+    delta: 0.5792596877744174,
+    gamma: 0.019552134698772795
+  },
+  put: {
+    price: 6.935902391337827,
+    delta: -0.4207403122255826,
+    gamma: 0.019552134698772795
+  },
+  digitalCall: {
+    price: 0.49009933716779436,
+    delta: 0.019552134698772795,
+    gamma: -0.00019164976492052065
+  },
+  digitalPut: {
+    price: 0.4900993361389609,
+    delta: -0.019552134698772795,
+    gamma: 0.00019164976492052065
+  },
   N_d1: 0.5792596877744174,
   N_d2: 0.5000000005248086,
   d1: 0.20000000000000004,
@@ -231,7 +249,7 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 ## History
 
-### 0.5.0 (not yet)
+### 0.5.0 (2020-05-30)
 * BREAKING CHANGE: move `callPrice` to `call.price` and `putPrice` to `put.price` on `PricingResult` objects; this will simplify the addition of greeks to results
 * implement [delta and gamma](#OptionPricingResult) (first- and second-order sensitivity of option price to spot change)
 * implement digital calls and puts for [equity options](#EqPricingResult)
