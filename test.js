@@ -348,12 +348,12 @@ describe('eqBlackScholes', function() {
             const digiCallPrice = function(s) {
                 return gauss.eqBlackScholes(s, K, T, sigma, q, r).digitalCall.price;
             };
-            //const digiPutPrice = function(s) {
-            //    return gauss.eqBlackScholes(s, K, T, sigma, q, r).digitalPut.price;
-            //};
+            const digiPutPrice = function(s) {
+                return gauss.eqBlackScholes(s, K, T, sigma, q, r).digitalPut.price;
+            };
             // delta
             assertEqualRounded(res.digitalCall.delta, diffquot(digiCallPrice, S), digits);
-            //assertEqualRounded(res.digitalPut.delta, diffquot(digiPutPrice, S), digits);
+            assertEqualRounded(res.digitalPut.delta, diffquot(digiPutPrice, S), digits);
             // gamma
             //assertEqualRounded(res.digitalCall.gamma, diffquot2(digiCallPrice, S), digits);
             //assertEqualRounded(res.digitalPut.gamma, diffquot2(digiPutPrice, S), digits);

@@ -192,7 +192,7 @@ export function eqBlackScholes(S, K, T, sigma, q, r) {
     };
     const digitalPut = {
         price: df * (1 - res.N_d2),
-        delta: null,
+        delta: -digitalCall.delta,
         gamma: null
     };
     res.digitalCall = digitalCall;
