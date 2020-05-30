@@ -79,8 +79,8 @@ function assertCorrelation(value, name) {
 
 /**
  * @typedef {PricingResult} EqPricingResult
- * @property {OptionPricingResult} digitalCall results for digital call option
- * @property {OptionPricingResult} digitalPut results for digital put option
+ * @property {OptionPricingResult} digitalCall results for digital (a.k.a. binary) call option
+ * @property {OptionPricingResult} digitalPut results for digital (a.k.a. binary) put option
  */
 
 /**

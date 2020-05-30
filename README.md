@@ -214,8 +214,8 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| digitalCall | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for digital call option |
-| digitalPut | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for digital put option |
+| digitalCall | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for digital (a.k.a. binary) call option |
+| digitalPut | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for digital (a.k.a. binary) put option |
 
 <a name="OptionPricingResult"></a>
 
