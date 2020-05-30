@@ -78,6 +78,12 @@ function assertCorrelation(value, name) {
  */
 
 /**
+ * @typedef {PricingResult} EqPricingResult
+ * @property {OptionPricingResilt} digitalCall results for digital call option
+ * @property {OptionPricingResilt} digitalPut results for digital put option
+ */
+
+/**
  * @typedef {Object} OptionPricingResult
  * @property {number} price price of the option
  * @property {number} delta delta, i.e. derivative by (first) underlying of the option
@@ -173,7 +179,7 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
  * @param {number} sigma volatility of the underlying stock
  * @param {number} q dividend rate of the underlying stock
  * @param {number} r risk-less rate of return
- * @returns {PricingResult}
+ * @returns {EqPricingResult}
  */
 export function eqBlackScholes(S, K, T, sigma, q, r) {
     const res = margrabesFormulaShort(S, K, T, sigma, q, r);

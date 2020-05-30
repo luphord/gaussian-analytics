@@ -58,7 +58,7 @@ Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.</p>
 Equivalent to <code>margrabesFormula</code> but accepting only the volatility corresponding
 to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 </dd>
-<dt><a href="#eqBlackScholes">eqBlackScholes(S, K, T, sigma, q, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
+<dt><a href="#eqBlackScholes">eqBlackScholes(S, K, T, sigma, q, r)</a> ⇒ <code><a href="#EqPricingResult">EqPricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for a European vanilla option on a stock (asset class equity).</p>
 <p>See Fischer Black and Myron Scholes, <a href="https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf">The Pricing of Options and Corporate Liabilities</a>,
 The Journal of Political Economy, Vol. 81, No. 3 (May - June 1973), pp. 637-654.</p>
@@ -75,6 +75,8 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 <dl>
 <dt><a href="#PricingResult">PricingResult</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#EqPricingResult">EqPricingResult</a> : <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd></dd>
 <dt><a href="#OptionPricingResult">OptionPricingResult</a> : <code>Object</code></dt>
 <dd></dd>
@@ -148,7 +150,7 @@ to the ratio `S1/S2` instead of their individual volatilities.
 
 <a name="eqBlackScholes"></a>
 
-#### eqBlackScholes(S, K, T, sigma, q, r) ⇒ [<code>PricingResult</code>](#PricingResult)
+#### eqBlackScholes(S, K, T, sigma, q, r) ⇒ [<code>EqPricingResult</code>](#EqPricingResult)
 Black-Scholes formula for a European vanilla option on a stock (asset class equity).
 
 See Fischer Black and Myron Scholes, [The Pricing of Options and Corporate Liabilities](https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf),
@@ -203,6 +205,17 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 | d1 | <code>number</code> |  |
 | d2 | <code>number</code> |  |
 | sigma | <code>number</code> | pricing volatility |
+
+<a name="EqPricingResult"></a>
+
+#### EqPricingResult : [<code>PricingResult</code>](#PricingResult)
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| digitalCall | <code>OptionPricingResilt</code> | results for digital call option |
+| digitalPut | <code>OptionPricingResilt</code> | results for digital put option |
 
 <a name="OptionPricingResult"></a>
 
