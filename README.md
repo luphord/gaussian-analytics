@@ -233,8 +233,8 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 ### 0.5.0 (not yet)
 * BREAKING CHANGE: move `callPrice` to `call.price` and `putPrice` to `put.price` on `PricingResult` objects; this will simplify the addition of greeks to results
-* implement delta and gamma (first- and second-order sensitivity of option price to spot change)
-* implement digital calls and puts
+* implement [delta and gamma](#OptionPricingResult) (first- and second-order sensitivity of option price to spot change)
+* implement digital calls and puts for [equity options](#EqPricingResult)
 
 ### 0.4.1 (2020-05-17)
 * assertions for parameter types and numerical ranges
