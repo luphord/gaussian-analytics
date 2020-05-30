@@ -198,8 +198,8 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 | --- | --- | --- |
 | call | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for the call option |
 | put | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for the put optionCall |
-| digitalCall | <code>OptionPricingResilt</code> | results for digital call option |
-| digitalPut | <code>OptionPricingResilt</code> | results for digital put option |
+| digitalCall | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for digital call option |
+| digitalPut | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for digital put option |
 | N_d1 | <code>number</code> | cumulative probability of `d1` |
 | N_d2 | <code>number</code> | cumulative probability of `d2` |
 | d1 | <code>number</code> |  |
@@ -214,8 +214,8 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 | Name | Type | Description |
 | --- | --- | --- |
-| digitalCall | <code>OptionPricingResilt</code> | results for digital call option |
-| digitalPut | <code>OptionPricingResilt</code> | results for digital put option |
+| digitalCall | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for digital call option |
+| digitalPut | [<code>OptionPricingResult</code>](#OptionPricingResult) | results for digital put option |
 
 <a name="OptionPricingResult"></a>
 
