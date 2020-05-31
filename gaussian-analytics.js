@@ -91,6 +91,18 @@ function assertCorrelation(value, name) {
  */
 
 /**
+ * @callback DiscountCurve
+ * @param {number} t time (typically expressed in years)
+ * @returns {number} discount factor at time t
+ */
+
+/**
+  * @typedef {Object} FixedCashflow
+  * @property {number} t time (typically expressed in years)
+  * @property {number} value cash amount paid at t
+  */
+
+/**
  * Margrabe's formula for pricing the exchange option between two risky assets.
  * 
  * See William  Margrabe, [The Value of an Option to Exchange One Asset for Another](http://www.stat.nus.edu.sg/~stalimtw/MFE5010/PDF/margrabe1978.pdf),
@@ -242,4 +254,24 @@ export function fxBlackScholes(S, K, T, sigma, rFor, rDom) {
  */
 export function irBlack76(F, K, T, sigma, r) {
     return margrabesFormulaShort(discountFactor(r, T) * F, K, T, sigma, 0, r);
+}
+
+/**
+ * Calculates the forward price at time t for a series of cashflows.
+ * Cashflows before t are ignored (i.e. do not add any value).
+ * 
+ * @param {Array<FixedCashflow>} cashflows future cashflows to be paid 
+ * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
+ * @param {number} t time point of the forward (typicall expressed in years)
+ */
+export function forwardPrice(cashflows, discountCurve, t) {
+    const df_t = discountCurve(t);
+    let fw = 0.0;
+    for (let i = 0; i < cashflows.length; i++) {
+        const cf = cashflows[i];
+        if (cf.t >= t) {
+            fw += cf.value * discountCurve(cf.t) / df_t;
+        }
+    }
+    return fw;
 }

@@ -93,6 +93,10 @@ known as the Black 76 model.</p>
 <p>See Fischer Black <a href="https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246">The pricing of commodity contracts</a>,
 Journal of Financial Economics, 3 (1976), 167-179.</p>
 </dd>
+<dt><a href="#forwardPrice">forwardPrice(cashflows, discountCurve, t)</a></dt>
+<dd><p>Calculates the forward price at time t for a series of cashflows.
+Cashflows before t are ignored (i.e. do not add any value).</p>
+</dd>
 </dl>
 
 #### Typedefs
@@ -103,6 +107,10 @@ Journal of Financial Economics, 3 (1976), 167-179.</p>
 <dt><a href="#EqPricingResult">EqPricingResult</a> : <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd></dd>
 <dt><a href="#OptionPricingResult">OptionPricingResult</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#DiscountCurve">DiscountCurve</a> ⇒ <code>number</code></dt>
+<dd></dd>
+<dt><a href="#FixedCashflow">FixedCashflow</a> : <code>Object</code></dt>
 <dd></dd>
 </dl>
 
@@ -231,6 +239,20 @@ Journal of Financial Economics, 3 (1976), 167-179.
 | sigma | <code>number</code> | volatility of the underlying forward price |
 | r | <code>number</code> | risk-less rate of return |
 
+<a name="forwardPrice"></a>
+
+#### forwardPrice(cashflows, discountCurve, t)
+Calculates the forward price at time t for a series of cashflows.
+Cashflows before t are ignored (i.e. do not add any value).
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| cashflows | [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow) | future cashflows to be paid |
+| discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve (used for discounting and forwards) |
+| t | <code>number</code> | time point of the forward (typicall expressed in years) |
+
 <a name="PricingResult"></a>
 
 #### PricingResult : <code>Object</code>
@@ -271,6 +293,27 @@ Journal of Financial Economics, 3 (1976), 167-179.
 | price | <code>number</code> | price of the option |
 | delta | <code>number</code> | delta, i.e. derivative by (first) underlying of the option |
 | gamma | <code>number</code> | gamma, i.e. second derivative by (first) underlying of the option |
+
+<a name="DiscountCurve"></a>
+
+#### DiscountCurve ⇒ <code>number</code>
+**Kind**: global typedef  
+**Returns**: <code>number</code> - discount factor at time t  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| t | <code>number</code> | time (typically expressed in years) |
+
+<a name="FixedCashflow"></a>
+
+#### FixedCashflow : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| t | <code>number</code> | time (typically expressed in years) |
+| value | <code>number</code> | cash amount paid at t |
 
 ## History
 
