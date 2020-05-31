@@ -406,3 +406,31 @@ describe('irBlack76', function() {
         assertEqualRounded(res.put.price, 2.4575673110408576, digits);
     });
 });
+
+describe('forwardPrice', function() {
+    const rate = 0.05;
+    const flatDiscCurve = function(t) {
+        return Math.exp(-rate * t);
+    };
+    const cf = {
+        t: 1.0,
+        value: 123.45
+    };
+    
+    it('empty cashflows should have a forward price of 0', function() {
+        assert.strictEqual(gauss.forwardPrice([], flatDiscCurve, 0), 0);
+    });
+
+    it('already paid cashflows should have a forward price of 0', function() {
+        assert.strictEqual(gauss.forwardPrice([cf], flatDiscCurve, 1.00001), 0);
+    });
+
+    it('forward price at time 0 should be equal to spot', function() {
+        assert.strictEqual(gauss.forwardPrice([cf], flatDiscCurve, 0), flatDiscCurve(cf.t) * cf.value);
+    });
+
+    it('forward price at cashflow time should be equal to notional', function() {
+        assertEqualRounded(gauss.forwardPrice([cf], flatDiscCurve, cf.t), cf.value, 13);
+    });
+
+});
