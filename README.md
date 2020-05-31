@@ -88,7 +88,7 @@ This is also known as the Garman–Kohlhagen model.</p>
 Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.</p>
 </dd>
 <dt><a href="#irBlack76">irBlack76(F, K, T, sigma, r)</a></dt>
-<dd><p>Black-Scholes formula for European option fiven the forward / future of the underlying (asset class interest rates),
+<dd><p>Black-Scholes formula for European option on forward / future (asset class interest rates),
 known as the Black 76 model.</p>
 <p>See Fischer Black <a href="https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246">The pricing of commodity contracts</a>,
 Journal of Financial Economics, 3 (1976), 167-179.</p>
@@ -215,7 +215,7 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 <a name="irBlack76"></a>
 
 #### irBlack76(F, K, T, sigma, r)
-Black-Scholes formula for European option fiven the forward / future of the underlying (asset class interest rates),
+Black-Scholes formula for European option on forward / future (asset class interest rates),
 known as the Black 76 model.
 
 See Fischer Black [The pricing of commodity contracts](https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246),

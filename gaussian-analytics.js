@@ -228,7 +228,7 @@ export function fxBlackScholes(S, K, T, sigma, rFor, rDom) {
 }
 
 /**
- * Black-Scholes formula for European option fiven the forward / future of the underlying (asset class interest rates),
+ * Black-Scholes formula for European option on forward / future (asset class interest rates),
  * known as the Black 76 model.
  * 
  * See Fischer Black [The pricing of commodity contracts](https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246),
