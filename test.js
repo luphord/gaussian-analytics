@@ -392,3 +392,17 @@ describe('fxBlackScholes', function() {
         }
     });
 });
+
+describe('irBlack76', function() {
+    it('should match first example from https://aaronschlegel.me/generalized-black-scholes-formula-european-options.html', function() {
+        const F = 20,
+            K = 20,
+            r = .15,
+            T = 9 / 12,
+            sigma = 0.40;
+        const digits = 7;
+        const res = gauss.irBlack76(F, K, T, sigma, r);
+        assertEqualRounded(res.call.price, 2.4575673110408576, digits);
+        assertEqualRounded(res.put.price, 2.4575673110408576, digits);
+    });
+});
