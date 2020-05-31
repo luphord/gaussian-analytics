@@ -87,6 +87,12 @@ This is also known as the Garman–Kohlhagen model.</p>
 <p>See Mark B. Garman and Steven W. Kohlhagen <a href="https://www.sciencedirect.com/science/article/pii/S0261560683800011">Foreign currency option values</a>,
 Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.</p>
 </dd>
+<dt><a href="#irBlack76">irBlack76(F, K, T, sigma, r)</a></dt>
+<dd><p>Black-Scholes formula for European option fiven the forward / future of the underlying (asset class interest rates),
+known as the Black 76 model.</p>
+<p>See Fischer Black <a href="https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246">The pricing of commodity contracts</a>,
+Journal of Financial Economics, 3 (1976), 167-179.</p>
+</dd>
 </dl>
 
 #### Typedefs
@@ -205,6 +211,25 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 | sigma | <code>number</code> | volatility of the currency exchange rate |
 | rFor | <code>number</code> | risk-less rate of return in the foreign currency |
 | rDom | <code>number</code> | risk-less rate of return in the domestic currency |
+
+<a name="irBlack76"></a>
+
+#### irBlack76(F, K, T, sigma, r)
+Black-Scholes formula for European option fiven the forward / future of the underlying (asset class interest rates),
+known as the Black 76 model.
+
+See Fischer Black [The pricing of commodity contracts](https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246),
+Journal of Financial Economics, 3 (1976), 167-179.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| F | <code>number</code> | forward price of the underlying |
+| K | <code>number</code> | strike price of the option |
+| T | <code>number</code> | time to maturity (typically expressed in years) |
+| sigma | <code>number</code> | volatility of the underlying forward price |
+| r | <code>number</code> | risk-less rate of return |
 
 <a name="PricingResult"></a>
 

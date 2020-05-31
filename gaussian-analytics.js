@@ -226,3 +226,20 @@ export function eqBlackScholes(S, K, T, sigma, q, r) {
 export function fxBlackScholes(S, K, T, sigma, rFor, rDom) {
     return margrabesFormulaShort(S, K, T, sigma, rFor, rDom);
 }
+
+/**
+ * Black-Scholes formula for European option fiven the forward / future of the underlying (asset class interest rates),
+ * known as the Black 76 model.
+ * 
+ * See Fischer Black [The pricing of commodity contracts](https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246),
+ * Journal of Financial Economics, 3 (1976), 167-179.
+ * 
+ * @param {number} F forward price of the underlying
+ * @param {number} K strike price of the option
+ * @param {number} T time to maturity (typically expressed in years)
+ * @param {number} sigma volatility of the underlying forward price
+ * @param {number} r risk-less rate of return
+ */
+export function irBlack76(F, K, T, sigma, r) {
+    return margrabesFormulaShort(discountFactor(r, T) * F, K, T, sigma, 0, r);
+}
