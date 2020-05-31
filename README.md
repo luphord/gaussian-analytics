@@ -274,6 +274,9 @@ Journal of Financial Economics, 3 (1976), 167-179.
 
 ## History
 
+### 0.6.0 (not yet)
+* implement [`irBlack76`](#irBlack76) (Black-Scholes formula for futures / forwards, particularly in interest rates)
+
 ### 0.5.0 (2020-05-30)
 * BREAKING CHANGE: move `callPrice` to `call.price` and `putPrice` to `put.price` on `PricingResult` objects; this will simplify the addition of greeks to results
 * implement [delta and gamma](#OptionPricingResult) (first- and second-order sensitivity of option price to spot change)
