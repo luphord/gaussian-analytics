@@ -405,6 +405,17 @@ describe('irBlack76', function() {
         assertEqualRounded(res.call.price, 2.4575673110408576, digits);
         assertEqualRounded(res.put.price, 2.4575673110408576, digits);
     });
+
+    it('should match (highly adapted) example of slide 8-12 of http://www.cmat.edu.uy/~mordecki/hk/lecture24.pdf', function() {
+        const T = 10 / 12,
+            bondDirtyForward = 939.68,
+            bondDirtyStrike = 1008.33,
+            r = 0.1,
+            sigma = 0.09;
+        const res = gauss.irBlack76(bondDirtyForward, bondDirtyStrike, T, sigma, r);
+        assertEqualRounded(res.call.price, 7.968, 3);
+        
+    });
 });
 
 describe('forwardPrice', function() {
