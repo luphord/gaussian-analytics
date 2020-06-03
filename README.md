@@ -93,7 +93,7 @@ known as the Black 76 model.</p>
 <p>See Fischer Black <a href="https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246">The pricing of commodity contracts</a>,
 Journal of Financial Economics, 3 (1976), 167-179.</p>
 </dd>
-<dt><a href="#forwardPrice">forwardPrice(cashflows, discountCurve, t)</a></dt>
+<dt><a href="#irForwardPrice">irForwardPrice(cashflows, discountCurve, t)</a></dt>
 <dd><p>Calculates the forward price at time t for a series of cashflows.
 Cashflows before t are ignored (i.e. do not add any value).</p>
 </dd>
@@ -239,9 +239,9 @@ Journal of Financial Economics, 3 (1976), 167-179.
 | sigma | <code>number</code> | volatility of the underlying forward price |
 | r | <code>number</code> | risk-less rate of return |
 
-<a name="forwardPrice"></a>
+<a name="irForwardPrice"></a>
 
-#### forwardPrice(cashflows, discountCurve, t)
+#### irForwardPrice(cashflows, discountCurve, t)
 Calculates the forward price at time t for a series of cashflows.
 Cashflows before t are ignored (i.e. do not add any value).
 

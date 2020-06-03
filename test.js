@@ -418,7 +418,7 @@ describe('irBlack76', function() {
     });
 });
 
-describe('forwardPrice', function() {
+describe('irForwardPrice', function() {
     const rate = 0.05;
     const flatDiscCurve = function(t) {
         return Math.exp(-rate * t);
@@ -429,19 +429,19 @@ describe('forwardPrice', function() {
     };
     
     it('empty cashflows should have a forward price of 0', function() {
-        assert.strictEqual(gauss.forwardPrice([], flatDiscCurve, 0), 0);
+        assert.strictEqual(gauss.irForwardPrice([], flatDiscCurve, 0), 0);
     });
 
     it('already paid cashflows should have a forward price of 0', function() {
-        assert.strictEqual(gauss.forwardPrice([cf], flatDiscCurve, 1.00001), 0);
+        assert.strictEqual(gauss.irForwardPrice([cf], flatDiscCurve, 1.00001), 0);
     });
 
     it('forward price at time 0 should be equal to spot', function() {
-        assert.strictEqual(gauss.forwardPrice([cf], flatDiscCurve, 0), flatDiscCurve(cf.t) * cf.value);
+        assert.strictEqual(gauss.irForwardPrice([cf], flatDiscCurve, 0), flatDiscCurve(cf.t) * cf.value);
     });
 
     it('forward price at cashflow time should be equal to notional', function() {
-        assertEqualRounded(gauss.forwardPrice([cf], flatDiscCurve, cf.t), cf.value, 13);
+        assertEqualRounded(gauss.irForwardPrice([cf], flatDiscCurve, cf.t), cf.value, 13);
     });
 
 });

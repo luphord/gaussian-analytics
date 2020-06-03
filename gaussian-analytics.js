@@ -264,7 +264,7 @@ export function irBlack76(F, K, T, sigma, r) {
  * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
  * @param {number} t time point of the forward (typicall expressed in years)
  */
-export function forwardPrice(cashflows, discountCurve, t) {
+export function irForwardPrice(cashflows, discountCurve, t) {
     const df_t = discountCurve(t);
     let fw = 0.0;
     for (let i = 0; i < cashflows.length; i++) {
