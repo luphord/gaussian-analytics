@@ -251,6 +251,7 @@ export function fxBlackScholes(S, K, T, sigma, rFor, rDom) {
  * @param {number} T time to maturity (typically expressed in years)
  * @param {number} sigma volatility of the underlying forward price
  * @param {number} r risk-less rate of return
+ * @returns {PricingResult} prices of forward / future option
  */
 export function irBlack76(F, K, T, sigma, r) {
     return margrabesFormulaShort(discountFactor(r, T) * F, K, T, sigma, 0, r);
@@ -263,6 +264,7 @@ export function irBlack76(F, K, T, sigma, r) {
  * @param {Array<FixedCashflow>} cashflows future cashflows to be paid 
  * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
  * @param {number} t time point of the forward (typicall expressed in years)
+ * @returns {number} forward price of given cashflows
  */
 export function irForwardPrice(cashflows, discountCurve, t) {
     const df_t = discountCurve(t);

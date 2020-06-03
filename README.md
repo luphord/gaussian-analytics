@@ -87,13 +87,13 @@ This is also known as the Garman–Kohlhagen model.</p>
 <p>See Mark B. Garman and Steven W. Kohlhagen <a href="https://www.sciencedirect.com/science/article/pii/S0261560683800011">Foreign currency option values</a>,
 Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.</p>
 </dd>
-<dt><a href="#irBlack76">irBlack76(F, K, T, sigma, r)</a></dt>
+<dt><a href="#irBlack76">irBlack76(F, K, T, sigma, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for European option on forward / future (asset class interest rates),
 known as the Black 76 model.</p>
 <p>See Fischer Black <a href="https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246">The pricing of commodity contracts</a>,
 Journal of Financial Economics, 3 (1976), 167-179.</p>
 </dd>
-<dt><a href="#irForwardPrice">irForwardPrice(cashflows, discountCurve, t)</a></dt>
+<dt><a href="#irForwardPrice">irForwardPrice(cashflows, discountCurve, t)</a> ⇒ <code>number</code></dt>
 <dd><p>Calculates the forward price at time t for a series of cashflows.
 Cashflows before t are ignored (i.e. do not add any value).</p>
 </dd>
@@ -222,7 +222,7 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 <a name="irBlack76"></a>
 
-#### irBlack76(F, K, T, sigma, r)
+#### irBlack76(F, K, T, sigma, r) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black-Scholes formula for European option on forward / future (asset class interest rates),
 known as the Black 76 model.
 
@@ -230,6 +230,7 @@ See Fischer Black [The pricing of commodity contracts](https://www.sciencedirect
 Journal of Financial Economics, 3 (1976), 167-179.
 
 **Kind**: global function  
+**Returns**: [<code>PricingResult</code>](#PricingResult) - prices of forward / future option  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -241,11 +242,12 @@ Journal of Financial Economics, 3 (1976), 167-179.
 
 <a name="irForwardPrice"></a>
 
-#### irForwardPrice(cashflows, discountCurve, t)
+#### irForwardPrice(cashflows, discountCurve, t) ⇒ <code>number</code>
 Calculates the forward price at time t for a series of cashflows.
 Cashflows before t are ignored (i.e. do not add any value).
 
 **Kind**: global function  
+**Returns**: <code>number</code> - forward price of given cashflows  
 
 | Param | Type | Description |
 | --- | --- | --- |
