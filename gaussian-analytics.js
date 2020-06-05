@@ -277,3 +277,39 @@ export function irForwardPrice(cashflows, discountCurve, t) {
     }
     return fw;
 }
+
+/**
+ * Frequencies expressed as number of payments per year.
+ */
+export const irFrequency = {
+    annually: 1,
+    semiannually: 2,
+    triannually: 3,
+    quarterly: 4,
+    bimonthly: 6,
+    monthly: 12,
+    weekly: 52,
+    businessdaily: 250,
+    daily: 365
+};
+
+/**
+ * Creates a payment schedule with payment frequency {@link frequency}
+ * that has last payment at {@link end} and no payments before {@link start}.
+ * 
+ * @param {number} start start time of schedule (usually expressed in years)
+ * @param {number} end end time of schedule (usually expressed in years)
+ * @param {number} frequency number of payments per period (usually per year)
+ * @returns {Array<number>} payment times
+ */
+export function irRollFromEnd(start, end, frequency) {
+    const schedule = [],
+        yearfraction = 1 / frequency,
+        nPayments = Math.floor(frequency * (end - start));
+    let t = end;
+    for (let i = 0; i < nPayments; i++) {
+        schedule.unshift(t);
+        t -= yearfraction;
+    }
+    return schedule;
+}

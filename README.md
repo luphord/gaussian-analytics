@@ -55,6 +55,14 @@ This should work at least for Firefox and Chrome.
 
 ## API Documentation
 
+#### Constants
+
+<dl>
+<dt><a href="#irFrequency">irFrequency</a></dt>
+<dd><p>Frequencies expressed as number of payments per year.</p>
+</dd>
+</dl>
+
 #### Functions
 
 <dl>
@@ -97,6 +105,10 @@ Journal of Financial Economics, 3 (1976), 167-179.</p>
 <dd><p>Calculates the forward price at time t for a series of cashflows.
 Cashflows before t are ignored (i.e. do not add any value).</p>
 </dd>
+<dt><a href="#irRollFromEnd">irRollFromEnd(start, end, frequency)</a> ⇒ <code>Array.&lt;number&gt;</code></dt>
+<dd><p>Creates a payment schedule with payment frequency <a href="frequency">frequency</a>
+that has last payment at <a href="end">end</a> and no payments before <a href="start">start</a>.</p>
+</dd>
 </dl>
 
 #### Typedefs
@@ -114,6 +126,12 @@ Cashflows before t are ignored (i.e. do not add any value).</p>
 <dd></dd>
 </dl>
 
+<a name="irFrequency"></a>
+
+#### irFrequency
+Frequencies expressed as number of payments per year.
+
+**Kind**: global constant  
 <a name="pdf"></a>
 
 #### pdf(x) ⇒ <code>number</code>
@@ -254,6 +272,21 @@ Cashflows before t are ignored (i.e. do not add any value).
 | cashflows | [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow) | future cashflows to be paid |
 | discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve (used for discounting and forwards) |
 | t | <code>number</code> | time point of the forward (typicall expressed in years) |
+
+<a name="irRollFromEnd"></a>
+
+#### irRollFromEnd(start, end, frequency) ⇒ <code>Array.&lt;number&gt;</code>
+Creates a payment schedule with payment frequency [frequency](frequency)
+that has last payment at [end](end) and no payments before [start](start).
+
+**Kind**: global function  
+**Returns**: <code>Array.&lt;number&gt;</code> - payment times  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| start | <code>number</code> | start time of schedule (usually expressed in years) |
+| end | <code>number</code> | end time of schedule (usually expressed in years) |
+| frequency | <code>number</code> | number of payments per period (usually per year) |
 
 <a name="PricingResult"></a>
 
