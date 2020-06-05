@@ -158,6 +158,7 @@ First coupon period is (possibly) shorter than later periods.
     * [.cashflows](#Bond+cashflows) ⇒ [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow)
     * [.forwardDirtyPrice(discountCurve, t)](#Bond+forwardDirtyPrice) ⇒ <code>number</code>
     * [.dirtyPrice(discountCurve)](#Bond+dirtyPrice) ⇒ <code>number</code>
+    * [.yieldToMaturity(npv)](#Bond+yieldToMaturity) ⇒ <code>number</code>
 
 <a name="new_Bond_new"></a>
 
@@ -202,6 +203,19 @@ Calculates the current price (dirty, i.e. including accrued interest) for this b
 | Param | Type | Description |
 | --- | --- | --- |
 | discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve (used for discounting and forwards) |
+
+<a name="Bond+yieldToMaturity"></a>
+
+##### bond.yieldToMaturity(npv) ⇒ <code>number</code>
+Calculates the bond yield given [npv](npv), i.e the flat discount rate
+(continuously compounded) for which the dirty price of the bond equals [npv](npv).
+
+**Kind**: instance method of [<code>Bond</code>](#Bond)  
+**Returns**: <code>number</code> - bond yield given npv  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| npv | <code>number</code> | present value of the bond for yield calculation |
 
 <a name="irFrequency"></a>
 

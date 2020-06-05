@@ -420,6 +420,19 @@ class Bond {
     dirtyPrice(discountCurve) {
         return this.forwardDirtyPrice(discountCurve, 0);
     }
+
+    /**
+     * Calculates the bond yield given {@link npv}, i.e the flat discount rate
+     * (continuously compounded) for which the dirty price of the bond equals {@link npv}.
+     * 
+     * @param {number} npv present value of the bond for yield calculation
+     * @returns {number} bond yield given npv
+     */
+    yieldToMaturity(npv) {
+        const cashflows = [...this.cashflows];
+        cashflows.unshift({t: 0, value: -npv});
+        return irInternalRateOfReturn(cashflows);
+    }
 }
 
 export {Bond};
