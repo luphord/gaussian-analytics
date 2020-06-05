@@ -441,6 +441,21 @@ describe('irForwardPrice', function() {
     it('forward price at cashflow time should be equal to notional', function() {
         assertEqualRounded(gauss.irForwardPrice([cf], flatDiscCurve, cf.t), cf.value, 13);
     });
+
+    it('should match example from wikipedia at https://en.wikipedia.org/wiki/Internal_rate_of_return', function() {
+        const cashflows = [
+                {t: 0, value: -123400},
+                {t: 1, value: 36200},
+                {t: 2, value: 54800},
+                {t: 3, value: 48100},
+            ],
+            rate = Math.log(1 + 0.0596), // discrete compounding in source
+            rateRoundedUp = Math.log(1 + 0.0597),
+            flatDiscCurve = gauss.irFlatDiscountCurve(rate),
+            flatDiscCurveRoundedUp = gauss.irFlatDiscountCurve(rateRoundedUp);
+        assertEqualRounded(gauss.irForwardPrice(cashflows, flatDiscCurve, 0), 3.91, 2);
+        assert(gauss.irForwardPrice(cashflows, flatDiscCurveRoundedUp, 0) < 0); // true IRR is in rounding interval
+    });
 });
 
 describe('irRollFromEnd', function() {
