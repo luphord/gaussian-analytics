@@ -329,6 +329,7 @@ export function irFlatDiscountCurve(flatRate) {
  */
 class Bond {
     /**
+     * Creates an instance of a coupon-paying bond.
      * 
      * @param {number} notional notional payment, i.e. last cashflow and reference amount for {@link notional}
      * @param {number} coupon annual coupon relative to {@link notional} (i.e. 0.04 for 4%, not a currency amount)
@@ -345,6 +346,9 @@ class Bond {
     }
 
     /**
+     * Cashflows of this bond as an array.
+     * Last coupon and notional payment are returned separately.
+     * 
      * @returns {Array<FixedCashflow>}
      */
     get cashflows() {

@@ -151,6 +151,8 @@ Coupon-paying bond with schedule rolled from end.
 <a name="new_Bond_new"></a>
 
 ##### new Bond(notional, coupon, start, end, frequency)
+Creates an instance of a coupon-paying bond.
+
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -163,6 +165,9 @@ Coupon-paying bond with schedule rolled from end.
 <a name="Bond+cashflows"></a>
 
 ##### bond.cashflows ⇒ [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow)
+Cashflows of this bond as an array.
+Last coupon and notional payment are returned separately.
+
 **Kind**: instance property of [<code>Bond</code>](#Bond)  
 <a name="irFrequency"></a>
 
