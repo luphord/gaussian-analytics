@@ -334,11 +334,11 @@ export function irFlatDiscountCurve(flatRate) {
  * @param {Array<FixedCashflow>} cashflows cashflows for which the IRR is to be calculated
  * @param {number} [r0=0] first guess for IRR
  * @param {number} [r1=0.05] second guess for IRR, may not be equal to {@link r0}
- * @param {number} [abstol=0.01] absolute tolerance to accept the current rate as solution
+ * @param {number} [abstol=1e-8] absolute tolerance to accept the current rate as solution
  * @param {number} [maxiter=100] maximum number of secant method iteration after which root finding aborts
  * @returns {number} continuously compounded IRR
  */
-export function irInternalRateOfReturn(cashflows, r0=0, r1=0.05, abstol=0.01, maxiter=100) {
+export function irInternalRateOfReturn(cashflows, r0=0, r1=0.05, abstol=1e-8, maxiter=100) {
     if (r0 === r1) {
         throw 'r0 and r1 initial IRR guesses have to be different';
     }

@@ -393,7 +393,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 | cashflows | [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow) |  | cashflows for which the IRR is to be calculated |
 | [r0] | <code>number</code> | <code>0</code> | first guess for IRR |
 | [r1] | <code>number</code> | <code>0.05</code> | second guess for IRR, may not be equal to [r0](r0) |
-| [abstol] | <code>number</code> | <code>0.01</code> | absolute tolerance to accept the current rate as solution |
+| [abstol] | <code>number</code> | <code>1e-8</code> | absolute tolerance to accept the current rate as solution |
 | [maxiter] | <code>number</code> | <code>100</code> | maximum number of secant method iteration after which root finding aborts |
 
 <a name="PricingResult"></a>
