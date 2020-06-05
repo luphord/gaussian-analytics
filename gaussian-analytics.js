@@ -313,3 +313,37 @@ export function irRollFromEnd(start, end, frequency) {
     }
     return schedule;
 }
+
+/**
+ * Coupon-paying bond with schedule rolled from end.
+ */
+export class Bond {
+    /**
+     * 
+     * @param {number} notional notional payment, i.e. last cashflow and reference amount for {@link notional}
+     * @param {number} coupon annual coupon relative to {@link notional} (i.e. 0.04 for 4%, not a currency amount)
+     * @param {number} start start time of bond (schedule will be rolled from {@link end})
+     * @param {number} end end time of bond (time of notional payment)
+     * @param {number} frequency number of payments per year
+     */
+    constructor(notional, coupon, start, end, frequency) {
+        this.notional = notional;
+        this.coupon = coupon;
+        this.start = start;
+        this.end = end;
+        this.frequency = frequency;
+    }
+
+    /**
+     * @returns {Array<FixedCashflow>}
+     */
+    get cashflows() {
+        const schedule = irRollFromEnd(this.start, this.end, this.frequency);
+        const cashflows = [];
+        for (const t of schedule) {
+            cashflows.push({t: t, value: this.notional * this.coupon / this.frequency});
+        }
+        cashflows.push({t: this.end, value: this.notional});
+        return cashflows;
+    }
+}

@@ -459,7 +459,6 @@ describe('irRollFromEnd', function() {
     });
 
     it('should always have # frequency dates', function() {
-
         for (let start = 0.1; start < 1e10; start *= 11) {
             for (let frequency in gauss.irFrequency) {
                 const schedule = new gauss.irRollFromEnd(start, start + 1, gauss.irFrequency[frequency]);
@@ -468,5 +467,22 @@ describe('irRollFromEnd', function() {
 
             }
         }
+    });
+});
+
+describe('Bond', function() {
+    const bond1 = new gauss.Bond(100, 0.04, 0, 5, 1),
+        bond2 = new gauss.Bond(100, 0.04, 0, 1, 4),
+        bond3 = new gauss.Bond(100, 0.04, 3, 4, 4);
+    it('should have some expected example cashflows', function() {
+        assert.deepStrictEqual(bond1.cashflows, 
+            [{t: 1, value: 4}, {t: 2, value: 4}, {t: 3, value: 4},
+                {t: 4, value: 4}, {t: 5, value: 4}, {t: 5, value: 100}]);
+        assert.deepStrictEqual(bond2.cashflows, 
+            [{t: 0.25, value: 1}, {t: 0.5, value: 1}, {t: 0.75, value: 1},
+                {t: 1, value: 1}, {t: 1, value: 100}]);
+        assert.deepStrictEqual(bond3.cashflows, 
+            [{t: 3.25, value: 1}, {t: 3.5, value: 1}, {t: 3.75, value: 1},
+                {t: 4, value: 1}, {t: 4, value: 100}]);
     });
 });
