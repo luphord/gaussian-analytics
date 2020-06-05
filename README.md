@@ -433,6 +433,9 @@ Creates a [DiscountCurve](#DiscountCurve) discounting with the constant [flatRat
 
 ### 0.6.0 (not yet)
 * implement [`irBlack76`](#irBlack76) (Black-Scholes formula for futures / forwards, particularly in interest rates)
+* implement [`irForwardPrice`](#irForwardPrice) for calculation of forward prices for fixed cashflows
+* implement [`irRollFromEnd`](#irRollFromEnd) for creating regular payment schedules
+* implement class [`Bond`](#Bond) with methods for obtaining cashflows and (forward) dirty price
 
 ### 0.5.0 (2020-05-30)
 * BREAKING CHANGE: move `callPrice` to `call.price` and `putPrice` to `put.price` on `PricingResult` objects; this will simplify the addition of greeks to results
