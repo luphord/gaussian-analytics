@@ -471,7 +471,15 @@ describe('irRollFromEnd', function() {
 describe('Bond', function() {
     const bond1 = new gauss.Bond(100, 0.04, 0, 5, 1),
         bond2 = new gauss.Bond(100, 0.04, 0, 1, 4),
-        bond3 = new gauss.Bond(100, 0.04, 3, 4, 4);
+        bond3 = new gauss.Bond(100, 0.04, 3, 4, 4),
+        curve0 = gauss.irFlatDiscountCurve(0.0),
+        curve1 = gauss.irFlatDiscountCurve(0.02),
+        curve2 = gauss.irFlatDiscountCurve(0.05),
+        curve3 = gauss.irFlatDiscountCurve(0.1),
+        curve4 = gauss.irFlatDiscountCurve(-0.03),
+        bonds = [bond1, bond2, bond3],
+        curves = [curve0, curve1, curve2, curve3, curve4];
+    
     it('should have some expected example cashflows', function() {
         assert.deepStrictEqual(bond1.cashflows, 
             [{t: 1, value: 4}, {t: 2, value: 4}, {t: 3, value: 4},
@@ -482,5 +490,21 @@ describe('Bond', function() {
         assert.deepStrictEqual(bond3.cashflows, 
             [{t: 3.25, value: 1}, {t: 3.5, value: 1}, {t: 3.75, value: 1},
                 {t: 4, value: 1}, {t: 4, value: 100}]);
+    });
+
+    it('should have forward price notional + last coupon payment at maturity', function() {
+        for (const bond of bonds) {
+            for (const curve of curves) {
+                const expected = bond.notional * (1 + bond.coupon / bond.frequency);
+                assertEqualRounded(bond.forwardDirtyPrice(curve, bond.end), expected, 13);
+            }
+        }
+    });
+
+    it('should have price == sum of cashflows if interest rate is 0', function() {
+        for (const bond of bonds) {
+            const expected = bond.cashflows.map(cf => cf.value).reduce((x, y) => x + y, 0);
+            assert.strictEqual(bond.dirtyPrice(curve0), expected);
+        }
     });
 });

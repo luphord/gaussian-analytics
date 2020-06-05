@@ -360,6 +360,25 @@ class Bond {
         cashflows.push({t: this.end, value: this.notional});
         return cashflows;
     }
+
+    /**
+     * Calculates the forward price (dirty, i.e. including accrued interest) at time t for this bond.
+     * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
+     * @param {number} t time for which the forward dirty price is to be calculated
+     * @returns {number}
+     */
+    forwardDirtyPrice(discountCurve, t) {
+        return irForwardPrice(this.cashflows, discountCurve, t);
+    }
+
+    /**
+     * Calculates the current price (dirty, i.e. including accrued interest) for this bond.
+     * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
+     * @returns {number}
+     */
+    dirtyPrice(discountCurve) {
+        return this.forwardDirtyPrice(discountCurve, 0);
+    }
 }
 
 export {Bond};

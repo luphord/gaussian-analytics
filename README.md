@@ -147,6 +147,8 @@ Coupon-paying bond with schedule rolled from end.
 * [Bond](#Bond)
     * [new Bond(notional, coupon, start, end, frequency)](#new_Bond_new)
     * [.cashflows](#Bond+cashflows) ⇒ [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow)
+    * [.forwardDirtyPrice(discountCurve, t)](#Bond+forwardDirtyPrice) ⇒ <code>number</code>
+    * [.dirtyPrice(discountCurve)](#Bond+dirtyPrice) ⇒ <code>number</code>
 
 <a name="new_Bond_new"></a>
 
@@ -169,6 +171,29 @@ Cashflows of this bond as an array.
 Last coupon and notional payment are returned separately.
 
 **Kind**: instance property of [<code>Bond</code>](#Bond)  
+<a name="Bond+forwardDirtyPrice"></a>
+
+##### bond.forwardDirtyPrice(discountCurve, t) ⇒ <code>number</code>
+Calculates the forward price (dirty, i.e. including accrued interest) at time t for this bond.
+
+**Kind**: instance method of [<code>Bond</code>](#Bond)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve (used for discounting and forwards) |
+| t | <code>number</code> | time for which the forward dirty price is to be calculated |
+
+<a name="Bond+dirtyPrice"></a>
+
+##### bond.dirtyPrice(discountCurve) ⇒ <code>number</code>
+Calculates the current price (dirty, i.e. including accrued interest) for this bond.
+
+**Kind**: instance method of [<code>Bond</code>](#Bond)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve (used for discounting and forwards) |
+
 <a name="irFrequency"></a>
 
 #### irFrequency
