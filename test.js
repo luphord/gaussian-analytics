@@ -577,4 +577,15 @@ describe('Bond', function() {
             assert.strictEqual(bond.dirtyPrice(curve0), expected);
         }
     });
+
+    it('should match zero rate', function() {
+        const notional = 100;
+        for (let t = 1; t < 5; t++) {
+            for (let zeroRate = -0.05; zeroRate < 0.1; zeroRate += 0.001) {
+                const curve = gauss.irFlatDiscountCurve(zeroRate),
+                    bond = new gauss.Bond(notional, 0, 0, t, 1);
+                assertEqualRounded(bond.yieldToMaturity(bond.dirtyPrice(curve)), zeroRate, 4);
+            }
+        }
+    });
 });
