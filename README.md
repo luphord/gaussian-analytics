@@ -55,6 +55,14 @@ This should work at least for Firefox and Chrome.
 
 ## API Documentation
 
+#### Classes
+
+<dl>
+<dt><a href="#Bond">Bond</a></dt>
+<dd><p>Coupon-paying bond with schedule rolled from end.</p>
+</dd>
+</dl>
+
 #### Constants
 
 <dl>
@@ -129,6 +137,33 @@ that has last payment at <a href="end">end</a> and no payments before <a href="s
 <dd></dd>
 </dl>
 
+<a name="Bond"></a>
+
+#### Bond
+Coupon-paying bond with schedule rolled from end.
+
+**Kind**: global class  
+
+* [Bond](#Bond)
+    * [new Bond(notional, coupon, start, end, frequency)](#new_Bond_new)
+    * [.cashflows](#Bond+cashflows) ⇒ [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow)
+
+<a name="new_Bond_new"></a>
+
+##### new Bond(notional, coupon, start, end, frequency)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| notional | <code>number</code> | notional payment, i.e. last cashflow and reference amount for [notional](notional) |
+| coupon | <code>number</code> | annual coupon relative to [notional](notional) (i.e. 0.04 for 4%, not a currency amount) |
+| start | <code>number</code> | start time of bond (schedule will be rolled from [end](end)) |
+| end | <code>number</code> | end time of bond (time of notional payment) |
+| frequency | <code>number</code> | number of payments per year |
+
+<a name="Bond+cashflows"></a>
+
+##### bond.cashflows ⇒ [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow)
+**Kind**: instance property of [<code>Bond</code>](#Bond)  
 <a name="irFrequency"></a>
 
 #### irFrequency

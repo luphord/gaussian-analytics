@@ -327,7 +327,7 @@ export function irFlatDiscountCurve(flatRate) {
 /**
  * Coupon-paying bond with schedule rolled from end.
  */
-export class Bond {
+class Bond {
     /**
      * 
      * @param {number} notional notional payment, i.e. last cashflow and reference amount for {@link notional}
@@ -357,3 +357,5 @@ export class Bond {
         return cashflows;
     }
 }
+
+export {Bond};
