@@ -458,6 +458,44 @@ describe('irForwardPrice', function() {
     });
 });
 
+describe('irInternalRateOfReturn', function() {
+    it('should throw on equal initial guesses', function() {
+        assert.throws(() => gauss.irInternalRateOfReturn([], 0.123, 0.123));
+    });
+
+    it('should throw on single cashflow', function() {
+        assert.throws(() => gauss.irInternalRateOfReturn([{t: 0, value: 1}]));
+    });
+
+    it('should throw on only positive cashflows', function() {
+        assert.throws(() => gauss.irInternalRateOfReturn([{t: 0, value: 1}, {t: 1, value: 1}]));
+    });
+
+    it('should match example from wikipedia at https://en.wikipedia.org/wiki/Internal_rate_of_return', function() {
+        const cashflows = [
+                {t: 0, value: -123400},
+                {t: 1, value: 36200},
+                {t: 2, value: 54800},
+                {t: 3, value: 48100},
+            ],
+            expectedRate = Math.log(1 + 0.0596); // discrete compounding in source
+        assertEqualRounded(gauss.irInternalRateOfReturn(cashflows), expectedRate, 4);
+    });
+
+    it('should match example from https://corporatefinanceinstitute.com/resources/knowledge/finance/internal-rate-return-irr/', function() {
+        const cashflows = [
+                {t: 0, value: -500000},
+                {t: 1, value: 160000},
+                {t: 2, value: 160000},
+                {t: 3, value: 160000},
+                {t: 4, value: 160000},
+                {t: 5, value: 50000}
+            ],
+            expectedRate = Math.log(1 + 0.13); // discrete compounding in source
+        assertEqualRounded(gauss.irInternalRateOfReturn(cashflows), expectedRate, 2);
+    });
+});
+
 describe('irRollFromEnd', function() {
     it('should give natural numbers when rolling full years', function() {
         const schedule = new gauss.irRollFromEnd(5, 11, 1);
