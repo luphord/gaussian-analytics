@@ -177,7 +177,7 @@ Last coupon and notional payment are returned separately.
 <a name="Bond+forwardDirtyPrice"></a>
 
 ##### bond.forwardDirtyPrice(discountCurve, t) ⇒ <code>number</code>
-Calculates the forward price (dirty, i.e. including accrued interest) at time t for this bond.
+Calculates the forward price (dirty, i.e. including accrued interest) at time [t](t) for this bond.
 
 **Kind**: instance method of [<code>Bond</code>](#Bond)  
 

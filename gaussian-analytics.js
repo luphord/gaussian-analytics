@@ -367,7 +367,8 @@ class Bond {
     }
 
     /**
-     * Calculates the forward price (dirty, i.e. including accrued interest) at time t for this bond.
+     * Calculates the forward price (dirty, i.e. including accrued interest) at time {@link t} for this bond.
+     * 
      * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
      * @param {number} t time for which the forward dirty price is to be calculated
      * @returns {number}
@@ -378,6 +379,7 @@ class Bond {
 
     /**
      * Calculates the current price (dirty, i.e. including accrued interest) for this bond.
+     * 
      * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
      * @returns {number}
      */
