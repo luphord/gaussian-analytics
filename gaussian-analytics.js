@@ -326,6 +326,40 @@ export function irFlatDiscountCurve(flatRate) {
 }
 
 /**
+ * Calculates the internal rate of return (IRR) of the given series of cashflow,
+ * i.e. the flat discount rate (continuously compounded) for which the total NPV of
+ * the given cashflows is 0. The secant method is used. If not IRR can be found
+ * after {@link maxiter} iteration, an exception is thrown.
+ * 
+ * @param {Array<FixedCashflow>} cashflows cashflows for which the IRR is to be calculated
+ * @param {number} [r0=0] first guess for IRR
+ * @param {number} [r1=0.05] second guess for IRR, may not be equal to {@link r0}
+ * @param {number} [abstol=0.01] absolute tolerance to accept the current rate as solution
+ * @param {number} [maxiter=100] maximum number of secant method iteration after which root finding aborts
+ * @returns {number} continuously compounded IRR
+ */
+export function irInternalRateOfReturn(cashflows, r0=0, r1=0.05, abstol=0.01, maxiter=100) {
+    if (r0 === r1) {
+        throw 'r0 and r1 initial IRR guesses have to be different';
+    }
+    const npv = (r) => irForwardPrice(cashflows, irFlatDiscountCurve(r), 0);
+    let last = r0,
+        current = r1,
+        npv_last = npv(last);
+    for (let i=0; i<=maxiter; i++) {
+        const npv_current = npv(current);
+        if (Math.abs(npv_current) <= abstol) {
+            return current;
+        }
+        const next = current - npv_current * (current - last) / (npv_current - npv_last);
+        last = current;
+        npv_last = npv_current;
+        current = next;
+    }
+    throw 'maximum number of iterations reached';
+}
+
+/**
  * Coupon-paying bond with schedule rolled from end.
  * First coupon period is (possibly) shorter than later periods.
  */

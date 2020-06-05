@@ -122,6 +122,12 @@ First payment period is (possibly) shorter than later periods.</p>
 <dt><a href="#irFlatDiscountCurve">irFlatDiscountCurve(flatRate)</a> ⇒ <code><a href="#DiscountCurve">DiscountCurve</a></code></dt>
 <dd><p>Creates a <a href="#DiscountCurve">DiscountCurve</a> discounting with the constant <a href="flatRate">flatRate</a>.</p>
 </dd>
+<dt><a href="#irInternalRateOfReturn">irInternalRateOfReturn(cashflows, [r0], [r1], [abstol], [maxiter])</a> ⇒ <code>number</code></dt>
+<dd><p>Calculates the internal rate of return (IRR) of the given series of cashflow,
+i.e. the flat discount rate (continuously compounded) for which the total NPV of
+the given cashflows is 0. The secant method is used. If not IRR can be found
+after <a href="maxiter">maxiter</a> iteration, an exception is thrown.</p>
+</dd>
 </dl>
 
 #### Typedefs
@@ -370,6 +376,25 @@ Creates a [DiscountCurve](#DiscountCurve) discounting with the constant [flatRat
 | Param | Type |
 | --- | --- |
 | flatRate | <code>number</code> | 
+
+<a name="irInternalRateOfReturn"></a>
+
+#### irInternalRateOfReturn(cashflows, [r0], [r1], [abstol], [maxiter]) ⇒ <code>number</code>
+Calculates the internal rate of return (IRR) of the given series of cashflow,
+i.e. the flat discount rate (continuously compounded) for which the total NPV of
+the given cashflows is 0. The secant method is used. If not IRR can be found
+after [maxiter](maxiter) iteration, an exception is thrown.
+
+**Kind**: global function  
+**Returns**: <code>number</code> - continuously compounded IRR  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| cashflows | [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow) |  | cashflows for which the IRR is to be calculated |
+| [r0] | <code>number</code> | <code>0</code> | first guess for IRR |
+| [r1] | <code>number</code> | <code>0.05</code> | second guess for IRR, may not be equal to [r0](r0) |
+| [abstol] | <code>number</code> | <code>0.01</code> | absolute tolerance to accept the current rate as solution |
+| [maxiter] | <code>number</code> | <code>100</code> | maximum number of secant method iteration after which root finding aborts |
 
 <a name="PricingResult"></a>
 
