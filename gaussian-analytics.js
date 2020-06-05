@@ -296,16 +296,17 @@ export const irFrequency = {
 /**
  * Creates a payment schedule with payment frequency {@link frequency}
  * that has last payment at {@link end} and no payments before {@link start}.
+ * First payment period is (possibly) shorter than later periods.
  * 
  * @param {number} start start time of schedule (usually expressed in years)
  * @param {number} end end time of schedule (usually expressed in years)
- * @param {number} frequency number of payments per period (usually per year)
+ * @param {number} frequency number of payments per time unit (usually per year)
  * @returns {Array<number>} payment times
  */
 export function irRollFromEnd(start, end, frequency) {
     const schedule = [],
         yearfraction = 1 / frequency,
-        nPayments = Math.floor(frequency * (end - start));
+        nPayments = Math.ceil(frequency * (end - start));
     let t = end;
     for (let i = 0; i < nPayments; i++) {
         schedule.unshift(t);
@@ -326,6 +327,7 @@ export function irFlatDiscountCurve(flatRate) {
 
 /**
  * Coupon-paying bond with schedule rolled from end.
+ * First coupon period is (possibly) shorter than later periods.
  */
 class Bond {
     /**
@@ -354,8 +356,11 @@ class Bond {
     get cashflows() {
         const schedule = irRollFromEnd(this.start, this.end, this.frequency);
         const cashflows = [];
+        let lastT = this.start;
         for (const t of schedule) {
-            cashflows.push({t: t, value: this.notional * this.coupon / this.frequency});
+            const yearfraction = t - lastT;
+            cashflows.push({t: t, value: this.notional * this.coupon * yearfraction});
+            lastT = t;
         }
         cashflows.push({t: this.end, value: this.notional});
         return cashflows;

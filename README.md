@@ -59,7 +59,8 @@ This should work at least for Firefox and Chrome.
 
 <dl>
 <dt><a href="#Bond">Bond</a></dt>
-<dd><p>Coupon-paying bond with schedule rolled from end.</p>
+<dd><p>Coupon-paying bond with schedule rolled from end.
+First coupon period is (possibly) shorter than later periods.</p>
 </dd>
 </dl>
 
@@ -115,7 +116,8 @@ Cashflows before t are ignored (i.e. do not add any value).</p>
 </dd>
 <dt><a href="#irRollFromEnd">irRollFromEnd(start, end, frequency)</a> ⇒ <code>Array.&lt;number&gt;</code></dt>
 <dd><p>Creates a payment schedule with payment frequency <a href="frequency">frequency</a>
-that has last payment at <a href="end">end</a> and no payments before <a href="start">start</a>.</p>
+that has last payment at <a href="end">end</a> and no payments before <a href="start">start</a>.
+First payment period is (possibly) shorter than later periods.</p>
 </dd>
 <dt><a href="#irFlatDiscountCurve">irFlatDiscountCurve(flatRate)</a> ⇒ <code><a href="#DiscountCurve">DiscountCurve</a></code></dt>
 <dd><p>Creates a <a href="#DiscountCurve">DiscountCurve</a> discounting with the constant <a href="flatRate">flatRate</a>.</p>
@@ -141,6 +143,7 @@ that has last payment at <a href="end">end</a> and no payments before <a href="s
 
 #### Bond
 Coupon-paying bond with schedule rolled from end.
+First coupon period is (possibly) shorter than later periods.
 
 **Kind**: global class  
 
@@ -346,6 +349,7 @@ Cashflows before t are ignored (i.e. do not add any value).
 #### irRollFromEnd(start, end, frequency) ⇒ <code>Array.&lt;number&gt;</code>
 Creates a payment schedule with payment frequency [frequency](frequency)
 that has last payment at [end](end) and no payments before [start](start).
+First payment period is (possibly) shorter than later periods.
 
 **Kind**: global function  
 **Returns**: <code>Array.&lt;number&gt;</code> - payment times  
@@ -354,7 +358,7 @@ that has last payment at [end](end) and no payments before [start](start).
 | --- | --- | --- |
 | start | <code>number</code> | start time of schedule (usually expressed in years) |
 | end | <code>number</code> | end time of schedule (usually expressed in years) |
-| frequency | <code>number</code> | number of payments per period (usually per year) |
+| frequency | <code>number</code> | number of payments per time unit (usually per year) |
 
 <a name="irFlatDiscountCurve"></a>
 

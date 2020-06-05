@@ -507,6 +507,12 @@ describe('Bond', function() {
                 {t: 4, value: 1}, {t: 4, value: 100}]);
     });
 
+    it('should handle fractional periods at the beginning', function() {
+        const bondWithFractionalPeriod = new gauss.Bond(100, 0.04, 0, 1.5, 1);
+        assert.deepStrictEqual(bondWithFractionalPeriod.cashflows,
+            [{t: 0.5, value: 2}, {t: 1.5, value: 4}, {t: 1.5, value: 100}]);
+    });
+
     it('should have forward price notional + last coupon payment at maturity', function() {
         for (const bond of bonds) {
             for (const curve of curves) {
