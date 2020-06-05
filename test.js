@@ -471,6 +471,17 @@ describe('irInternalRateOfReturn', function() {
         assert.throws(() => gauss.irInternalRateOfReturn([{t: 0, value: 1}, {t: 1, value: 1}]));
     });
 
+    it('should match zero rate', function() {
+        const notional = 100;
+        for (let t = 1; t < 5; t++) {
+            for (let zeroBondPrice = 10; zeroBondPrice < 150; zeroBondPrice += 3) {
+                const zeroRate = Math.log(notional / zeroBondPrice) / t,
+                    cashflows = [{t: 0, value: -zeroBondPrice}, {t: t, value: notional}];
+                assertEqualRounded(gauss.irInternalRateOfReturn(cashflows), zeroRate, 4);
+            }
+        }
+    });
+
     it('should match example from wikipedia at https://en.wikipedia.org/wiki/Internal_rate_of_return', function() {
         const cashflows = [
                 {t: 0, value: -123400},
