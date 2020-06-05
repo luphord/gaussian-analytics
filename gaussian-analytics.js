@@ -315,6 +315,16 @@ export function irRollFromEnd(start, end, frequency) {
 }
 
 /**
+ * Creates a {@link DiscountCurve} discounting with the constant {@link flatRate}.
+ * 
+ * @param {number} flatRate 
+ * @returns {DiscountCurve}
+ */
+export function irFlatDiscountCurve(flatRate) {
+    return (t) => Math.exp(-flatRate * t);
+}
+
+/**
  * Coupon-paying bond with schedule rolled from end.
  */
 export class Bond {

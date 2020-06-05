@@ -109,6 +109,9 @@ Cashflows before t are ignored (i.e. do not add any value).</p>
 <dd><p>Creates a payment schedule with payment frequency <a href="frequency">frequency</a>
 that has last payment at <a href="end">end</a> and no payments before <a href="start">start</a>.</p>
 </dd>
+<dt><a href="#irFlatDiscountCurve">irFlatDiscountCurve(flatRate)</a> ⇒ <code><a href="#DiscountCurve">DiscountCurve</a></code></dt>
+<dd><p>Creates a <a href="#DiscountCurve">DiscountCurve</a> discounting with the constant <a href="flatRate">flatRate</a>.</p>
+</dd>
 </dl>
 
 #### Typedefs
@@ -287,6 +290,17 @@ that has last payment at [end](end) and no payments before [start](start).
 | start | <code>number</code> | start time of schedule (usually expressed in years) |
 | end | <code>number</code> | end time of schedule (usually expressed in years) |
 | frequency | <code>number</code> | number of payments per period (usually per year) |
+
+<a name="irFlatDiscountCurve"></a>
+
+#### irFlatDiscountCurve(flatRate) ⇒ [<code>DiscountCurve</code>](#DiscountCurve)
+Creates a [DiscountCurve](#DiscountCurve) discounting with the constant [flatRate](flatRate).
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| flatRate | <code>number</code> | 
 
 <a name="PricingResult"></a>
 

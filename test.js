@@ -420,9 +420,7 @@ describe('irBlack76', function() {
 
 describe('irForwardPrice', function() {
     const rate = 0.05;
-    const flatDiscCurve = function(t) {
-        return Math.exp(-rate * t);
-    };
+    const flatDiscCurve = gauss.irFlatDiscountCurve(rate);
     const cf = {
         t: 1.0,
         value: 123.45
