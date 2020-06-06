@@ -533,9 +533,9 @@ describe('irRollFromEnd', function() {
 });
 
 describe('Bond', function() {
-    const bond1 = new gauss.Bond(100, 0.04, 0, 5, 1),
-        bond2 = new gauss.Bond(100, 0.04, 0, 1, 4),
-        bond3 = new gauss.Bond(100, 0.04, 3, 4, 4),
+    const bond1 = new gauss.Bond(100, 0.04, 0, 5, gauss.irFrequency.annually),
+        bond2 = new gauss.Bond(100, 0.04, 0, 1, gauss.irFrequency.quarterly),
+        bond3 = new gauss.Bond(100, 0.04, 3, 4, gauss.irFrequency.quarterly),
         curve0 = gauss.irFlatDiscountCurve(0.0),
         curve1 = gauss.irFlatDiscountCurve(0.02),
         curve2 = gauss.irFlatDiscountCurve(0.05),
@@ -557,7 +557,7 @@ describe('Bond', function() {
     });
 
     it('should handle fractional periods at the beginning', function() {
-        const bondWithFractionalPeriod = new gauss.Bond(100, 0.04, 0, 1.5, 1);
+        const bondWithFractionalPeriod = new gauss.Bond(100, 0.04, 0, 1.5, gauss.irFrequency.annually);
         assert.deepStrictEqual(bondWithFractionalPeriod.cashflows,
             [{t: 0.5, value: 2}, {t: 1.5, value: 4}, {t: 1.5, value: 100}]);
     });
@@ -583,7 +583,7 @@ describe('Bond', function() {
         for (let t = 1; t < 5; t++) {
             for (let zeroRate = -0.05; zeroRate < 0.1; zeroRate += 0.001) {
                 const curve = gauss.irFlatDiscountCurve(zeroRate),
-                    bond = new gauss.Bond(notional, 0, 0, t, 1);
+                    bond = new gauss.Bond(notional, 0, 0, t, gauss.irFrequency.annually);
                 assertEqualRounded(bond.yieldToMaturity(bond.dirtyPrice(curve)), zeroRate, 4);
             }
         }
