@@ -599,6 +599,13 @@ describe('Bond', function() {
         }
     });
 
+    it('should have value 100% when discounting with par yield', function() {
+        for (const bond of bonds) {
+            const curve = gauss.irFlatDiscountCurve(bond.yieldToMaturity());
+            assertEqualRounded(bond.dirtyPrice(curve), bond.notional, 7);
+        }
+    });
+
     it('should have price == sum of cashflows if interest rate is 0', function() {
         for (const bond of bonds) {
             const expected = bond.cashflows.map(cf => cf.value).reduce((x, y) => x + y, 0);

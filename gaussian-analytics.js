@@ -442,10 +442,13 @@ class Bond {
      * Calculates the bond yield given {@link npv}, i.e the flat discount rate
      * (continuously compounded) for which the dirty price of the bond equals {@link npv}.
      * 
-     * @param {number} npv present value of the bond for yield calculation
+     * @param {number} [npv=this.notional] present value of the bond for yield calculation, defaults to 100% (i.e. notional)
      * @returns {number} bond yield given npv
      */
     yieldToMaturity(npv) {
+        if (typeof npv === 'undefined') {
+            npv = this.notional;
+        }
         const cashflows = [...this.cashflows];
         cashflows.unshift({t: 0, value: -npv});
         return irInternalRateOfReturn(cashflows);
