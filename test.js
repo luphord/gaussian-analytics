@@ -530,6 +530,22 @@ describe('irRollFromEnd', function() {
             }
         }
     });
+
+    it('should not have periods below irMinimumPeriod length', function() {
+        for (let start = 0.1; start < 1e5; start *= 111) {
+            for (let frequency in gauss.irFrequency) {
+                for (let fractionalPeriod of [0, 0.0001, 0.001, 0.01, 0.1, 1/3]) {
+                    const period = 1 + fractionalPeriod;
+                    const schedule = new gauss.irRollFromEnd(start, start + period, gauss.irFrequency[frequency]);
+                    let tLast = start;
+                    for (let t of schedule) {
+                        const dt = t - tLast;
+                        assert(dt >= gauss.irMinimumPeriod, `failing at start ${start}, period ${period} with frequency "${frequency}", period length ${dt} < ${gauss.irMinimumPeriod}`);
+                    }
+                }
+            }
+        }
+    });
 });
 
 describe('Bond', function() {

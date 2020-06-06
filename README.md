@@ -70,6 +70,9 @@ First coupon period is (possibly) shorter than later periods.</p>
 <dt><a href="#irFrequency">irFrequency</a></dt>
 <dd><p>Frequencies expressed as number of payments per year.</p>
 </dd>
+<dt><a href="#irMinimumPeriod">irMinimumPeriod</a></dt>
+<dd><p>Minimum period <a href="#irRollFromEnd">irRollFromEnd</a> will create.</p>
+</dd>
 </dl>
 
 #### Functions
@@ -221,6 +224,12 @@ Calculates the bond yield given [npv](npv), i.e the flat discount rate
 
 #### irFrequency
 Frequencies expressed as number of payments per year.
+
+**Kind**: global constant  
+<a name="irMinimumPeriod"></a>
+
+#### irMinimumPeriod
+Minimum period [irRollFromEnd](#irRollFromEnd) will create.
 
 **Kind**: global constant  
 <a name="pdf"></a>

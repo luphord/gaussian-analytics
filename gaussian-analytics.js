@@ -294,6 +294,11 @@ export const irFrequency = {
 };
 
 /**
+ * Minimum period {@link irRollFromEnd} will create.
+ */
+export const irMinimumPeriod = 1 / 1000;
+
+/**
  * Creates a payment schedule with payment frequency {@link frequency}
  * that has last payment at {@link end} and no payments before {@link start}.
  * First payment period is (possibly) shorter than later periods.
@@ -309,6 +314,9 @@ export function irRollFromEnd(start, end, frequency) {
         nPayments = Math.ceil(frequency * (end - start));
     let t = end;
     for (let i = 0; i < nPayments; i++) {
+        if (t - start < irMinimumPeriod) {
+            break;
+        }
         schedule.unshift(t);
         t -= yearfraction;
     }
