@@ -309,6 +309,15 @@ export const irMinimumPeriod = 1 / 1000;
  * @returns {Array<number>} payment times
  */
 export function irRollFromEnd(start, end, frequency) {
+    if (start + irMinimumPeriod >= end) {
+        throw `start needs to be at least ${irMinimumPeriod} before end, got start=${start} and end=${end}`;
+    }
+    if (frequency <= 0) {
+        throw `need a strictly positive frequency, got ${frequency}`;
+    }
+    if (frequency > 1 / irMinimumPeriod) {
+        throw `need a frequency that is smaller than ${1 / irMinimumPeriod}, got ${frequency}`;
+    }
     const schedule = [],
         yearfraction = 1 / frequency,
         nPayments = Math.ceil(frequency * (end - start));

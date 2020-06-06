@@ -546,6 +546,18 @@ describe('irRollFromEnd', function() {
             }
         }
     });
+
+    it('should fail on start >= end', function() {
+        assert.throws(() => gauss.irRollFromEnd(1, 1, gauss.irFrequency.annually));
+    });
+
+    it('should fail on negative frequency', function() {
+        assert.throws(() => gauss.irRollFromEnd(1, 2, -1));
+    });
+
+    it('should fail on frequencies too large', function() {
+        assert.throws(() => gauss.irRollFromEnd(1, 2, 2000));
+    });
 });
 
 describe('Bond', function() {
