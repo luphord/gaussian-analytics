@@ -542,7 +542,9 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 * implement [`irBlack76`](#irBlack76) (Black-Scholes formula for futures / forwards, particularly in interest rates)
 * implement [`irForwardPrice`](#irForwardPrice) for calculation of forward prices for fixed cashflows
 * implement [`irRollFromEnd`](#irRollFromEnd) for creating regular payment schedules
-* implement class [`Bond`](#Bond) with methods for obtaining cashflows and (forward) dirty price
+* implement [`irInternalRateOfReturn`](#irInternalRateOfReturn) to solve for IRR using the secant method
+* implement class [`Bond`](#Bond) with methods for obtaining cashflows, (forward) dirty price and yield to maturity
+* implement helper functions for dealing with spot and discount curves
 
 ### 0.5.0 (2020-05-30)
 * BREAKING CHANGE: move `callPrice` to `call.price` and `putPrice` to `put.price` on `PricingResult` objects; this will simplify the addition of greeks to results
