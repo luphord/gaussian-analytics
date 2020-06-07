@@ -426,7 +426,10 @@ describe('irBlack76', function() {
                 {t: 9/12, rate: 0.095},
                 {t: 10/12, rate: 0.10},
             ],
-            bond = new gauss.Bond(1000, 0.1, -0.25, 9.75, gauss.irFrequency.semiannually);
+            bond = new gauss.Bond(1000, 0.1, -0.25, 9.75, gauss.irFrequency.semiannually),
+            forwardVolatility = 0.09,
+            strike1 = 1000,
+            expectedPptionPremium1 = 9.49;
         // we want to calculate the forward in an alternative way for which we need a complete discount curve
         // first step is to *determine the implied rate*, s.t. the given dirty price is matched without breaking
         // the values of the given two coupons at 3m and 9m
@@ -439,10 +442,14 @@ describe('irBlack76', function() {
         helperBond.start = 0.75;
         const helperBondDirtyPrice = bondDirtyPrice - couponBeforeOptionNpv;
         const impliedRate = helperBond.yieldToMaturity(helperBondDirtyPrice); // this is the result of step one
-        const impliedCurve = gauss.irSpotCurve2DiscountCurve(gauss.irLinearInterpolationSpotCurve([...rates, {t: helperBond.cashflows[0].t, rate: impliedRate}]));
+        const impliedSpotCurve = gauss.irLinearInterpolationSpotCurve([...rates, {t: helperBond.cashflows[0].t, rate: impliedRate}]);
+        const impliedCurve = gauss.irSpotCurve2DiscountCurve(impliedSpotCurve);
         assertEqualRounded(bond.dirtyPrice(impliedCurve), bondDirtyPrice, 0); // dirty price matches
         assertEqualRounded(gauss.irForwardPrice(couponsBeforeOption, impliedCurve, 0), expectedCouponBeforeOptionNpv, 0); // coupons before option match
         assertEqualRounded(bond.forwardDirtyPrice(impliedCurve, optionMaturity), bondDirtyForwardPrice, 2); // forward price matches
+        // second step is to evaluate the option
+        const result = gauss.irBlack76(bond.forwardDirtyPrice(impliedCurve, optionMaturity), strike1, optionMaturity, forwardVolatility, impliedSpotCurve(optionMaturity));
+        assertEqualRounded(result.call.price, expectedPptionPremium1, 2);
     });
 });
 
