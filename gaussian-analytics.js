@@ -380,12 +380,31 @@ export function irLinearInterpolationSpotCurve(spotRates) {
 
 /**
  * Turns a {@link SpotCurve} into a {@link DiscountCurve}.
+ * Inverse of {@link irDiscountCurve2SpotCurve}.
  * 
  * @param {SpotCurve} spotCurve spot rate curve to be converted
  * @returns {DiscountCurve}
  */
 export function irSpotCurve2DiscountCurve(spotCurve) {
     return (t) => Math.exp(-spotCurve(t) * t);
+}
+
+const irDiscountCurveConversionTimeCutoff = 1e-8;
+
+/**
+ * Turns a {@link DiscountCurve} into a {@link SpotCurve}.
+ * Inverse of {@link irSpotCurve2DiscountCurve}.
+ * 
+ * @param {DiscountCurve} discountCurve discount curve to be converted
+ * @returns {SpotCurve}
+ */
+export function irDiscountCurve2SpotCurve(discountCurve) {
+    return (t) => {
+        if (t >= 0 && t <= irDiscountCurveConversionTimeCutoff) {
+            t = irDiscountCurveConversionTimeCutoff;
+        }
+        return -Math.log(discountCurve(t)) / t;
+    };
 }
 
 /**

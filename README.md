@@ -130,7 +130,12 @@ First payment period is (possibly) shorter than later periods.</p>
 Extrapolation in both directions is constant.</p>
 </dd>
 <dt><a href="#irSpotCurve2DiscountCurve">irSpotCurve2DiscountCurve(spotCurve)</a> ⇒ <code><a href="#DiscountCurve">DiscountCurve</a></code></dt>
-<dd><p>Turns a <a href="#SpotCurve">SpotCurve</a> into a <a href="#DiscountCurve">DiscountCurve</a>.</p>
+<dd><p>Turns a <a href="#SpotCurve">SpotCurve</a> into a <a href="#DiscountCurve">DiscountCurve</a>.
+Inverse of <a href="#irDiscountCurve2SpotCurve">irDiscountCurve2SpotCurve</a>.</p>
+</dd>
+<dt><a href="#irDiscountCurve2SpotCurve">irDiscountCurve2SpotCurve(discountCurve)</a> ⇒ <code><a href="#SpotCurve">SpotCurve</a></code></dt>
+<dd><p>Turns a <a href="#DiscountCurve">DiscountCurve</a> into a <a href="#SpotCurve">SpotCurve</a>.
+Inverse of <a href="#irSpotCurve2DiscountCurve">irSpotCurve2DiscountCurve</a>.</p>
 </dd>
 <dt><a href="#irInternalRateOfReturn">irInternalRateOfReturn(cashflows, [r0], [r1], [abstol], [maxiter])</a> ⇒ <code>number</code></dt>
 <dd><p>Calculates the internal rate of return (IRR) of the given series of cashflow,
@@ -427,12 +432,25 @@ Extrapolation in both directions is constant.
 
 #### irSpotCurve2DiscountCurve(spotCurve) ⇒ [<code>DiscountCurve</code>](#DiscountCurve)
 Turns a [SpotCurve](#SpotCurve) into a [DiscountCurve](#DiscountCurve).
+Inverse of [irDiscountCurve2SpotCurve](#irDiscountCurve2SpotCurve).
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | spotCurve | [<code>SpotCurve</code>](#SpotCurve) | spot rate curve to be converted |
+
+<a name="irDiscountCurve2SpotCurve"></a>
+
+#### irDiscountCurve2SpotCurve(discountCurve) ⇒ [<code>SpotCurve</code>](#SpotCurve)
+Turns a [DiscountCurve](#DiscountCurve) into a [SpotCurve](#SpotCurve).
+Inverse of [irSpotCurve2DiscountCurve](#irSpotCurve2DiscountCurve).
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve to be converted |
 
 <a name="irInternalRateOfReturn"></a>
 
