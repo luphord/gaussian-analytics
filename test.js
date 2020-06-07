@@ -493,6 +493,26 @@ describe('irForwardPrice', function() {
     });
 });
 
+describe('curve conversions', function() {
+    const rates = [
+            {t: 1/12, rate: 0.01},
+            {t: 2/12, rate: 0.015},
+            {t: 3/12, rate: 0.02},
+            {t: 6/12, rate: 0.025},
+            {t: 1, rate: 0.04},
+            {t: 2, rate: 0.045},
+            {t: 5, rate: 0.05},
+        ],
+        curve = gauss.irLinearInterpolationSpotCurve(rates);
+
+    it('should properly invert', function() {
+        const transformedCurve = gauss.irDiscountCurve2SpotCurve(gauss.irSpotCurve2DiscountCurve(curve));
+        for (let t = 0; t < 30; t += 0.2) {
+            assertEqualRounded(transformedCurve(t), curve(t), 8);
+        }
+    });
+});
+
 describe('irInternalRateOfReturn', function() {
     it('should throw on equal initial guesses', function() {
         assert.throws(() => gauss.irInternalRateOfReturn([], 0.123, 0.123));
