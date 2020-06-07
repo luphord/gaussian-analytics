@@ -418,6 +418,7 @@ describe('irBlack76', function() {
 
     it('should match (adapted example from Hull, example 28.1', function() {
         const optionMaturity = 10 / 12,
+            bondDirtyPrice = 960,
             rates = [
                 {t: 3/12, rate: 0.09},
                 {t: 9/12, rate: 0.095},
@@ -431,6 +432,10 @@ describe('irBlack76', function() {
         assertEqualRounded(couponBeforeOptionNpv, 95.45, 2);
         const helperBond = Object.assign(new gauss.Bond(), bond);
         helperBond.start = 0.75;
+        const helperBondDirtyPrice = bondDirtyPrice - couponBeforeOptionNpv;
+        const impliedRate = helperBond.yieldToMaturity(helperBondDirtyPrice);
+        const impliedCurve = gauss.irSpotCurve2DiscountCurve(gauss.irLinearInterpolationSpotCurve([...rates, {t: helperBond.cashflows[0].t, rate: impliedRate}]));
+        assertEqualRounded(bond.dirtyPrice(impliedCurve), bondDirtyPrice, 0);
     });
 });
 
