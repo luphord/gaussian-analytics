@@ -424,7 +424,7 @@ describe('irBlack76', function() {
                 {t: 10/12, rate: 0.10},
             ],
             bond = new gauss.Bond(1000, 0.1, -0.25, 9.75, gauss.irFrequency.semiannually);
-        const helperCurve = new gauss.irLinearInterpolationDiscountCurve(rates);
+        const helperCurve = gauss.irSpotCurve2DiscountCurve(gauss.irLinearInterpolationSpotCurve(rates));
         const couponsBeforeOption = bond.cashflows.filter(cf => cf.t < optionMaturity);
         assert.deepStrictEqual(couponsBeforeOption, [{t: 0.25, value: 50}, {t: 0.75, value: 50}]);
         const couponBeforeOptionNpv = gauss.irForwardPrice(couponsBeforeOption, helperCurve, 0);

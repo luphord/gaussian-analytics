@@ -125,6 +125,13 @@ First payment period is (possibly) shorter than later periods.</p>
 <dt><a href="#irFlatDiscountCurve">irFlatDiscountCurve(flatRate)</a> ⇒ <code><a href="#DiscountCurve">DiscountCurve</a></code></dt>
 <dd><p>Creates a <a href="#DiscountCurve">DiscountCurve</a> discounting with the constant <a href="flatRate">flatRate</a>.</p>
 </dd>
+<dt><a href="#irLinearInterpolationSpotCurve">irLinearInterpolationSpotCurve(spotRates)</a> ⇒ <code><a href="#SpotCurve">SpotCurve</a></code></dt>
+<dd><p>Creates a <a href="#SpotCurve">SpotCurve</a> by linearly interpolating the given points in time.
+Extrapolation in both directions is constant.</p>
+</dd>
+<dt><a href="#irSpotCurve2DiscountCurve">irSpotCurve2DiscountCurve(spotCurve)</a> ⇒ <code><a href="#DiscountCurve">DiscountCurve</a></code></dt>
+<dd><p>Turns a <a href="#SpotCurve">SpotCurve</a> into a <a href="#DiscountCurve">DiscountCurve</a>.</p>
+</dd>
 <dt><a href="#irInternalRateOfReturn">irInternalRateOfReturn(cashflows, [r0], [r1], [abstol], [maxiter])</a> ⇒ <code>number</code></dt>
 <dd><p>Calculates the internal rate of return (IRR) of the given series of cashflow,
 i.e. the flat discount rate (continuously compounded) for which the total NPV of
@@ -143,6 +150,10 @@ after <a href="maxiter">maxiter</a> iteration, an exception is thrown.</p>
 <dt><a href="#OptionPricingResult">OptionPricingResult</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#DiscountCurve">DiscountCurve</a> ⇒ <code>number</code></dt>
+<dd></dd>
+<dt><a href="#SpotCurve">SpotCurve</a> ⇒ <code>number</code></dt>
+<dd></dd>
+<dt><a href="#SpotRate">SpotRate</a> : <code>Object</code></dt>
 <dd></dd>
 <dt><a href="#FixedCashflow">FixedCashflow</a> : <code>Object</code></dt>
 <dd></dd>
@@ -400,6 +411,29 @@ Creates a [DiscountCurve](#DiscountCurve) discounting with the constant [flatRat
 | --- | --- |
 | flatRate | <code>number</code> | 
 
+<a name="irLinearInterpolationSpotCurve"></a>
+
+#### irLinearInterpolationSpotCurve(spotRates) ⇒ [<code>SpotCurve</code>](#SpotCurve)
+Creates a [SpotCurve](#SpotCurve) by linearly interpolating the given points in time.
+Extrapolation in both directions is constant.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| spotRates | [<code>Array.&lt;SpotRate&gt;</code>](#SpotRate) | individual spot rates used for interpolation; will be sorted automatically |
+
+<a name="irSpotCurve2DiscountCurve"></a>
+
+#### irSpotCurve2DiscountCurve(spotCurve) ⇒ [<code>DiscountCurve</code>](#DiscountCurve)
+Turns a [SpotCurve](#SpotCurve) into a [DiscountCurve](#DiscountCurve).
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| spotCurve | [<code>SpotCurve</code>](#SpotCurve) | spot rate curve to be converted |
+
 <a name="irInternalRateOfReturn"></a>
 
 #### irInternalRateOfReturn(cashflows, [r0], [r1], [abstol], [maxiter]) ⇒ <code>number</code>
@@ -469,6 +503,27 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 | Param | Type | Description |
 | --- | --- | --- |
 | t | <code>number</code> | time (typically expressed in years) |
+
+<a name="SpotCurve"></a>
+
+#### SpotCurve ⇒ <code>number</code>
+**Kind**: global typedef  
+**Returns**: <code>number</code> - spot interest rate to time t  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| t | <code>number</code> | time (typically expressed in years) |
+
+<a name="SpotRate"></a>
+
+#### SpotRate : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| t | <code>number</code> | time (typically expressed in years) |
+| rate | <code>number</code> | spot rate to time [t](t) |
 
 <a name="FixedCashflow"></a>
 

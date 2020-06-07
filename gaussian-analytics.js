@@ -97,7 +97,13 @@ function assertCorrelation(value, name) {
  */
 
 /**
-  * @typedef {Object} Rate
+ * @callback SpotCurve
+ * @param {number} t time (typically expressed in years)
+ * @returns {number} spot interest rate to time t
+ */
+
+/**
+  * @typedef {Object} SpotRate
   * @property {number} t time (typically expressed in years)
   * @property {number} rate spot rate to time {@link t}
   */
@@ -349,12 +355,15 @@ export function irFlatDiscountCurve(flatRate) {
 }
 
 /**
+ * Creates a {@link SpotCurve} by linearly interpolating the given points in time.
+ * Extrapolation in both directions is constant.
  * 
- * @param {Array<Rate>} spotRates 
+ * @param {Array<SpotRate>} spotRates individual spot rates used for interpolation; will be sorted automatically
+ * @returns {SpotCurve}
  */
-export function irLinearInterpolationDiscountCurve(spotRates) {
+export function irLinearInterpolationSpotCurve(spotRates) {
     spotRates.sort((rate1, rate2) => rate1.t - rate2.t);
-    const rate = (t) => {
+    return (t) => {
         if (t < spotRates[0].t) {
             return spotRates[0].rate;
         }
@@ -366,7 +375,17 @@ export function irLinearInterpolationDiscountCurve(spotRates) {
         }
         return spotRates[spotRates.length - 1].rate;
     };
-    return (t) => Math.exp(-rate(t) * t);
+}
+
+
+/**
+ * Turns a {@link SpotCurve} into a {@link DiscountCurve}.
+ * 
+ * @param {SpotCurve} spotCurve spot rate curve to be converted
+ * @returns {DiscountCurve}
+ */
+export function irSpotCurve2DiscountCurve(spotCurve) {
+    return (t) => Math.exp(-spotCurve(t) * t);
 }
 
 /**
