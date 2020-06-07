@@ -595,6 +595,45 @@ describe('irRollFromEnd', function() {
     });
 });
 
+describe('irLinearInterpolationSpotCurve', function() {
+    const rates = [
+            {t: 1/12, rate: 0.01},
+            {t: 2/12, rate: 0.015},
+            {t: 3/12, rate: 0.02},
+            {t: 6/12, rate: 0.025},
+            {t: 1, rate: 0.04},
+            {t: 2, rate: 0.045},
+            {t: 5, rate: 0.05},
+        ],
+        curve = gauss.irLinearInterpolationSpotCurve(rates);
+
+    it('should match control points', function() {
+        for (let rate of rates) {
+            assert.strictEqual(curve(rate.t), rate.rate);
+        }
+    });
+
+    it('should be in the middle inbetween', function() {
+        for (let i=1; i<rates.length; i++) {
+            for (let alpha = 0; alpha <= 1; alpha += 0.1) {
+                const t = rates[i-1].t + alpha * (rates[i].t - rates[i-1].t);
+                assert(curve(t) >= Math.min(rates[i].rate, rates[i-1].rate));
+                assert(curve(t) <= Math.max(rates[i].rate, rates[i-1].rate));
+            }
+        }
+    });
+
+    it('should extrapolate constantly', function() {
+        assert.strictEqual(curve(0.0001), rates[0].rate);
+        assert.strictEqual(curve(0.001), rates[0].rate);
+        assert.strictEqual(curve(0.01), rates[0].rate);
+        assert.strictEqual(curve(6), rates[rates.length-1].rate);
+        assert.strictEqual(curve(7), rates[rates.length-1].rate);
+        assert.strictEqual(curve(10), rates[rates.length-1].rate);
+        assert.strictEqual(curve(100), rates[rates.length-1].rate);
+    });
+});
+
 describe('Bond', function() {
     const bond1 = new gauss.Bond(100, 0.04, 0, 5, gauss.irFrequency.annually),
         bond2 = new gauss.Bond(100, 0.04, 0, 1, gauss.irFrequency.quarterly),
