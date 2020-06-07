@@ -525,21 +525,21 @@ describe('irInternalRateOfReturn', function() {
 
 describe('irRollFromEnd', function() {
     it('should give natural numbers when rolling full years', function() {
-        const schedule = new gauss.irRollFromEnd(5, 11, 1);
+        const schedule = gauss.irRollFromEnd(5, 11, 1);
         assert.deepStrictEqual(schedule, [6, 7, 8, 9, 10, 11]);
     });
 
     it('should work with fraction frequencies', function() {
-        const schedule = new gauss.irRollFromEnd(5, 11, 0.5);
+        const schedule = gauss.irRollFromEnd(5, 11, 0.5);
         assert.deepStrictEqual(schedule, [7, 9, 11]);
-        const schedule2 = new gauss.irRollFromEnd(5, 11, 1/3);
+        const schedule2 = gauss.irRollFromEnd(5, 11, 1/3);
         assert.deepStrictEqual(schedule2, [8, 11]);
     });
 
     it('should always have # frequency dates', function() {
         for (let start = 0.1; start < 1e10; start *= 11) {
             for (let frequency in gauss.irFrequency) {
-                const schedule = new gauss.irRollFromEnd(start, start + 1, gauss.irFrequency[frequency]);
+                const schedule = gauss.irRollFromEnd(start, start + 1, gauss.irFrequency[frequency]);
                 assert.strictEqual(schedule.length, gauss.irFrequency[frequency],
                     `failing at start ${start} with frequency "${frequency}", schedule = ${schedule}`);
 
@@ -552,7 +552,7 @@ describe('irRollFromEnd', function() {
             for (let frequency in gauss.irFrequency) {
                 for (let fractionalPeriod of [0, 0.0001, 0.001, 0.01, 0.1, 1/3]) {
                     const period = 1 + fractionalPeriod;
-                    const schedule = new gauss.irRollFromEnd(start, start + period, gauss.irFrequency[frequency]);
+                    const schedule = gauss.irRollFromEnd(start, start + period, gauss.irFrequency[frequency]);
                     let tLast = start;
                     for (let t of schedule) {
                         const dt = t - tLast;
