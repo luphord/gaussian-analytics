@@ -97,6 +97,12 @@ function assertCorrelation(value, name) {
  */
 
 /**
+  * @typedef {Object} Rate
+  * @property {number} t time (typically expressed in years)
+  * @property {number} rate spot rate to time {@link t}
+  */
+
+/**
   * @typedef {Object} FixedCashflow
   * @property {number} t time (typically expressed in years)
   * @property {number} value cash amount paid at t
@@ -340,6 +346,27 @@ export function irRollFromEnd(start, end, frequency) {
  */
 export function irFlatDiscountCurve(flatRate) {
     return (t) => Math.exp(-flatRate * t);
+}
+
+/**
+ * 
+ * @param {Array<Rate>} spotRates 
+ */
+export function irLinearInterpolationDiscountCurve(spotRates) {
+    spotRates.sort((rate1, rate2) => rate1.t - rate2.t);
+    const rate = (t) => {
+        if (t < spotRates[0].t) {
+            return spotRates[0].rate;
+        }
+        for (let i = 1; i < spotRates.length; i++) {
+            if (t < spotRates[i].t) {
+                const slope = (spotRates[i].rate - spotRates[i-1].rate) / (spotRates[i].t - spotRates[i-1].t);
+                return spotRates[i-1].rate + slope * (t - spotRates[i-1].t);
+            }
+        }
+        return spotRates[spotRates.length - 1].rate;
+    };
+    return (t) => Math.exp(-rate(t) * t);
 }
 
 /**
