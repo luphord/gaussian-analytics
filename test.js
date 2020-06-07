@@ -448,7 +448,7 @@ describe('irBlack76', function() {
         assertEqualRounded(gauss.irForwardPrice(couponsBeforeOption, impliedCurve, 0), expectedCouponBeforeOptionNpv, 0); // coupons before option match
         assertEqualRounded(bond.forwardDirtyPrice(impliedCurve, optionMaturity), bondDirtyForwardPrice, 2); // forward price matches
         // second step is to evaluate the option
-        const result = gauss.irBlack76(bond.forwardDirtyPrice(impliedCurve, optionMaturity), strike1, optionMaturity, forwardVolatility, impliedSpotCurve(optionMaturity));
+        const result = gauss.irBlack76BondOption(bond, strike1, optionMaturity, forwardVolatility, impliedSpotCurve);
         assertEqualRounded(result.call.price, expectedOptionPremium1, 2);
     });
 });
