@@ -575,7 +575,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 ## History
 
 ### 0.6.1 (not yet)
-* assert parameter types and numerical ranges of [`Bond`](#Bond)
+* assert parameter types and numerical ranges of [`Bond`](#Bond) and [`irRollFromEnd`](#irRollFromEnd)
 
 ### 0.6.0 (2020-06-07)
 * implement [`irBlack76`](#irBlack76) (Black-Scholes formula for futures / forwards, particularly in interest rates)
