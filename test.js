@@ -674,6 +674,7 @@ describe('Bond', function() {
         assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, 'annually'));
         assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, 0));
         assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, -1));
+        assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, 1 / gauss.irMinimumPeriod + 1));
         assert.throws(() => new gauss.Bond());
     });
     

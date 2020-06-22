@@ -64,6 +64,14 @@ function assertStrictlyPositive(value, name) {
     }
 }
 
+function assertFrequency(value, name) {
+    assertStrictlyPositive(value, name);
+    const maxFreq = 1 / irMinimumPeriod;
+    if (value > maxFreq) {
+        throw name + ' must be less than ' + maxFreq + '; got ' + value;
+    }
+}
+
 function assertCorrelation(value, name) {
     assertNumber(value, name);
     if (value < -1 || value > 1) {
@@ -481,7 +489,7 @@ class Bond {
         assertNumber(coupon, 'coupon');
         assertNumber(start, 'start');
         assertNumber(end, 'end');
-        assertStrictlyPositive(frequency, 'frequency');
+        assertFrequency(frequency, 'frequency');
         this.notional = notional;
         this.coupon = coupon;
         this.start = start;
