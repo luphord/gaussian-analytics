@@ -438,7 +438,7 @@ describe('irBlack76', function() {
         assert.deepStrictEqual(couponsBeforeOption, [{t: 0.25, value: 50}, {t: 0.75, value: 50}]);
         const couponBeforeOptionNpv = gauss.irForwardPrice(couponsBeforeOption, helperCurve, 0);
         assertEqualRounded(couponBeforeOptionNpv, expectedCouponBeforeOptionNpv, 2);
-        const helperBond = Object.assign(new gauss.Bond(), bond);
+        const helperBond = Object.assign({ __proto__: bond.__proto__ }, bond);
         helperBond.start = 0.75;
         const helperBondDirtyPrice = bondDirtyPrice - couponBeforeOptionNpv;
         const impliedRate = helperBond.yieldToMaturity(helperBondDirtyPrice); // this is the result of step one
