@@ -666,6 +666,17 @@ describe('Bond', function() {
         bonds = [bond1, bond2, bond3],
         curves = [curve0, curve1, curve2, curve3, curve4];
     
+    it('should fail with bad parameters', function() {
+        assert.throws(() => new gauss.Bond('100', 0.04, 0, 1.5, gauss.irFrequency.annually));
+        assert.throws(() => new gauss.Bond(100, '0.04', 0, 1.5, gauss.irFrequency.annually));
+        assert.throws(() => new gauss.Bond(100, 0.04, '0', 1.5, gauss.irFrequency.annually));
+        assert.throws(() => new gauss.Bond(100, 0.04, 0, '1.5', gauss.irFrequency.annually));
+        assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, 'annually'));
+        assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, 0));
+        assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, -1));
+        assert.throws(() => new gauss.Bond());
+    });
+    
     it('should have some expected example cashflows', function() {
         assert.deepStrictEqual(bond1.cashflows, 
             [{t: 1, value: 4}, {t: 2, value: 4}, {t: 3, value: 4},

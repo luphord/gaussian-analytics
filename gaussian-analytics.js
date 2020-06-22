@@ -57,6 +57,13 @@ function assertPositive(value, name) {
     }
 }
 
+function assertStrictlyPositive(value, name) {
+    assertNumber(value, name);
+    if (value <= 0) {
+        throw name + ' must be greater than 0; got ' + value;
+    }
+}
+
 function assertCorrelation(value, name) {
     assertNumber(value, name);
     if (value < -1 || value > 1) {
@@ -470,6 +477,11 @@ class Bond {
      * @param {number} frequency number of payments per year
      */
     constructor(notional, coupon, start, end, frequency) {
+        assertNumber(notional, 'notional');
+        assertNumber(coupon, 'coupon');
+        assertNumber(start, 'start');
+        assertNumber(end, 'end');
+        assertStrictlyPositive(frequency, 'frequency');
         this.notional = notional;
         this.coupon = coupon;
         this.start = start;
