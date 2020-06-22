@@ -602,6 +602,12 @@ describe('irRollFromEnd', function() {
         }
     });
 
+    it('should fail on bad parameter types', function() {
+        assert.throws(() => gauss.irRollFromEnd('1', 2, gauss.irFrequency.annually));
+        assert.throws(() => gauss.irRollFromEnd(1, '2', gauss.irFrequency.annually));
+        assert.throws(() => gauss.irRollFromEnd(1, 2, 'annually'));
+    });
+
     it('should fail on start >= end', function() {
         assert.throws(() => gauss.irRollFromEnd(1, 1, gauss.irFrequency.annually));
     });

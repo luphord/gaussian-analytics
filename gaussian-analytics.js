@@ -350,6 +350,8 @@ export const irMinimumPeriod = 1 / 1000;
  * @returns {Array<number>} payment times
  */
 export function irRollFromEnd(start, end, frequency) {
+    assertNumber(start, 'start');
+    assertNumber(end, 'end');
     if (start + irMinimumPeriod >= end) {
         throw `start needs to be at least ${irMinimumPeriod} before end, got start=${start} and end=${end}`;
     }
