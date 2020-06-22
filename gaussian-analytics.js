@@ -46,21 +46,21 @@ function discountFactor(r, t) {
 
 function assertNumber(value, name) {
     if (typeof value !== 'number') {
-        throw name + ' must be a number';
+        throw `${name} must be a number`;
     }
 }
 
 function assertPositive(value, name) {
     assertNumber(value, name);
     if (value < 0) {
-        throw name + ' must be greater or equal to 0; got ' + value;
+        throw `${name} must be greater or equal to 0; got ${value}`;
     }
 }
 
 function assertStrictlyPositive(value, name) {
     assertNumber(value, name);
     if (value <= 0) {
-        throw name + ' must be greater than 0; got ' + value;
+        throw `${name} must be greater than 0; got ${value}`;
     }
 }
 
@@ -68,14 +68,14 @@ function assertFrequency(value, name) {
     assertStrictlyPositive(value, name);
     const maxFreq = 1 / irMinimumPeriod;
     if (value > maxFreq) {
-        throw name + ' must be less than ' + maxFreq + '; got ' + value;
+        throw `${name} must be less than ${maxFreq}; got ${value}`;
     }
 }
 
 function assertCorrelation(value, name) {
     assertNumber(value, name);
     if (value < -1 || value > 1) {
-        throw name + ' must be in interval [-1, 1]; got ' + value;
+        throw `${name} must be in interval [-1, 1]; got ${value}`;
     }
 }
 
