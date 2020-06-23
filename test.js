@@ -71,6 +71,11 @@ describe('pdf()', function() {
             assertEqualRounded(gauss.pdf(i), pdf_example_values[i], 6);
         }
     });
+
+    it('should fail with bad parameters', function() {
+        assert.throws(() => gauss.pdf('0'));
+        assert.throws(() => gauss.pdf());
+    });
 });
 
 describe('cdf()', function() {

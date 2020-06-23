@@ -7,6 +7,7 @@ const stdnormalNormalizingConstant = 1 / Math.sqrt(2 * Math.PI);
  * @returns {number} density of standard normal distribution
  */
 export function pdf(x) {
+    assertNumber(x, 'x');
     return stdnormalNormalizingConstant * Math.exp(-0.5*x**2);
 }
 
