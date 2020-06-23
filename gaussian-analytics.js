@@ -396,6 +396,7 @@ export function irFlatDiscountCurve(flatRate) {
 export function irLinearInterpolationSpotCurve(spotRates) {
     spotRates.sort((rate1, rate2) => rate1.t - rate2.t);
     return (t) => {
+        assertNumber(t, 't');
         if (t < spotRates[0].t) {
             return spotRates[0].rate;
         }

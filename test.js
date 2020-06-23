@@ -678,6 +678,11 @@ describe('irLinearInterpolationSpotCurve', function() {
         assert.strictEqual(curve(10), rates[rates.length-1].rate);
         assert.strictEqual(curve(100), rates[rates.length-1].rate);
     });
+
+    it('should fail with bad parameters', function() {
+        assert.throws(() => curve('0.1'));
+        assert.throws(() => curve());
+    });
 });
 
 describe('Bond', function() {
