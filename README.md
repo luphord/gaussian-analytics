@@ -16,7 +16,7 @@ As `gaussian-analytics.js` is published as an [ES6 module](https://developer.moz
 import('//unpkg.com/gaussian-analytics').then(m => window.gauss=m);
 ```
 
-Afterwards, the global variable `gauss` will contain the module and you can run call exported functions on it, e.g.
+Afterwards, the global variable `gauss` will contain the module and you can call exported functions on it, e.g.
 
 ```javascript
 gauss.eqBlackScholes(100, 100, 1.0, 0.2, 0.0, 0.02);
