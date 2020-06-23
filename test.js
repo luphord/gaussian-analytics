@@ -591,6 +591,15 @@ describe('irInternalRateOfReturn', function() {
             expectedRate = Math.log(1 + 0.13); // discrete compounding in source
         assertEqualRounded(gauss.irInternalRateOfReturn(cashflows), expectedRate, 2);
     });
+
+    it('should fail on bad parameter types', function() {
+        assert.throws(() => gauss.irInternalRateOfReturn());
+        assert.throws(() => gauss.irInternalRateOfReturn([]));
+        assert.throws(() => gauss.irInternalRateOfReturn([{t: 1, value: 1}], '0'));
+        assert.throws(() => gauss.irInternalRateOfReturn([{t: 1, value: 1}], 0, '1'));
+        assert.throws(() => gauss.irInternalRateOfReturn([{t: 1, value: 1}], 0, 1, '1'));
+        assert.throws(() => gauss.irInternalRateOfReturn([{t: 1, value: 1}], 0, 1, 1, '1'));
+    });
 });
 
 describe('irRollFromEnd', function() {

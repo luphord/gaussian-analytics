@@ -52,6 +52,15 @@ function assertDefined(value, name) {
     }
 }
 
+function assertNonEmptyArray(value, name) {
+    if (!Array.isArray(value)) {
+        throw `${name} must be a array`;
+    }
+    if (value.length < 1) {
+        throw `${name} must contain at least one element, got zero`;
+    }
+}
+
 function assertNumber(value, name) {
     if (typeof value !== 'number') {
         throw `${name} must be a number`;
@@ -469,6 +478,11 @@ export function irDiscountCurve2SpotCurve(discountCurve) {
  * @returns {number} continuously compounded IRR
  */
 export function irInternalRateOfReturn(cashflows, r0=0, r1=0.05, abstol=1e-8, maxiter=100) {
+    assertNonEmptyArray(cashflows, 'cashflows');
+    assertNumber(r0, 'r0');
+    assertNumber(r1, 'r1');
+    assertNumber(abstol, 'abstol');
+    assertNumber(maxiter, 'maxiter');
     if (r0 === r1) {
         throw 'r0 and r1 initial IRR guesses have to be different';
     }
