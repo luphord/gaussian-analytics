@@ -579,6 +579,7 @@ class Bond {
         if (typeof npv === 'undefined') {
             npv = this.notional;
         }
+        assertNumber(npv);
         const cashflows = [...this.cashflows];
         cashflows.unshift({t: 0, value: -npv});
         return irInternalRateOfReturn(cashflows);

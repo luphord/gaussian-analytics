@@ -729,6 +729,8 @@ describe('Bond', function() {
         assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, -1));
         assert.throws(() => new gauss.Bond(100, 0.04, 0, 1.5, 1 / gauss.irMinimumPeriod + 1));
         assert.throws(() => new gauss.Bond());
+
+        assert.throws(() => bond1.yieldToMaturity('100'));
     });
     
     it('should have some expected example cashflows', function() {
