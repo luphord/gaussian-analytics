@@ -682,6 +682,8 @@ describe('irLinearInterpolationSpotCurve', function() {
     it('should fail with bad parameters', function() {
         assert.throws(() => curve('0.1'));
         assert.throws(() => curve());
+        assert.throws(() => gauss.irLinearInterpolationSpotCurve());
+        assert.throws(() => gauss.irLinearInterpolationSpotCurve([]));
     });
 });
 

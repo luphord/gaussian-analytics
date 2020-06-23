@@ -394,6 +394,9 @@ export function irFlatDiscountCurve(flatRate) {
  * @returns {SpotCurve}
  */
 export function irLinearInterpolationSpotCurve(spotRates) {
+    if (typeof spotRates === 'undefined' || spotRates.length < 1) {
+        throw `spotRates must contain at least one element, got ${spotRates}`;
+    }
     spotRates.sort((rate1, rate2) => rate1.t - rate2.t);
     return (t) => {
         assertNumber(t, 't');
