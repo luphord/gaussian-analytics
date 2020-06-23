@@ -379,7 +379,11 @@ export function irRollFromEnd(start, end, frequency) {
  * @returns {DiscountCurve}
  */
 export function irFlatDiscountCurve(flatRate) {
-    return (t) => Math.exp(-flatRate * t);
+    assertNumber(flatRate, 'flatRate');
+    return (t) => {
+        assertNumber(t, 't');
+        return Math.exp(-flatRate * t);
+    };
 }
 
 /**

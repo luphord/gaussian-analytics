@@ -503,6 +503,16 @@ describe('irForwardPrice', function() {
     });
 });
 
+describe('irFlatDiscountCurve', function() {
+    it('should fail on bad parameter types', function() {
+        assert.throws(() => gauss.irFlatDiscountCurve('0.1'));
+        assert.throws(() => gauss.irFlatDiscountCurve());
+        const curve = gauss.irFlatDiscountCurve(0.1);
+        assert.throws(() => curve('0.1'));
+        assert.throws(() => curve());
+    });
+});
+
 describe('curve conversions', function() {
     const rates = [
             {t: 1/12, rate: 0.01},
