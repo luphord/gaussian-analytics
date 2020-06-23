@@ -46,6 +46,12 @@ function discountFactor(r, t) {
     return Math.exp(-r*t);
 }
 
+function assertDefined(value, name) {
+    if (typeof value === 'undefined') {
+        throw `${name} must be given, got undefined`;
+    }
+}
+
 function assertNumber(value, name) {
     if (typeof value !== 'number') {
         throw `${name} must be a number`;
@@ -422,7 +428,11 @@ export function irLinearInterpolationSpotCurve(spotRates) {
  * @returns {DiscountCurve}
  */
 export function irSpotCurve2DiscountCurve(spotCurve) {
-    return (t) => Math.exp(-spotCurve(t) * t);
+    assertDefined(spotCurve, 'spotCurve');
+    return (t) => {
+        assertNumber(t, 't');
+        return Math.exp(-spotCurve(t) * t);
+    };
 }
 
 const irDiscountCurveConversionTimeCutoff = 1e-8;
@@ -435,7 +445,9 @@ const irDiscountCurveConversionTimeCutoff = 1e-8;
  * @returns {SpotCurve}
  */
 export function irDiscountCurve2SpotCurve(discountCurve) {
+    assertDefined(discountCurve, 'discountCurve');
     return (t) => {
+        assertNumber(t, 't');
         if (t >= 0 && t <= irDiscountCurveConversionTimeCutoff) {
             t = irDiscountCurveConversionTimeCutoff;
         }

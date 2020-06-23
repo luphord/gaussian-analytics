@@ -531,6 +531,17 @@ describe('curve conversions', function() {
             assertEqualRounded(transformedCurve(t), curve(t), 8);
         }
     });
+
+    it('should fail on bad parameter types', function() {
+        assert.throws(() => gauss.irDiscountCurve2SpotCurve());
+        const spotCurve = gauss.irDiscountCurve2SpotCurve(gauss.irSpotCurve2DiscountCurve(curve));
+        assert.throws(() => spotCurve('0.1'));
+        assert.throws(() => spotCurve());
+        assert.throws(() => gauss.irSpotCurve2DiscountCurve());
+        const discCurve = gauss.irSpotCurve2DiscountCurve(curve);
+        assert.throws(() => discCurve('0.1'));
+        assert.throws(() => discCurve());
+    });
 });
 
 describe('irInternalRateOfReturn', function() {
