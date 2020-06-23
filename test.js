@@ -107,6 +107,11 @@ describe('cdf()', function() {
             x => assertEqualRounded(diffquot(gauss.cdf, x), gauss.pdf(x), digits)
         );
     });
+
+    it('should fail with bad parameters', function() {
+        assert.throws(() => gauss.cdf('0'));
+        assert.throws(() => gauss.cdf());
+    });
 });
 
 
