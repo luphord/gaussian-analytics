@@ -21,7 +21,7 @@ Create a file `mymodule.mjs` (notice the extension `.mjs` which tells Node.js th
 ```javascript
 import * as gauss from 'gaussian-analytics';
 
-console.log(gauss.pdf(0))
+console.log(gauss.pdf(0));
 ```
 
 and run it by
@@ -601,7 +601,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 
 ## History
 
-### 0.6.1 (not yet)
+### 0.6.1 (2020-06-24)
 * assert parameter types and numerical ranges of [`Bond`](#Bond) [`irRollFromEnd`](#irRollFromEnd), [Bond.yieldToMaturity](#Bond+yieldToMaturity), [`cdf`](#cdf), [`pdf`](#pdf), [`irFlatDiscountCurve`](#irFlatDiscountCurve), [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve), [`irInternalRateOfReturn`](#irInternalRateOfReturn) and curve conversion methods
 * ensure non-empty arrays in [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve) and [`irInternalRateOfReturn`](#irInternalRateOfReturn)
 * do not modify spotRates passed to [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve)

@@ -1,6 +1,6 @@
 {
   "name": "gaussian-analytics",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Library for analytical pricings of financial derivatives under (log)normal distribution assumptions",
   "main": "gaussian-analytics.js",
   "type": "module",
