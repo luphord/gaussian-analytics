@@ -699,6 +699,13 @@ describe('irLinearInterpolationSpotCurve', function() {
         assert.strictEqual(curve(100), rates[rates.length-1].rate);
     });
 
+    it('should not modify passed argument', function() {
+        const rates = [{t: 1, rate: 0.123}, {t: 0, rate: 0.123}]; // *not* sorted by t
+        gauss.irLinearInterpolationSpotCurve(rates);
+        assert.strictEqual(rates[0].t, 1);
+        assert.strictEqual(rates[1].t, 0);
+    });
+
     it('should fail with bad parameters', function() {
         assert.throws(() => curve('0.1'));
         assert.throws(() => curve());

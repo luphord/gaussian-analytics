@@ -410,6 +410,7 @@ export function irFlatDiscountCurve(flatRate) {
  */
 export function irLinearInterpolationSpotCurve(spotRates) {
     assertNonEmptyArray(spotRates, 'spotRates');
+    spotRates = [...spotRates]; // do not modify non-local array
     spotRates.sort((rate1, rate2) => rate1.t - rate2.t);
     return (t) => {
         assertNumber(t, 't');
