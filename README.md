@@ -201,6 +201,7 @@ Creates an instance of a coupon-paying bond.
 ##### bond.cashflows ⇒ [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow)
 Cashflows of this bond as an array.
 Last coupon and notional payment are returned separately.
+For zero bonds (i.e. coupon === 0), only the notional payment is returned as cashflow.
 
 **Kind**: instance property of [<code>Bond</code>](#Bond)  
 <a name="Bond+forwardDirtyPrice"></a>

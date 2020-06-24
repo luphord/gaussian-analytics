@@ -718,6 +718,7 @@ describe('Bond', function() {
     const bond1 = new gauss.Bond(100, 0.04, 0, 5, gauss.irFrequency.annually),
         bond2 = new gauss.Bond(100, 0.04, 0, 1, gauss.irFrequency.quarterly),
         bond3 = new gauss.Bond(100, 0.04, 3, 4, gauss.irFrequency.quarterly),
+        zeroBond = new gauss.Bond(100, 0, 0, 5, gauss.irFrequency.annually),
         curve0 = gauss.irFlatDiscountCurve(0.0),
         curve1 = gauss.irFlatDiscountCurve(0.02),
         curve2 = gauss.irFlatDiscountCurve(0.05),
@@ -790,5 +791,11 @@ describe('Bond', function() {
                 assertEqualRounded(bond.yieldToMaturity(bond.dirtyPrice(curve)), zeroRate, 4);
             }
         }
+    });
+
+    it('should have no coupons for zero bonds', function() {
+        assert.strictEqual(zeroBond.cashflows.length, 1);
+        assert.strictEqual(zeroBond.cashflows[0].t, zeroBond.end);
+        assert.strictEqual(zeroBond.cashflows[0].value, zeroBond.notional);
     });
 });

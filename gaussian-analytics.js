@@ -532,10 +532,15 @@ class Bond {
     /**
      * Cashflows of this bond as an array.
      * Last coupon and notional payment are returned separately.
+     * For zero bonds (i.e. coupon === 0), only the notional payment is returned as cashflow.
      * 
      * @returns {Array<FixedCashflow>}
      */
     get cashflows() {
+        const notionalCashflow = {t: this.end, value: this.notional};
+        if (this.coupon === 0) {
+            return [notionalCashflow];
+        }
         const schedule = irRollFromEnd(this.start, this.end, this.frequency);
         const cashflows = [];
         let lastT = this.start;
@@ -544,7 +549,7 @@ class Bond {
             cashflows.push({t: t, value: this.notional * this.coupon * yearfraction});
             lastT = t;
         }
-        cashflows.push({t: this.end, value: this.notional});
+        cashflows.push(notionalCashflow);
         return cashflows;
     }
 
