@@ -579,6 +579,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 * assert parameter types and numerical ranges of [`Bond`](#Bond) [`irRollFromEnd`](#irRollFromEnd), [Bond.yieldToMaturity](#Bond+yieldToMaturity), [`cdf`](#cdf), [`pdf`](#pdf), [`irFlatDiscountCurve`](#irFlatDiscountCurve), [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve), [`irInternalRateOfReturn`](#irInternalRateOfReturn) and curve conversion methods
 * ensure non-empty arrays in [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve) and [`irInternalRateOfReturn`](#irInternalRateOfReturn)
 * do not modify spotRates passed to [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve)
+* for zero bonds (i.e. coupon === 0), only the notional payment is returned as cashflow by [Bond.cashflows](#Bond+cashflows)
 
 ### 0.6.0 (2020-06-07)
 * implement [`irBlack76`](#irBlack76) (Black-Scholes formula for futures / forwards, particularly in interest rates)
