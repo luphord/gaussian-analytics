@@ -7,6 +7,32 @@ JavaScript library for analytical pricings of financial derivatives under (log)n
 
 ## Usage
 
+### Usage in Node.js
+
+Please make sure to have a recent version of [Node.js with npm](https://nodejs.org/en/download/) installed, at least [v13.2.0](https://medium.com/@nodejs/announcing-core-node-js-support-for-ecmascript-modules-c5d6dc29b663).
+
+`gaussian-analytics.js` is available from npm via
+```bash
+> npm install gaussian-analytics
+```
+
+Create a file `mymodule.mjs` (notice the extension `.mjs` which tells Node.js that this is an [ES6 module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)) containing
+
+```javascript
+import * as gauss from 'gaussian-analytics';
+
+console.log(gauss.pdf(0))
+```
+
+and run it by
+
+```bash
+> node mymodule.mjs
+0.3989422804014327
+```
+
+For more details on Node.js and ES6 modules please see https://nodejs.org/api/esm.html#esm_enabling.
+
 ### Experiment in browser console
 
 As `gaussian-analytics.js` is published as an [ES6 module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) you have to apply the following trick to play with it in your browser's dev console. First open the dev console (in Firefox press `F12`) and execute
