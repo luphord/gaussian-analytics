@@ -832,4 +832,10 @@ describe('Bond', function() {
         assertEqualRounded(bond.yieldToMaturity(npv), bondYield, 6);
         assertEqualRounded(bond.duration(npv), 1.78, 2);
     });
+
+    it('zero coupon bond should have duration == maturity', function() {
+        for (const npv of [10, 20, 50, 80, 100, 120, 150]) {
+            assertEqualRounded(zeroBond.duration(npv), zeroBond.end, 8);
+        }
+    });
 });
