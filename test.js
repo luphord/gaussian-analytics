@@ -824,4 +824,12 @@ describe('Bond', function() {
         assert.strictEqual(zeroBond.cashflows[0].t, zeroBond.end);
         assert.strictEqual(zeroBond.cashflows[0].value, zeroBond.notional);
     });
+
+    it('duration should match example from Wikipedia https://en.wikipedia.org/wiki/Bond_duration Fig. 1', function() {
+        const bond = new gauss.Bond(100, 0.2, 0, 2, gauss.irFrequency.semiannually),
+            bondYield = 0.039605,
+            npv = bond.dirtyPrice(gauss.irFlatDiscountCurve(bondYield));
+        assertEqualRounded(bond.yieldToMaturity(npv), bondYield, 6);
+        assertEqualRounded(bond.duration(npv), 1.78, 2);
+    });
 });
