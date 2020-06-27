@@ -514,8 +514,18 @@ describe('irForwardPrice', function() {
             ];
         for (var rate = 0.0; rate <= 0.1; rate += 0.01) {
             const curve = gauss.irFlatDiscountCurve(rate);
-            assertEqualRounded(gauss.irForwardPrice(cashflows, curve, 0), notional, 2);
+            assertEqualRounded(gauss.irForwardPrice(cashflows, curve, 0), notional, 12);
         }
+        const curve = gauss.irSpotCurve2DiscountCurve(gauss.irLinearInterpolationSpotCurve([
+            {t: 1/12, rate: 0.01},
+            {t: 2/12, rate: 0.015},
+            {t: 3/12, rate: 0.02},
+            {t: 6/12, rate: 0.025},
+            {t: 1, rate: 0.04},
+            {t: 2, rate: 0.045},
+            {t: 5, rate: 0.05},
+        ]));
+        assertEqualRounded(gauss.irForwardPrice(cashflows, curve, 0), notional, 12);
     });
 });
 
