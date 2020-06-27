@@ -191,6 +191,10 @@ after <a href="maxiter">maxiter</a> iteration, an exception is thrown.</p>
 <dd></dd>
 <dt><a href="#FixedCashflow">FixedCashflow</a> : <code>Object</code></dt>
 <dd></dd>
+<dt><a href="#FloatingCashflow">FloatingCashflow</a> : <code>Object</code></dt>
+<dd></dd>
+<dt><a href="#Cashflow">Cashflow</a> : <code><a href="#FixedCashflow">FixedCashflow</a></code> | <code><a href="#FloatingCashflow">FloatingCashflow</a></code></dt>
+<dd></dd>
 </dl>
 
 <a name="Bond"></a>
@@ -599,6 +603,22 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 | t | <code>number</code> | time (typically expressed in years) |
 | value | <code>number</code> | cash amount paid at t |
 
+<a name="FloatingCashflow"></a>
+
+#### FloatingCashflow : <code>Object</code>
+**Kind**: global typedef  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| t | <code>number</code> | fixing time |
+| T | <code>number</code> | payment time, yearfraction is T - t |
+| notional | <code>number</code> | notional amount that the rate fixed at will refer to |
+
+<a name="Cashflow"></a>
+
+#### Cashflow : [<code>FixedCashflow</code>](#FixedCashflow) \| [<code>FloatingCashflow</code>](#FloatingCashflow)
+**Kind**: global typedef  
 ## History
 
 ### 0.6.1 (2020-06-24)

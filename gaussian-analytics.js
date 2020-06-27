@@ -146,6 +146,18 @@ function assertCorrelation(value, name) {
   * @property {number} value cash amount paid at t
   */
 
+
+/**
+  * @typedef {Object} FloatingCashflow
+  * @property {number} t fixing time
+  * @property {number} T payment time, yearfraction is T - t
+  * @property {number} notional notional amount that the rate fixed at will refer to
+  */
+
+/**
+  * @typedef {FixedCashflow | FloatingCashflow} Cashflow
+  */
+
 /**
  * Margrabe's formula for pricing the exchange option between two risky assets.
  * 
