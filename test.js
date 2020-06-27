@@ -833,6 +833,16 @@ describe('Bond', function() {
         assertEqualRounded(bond.duration(npv), 1.78, 2);
     });
 
+    it('duration should match second example from Wikipedia https://en.wikipedia.org/wiki/Bond_duration', function() {
+        const bond = new gauss.Bond(100, 0.05, 0, 10, gauss.irFrequency.semiannually),
+            bondYield = 0.05,
+            npv = bond.dirtyPrice(gauss.irFlatDiscountCurve(bondYield));
+        assertEqualRounded(npv, 100, 0); // Wikipedia results seem somewhat inconsistent
+        assertEqualRounded(bond.yieldToMaturity(npv), bondYield, 6);
+        assertEqualRounded(bond.duration(npv), 7.99, 1); // Wikipedia results seem somewhat inconsistent
+        assertEqualRounded(bond.duration(), 7.99, 2);
+    });
+
     it('zero coupon bond should have duration == maturity', function() {
         for (const npv of [10, 20, 50, 80, 100, 120, 150]) {
             assertEqualRounded(zeroBond.duration(npv), zeroBond.end, 8);
