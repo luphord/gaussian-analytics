@@ -434,7 +434,7 @@ Cashflows before t are ignored (i.e. do not add any value).
 
 | Param | Type | Description |
 | --- | --- | --- |
-| cashflows | [<code>Array.&lt;FixedCashflow&gt;</code>](#FixedCashflow) | future cashflows to be paid |
+| cashflows | [<code>Array.&lt;Cashflow&gt;</code>](#Cashflow) | future cashflows to be paid |
 | discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve (used for discounting and forwards) |
 | t | <code>number</code> | time point of the forward (typicall expressed in years) |
 

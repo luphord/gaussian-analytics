@@ -331,7 +331,7 @@ export function irBlack76BondOption(bond, K, T, sigma, spotCurve) {
  * Calculates the forward price at time t for a series of cashflows.
  * Cashflows before t are ignored (i.e. do not add any value).
  * 
- * @param {Array<FixedCashflow>} cashflows future cashflows to be paid 
+ * @param {Array<Cashflow>} cashflows future cashflows to be paid 
  * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
  * @param {number} t time point of the forward (typicall expressed in years)
  * @returns {number} forward price of given cashflows
@@ -341,8 +341,18 @@ export function irForwardPrice(cashflows, discountCurve, t) {
     let fw = 0.0;
     for (let i = 0; i < cashflows.length; i++) {
         const cf = cashflows[i];
-        if (cf.t >= t) {
-            fw += cf.value * discountCurve(cf.t) / df_t;
+        if (typeof cf.notional === 'number') { // FloatingCashflow
+            if (cf.T >= t) {
+                const df_T = discountCurve(cf.T),
+                    forwardLinearRate = discountCurve(cf.t) / df_T - 1,
+                    yearfraction = cf.T - cf.t;
+                fw += cf.notional * forwardLinearRate * yearfraction * df_T / df_t;
+            }
+
+        } else { // FixedCashflow
+            if (cf.t >= t) {
+                fw += cf.value * discountCurve(cf.t) / df_t;
+            }
         }
     }
     return fw;
