@@ -501,6 +501,22 @@ describe('irForwardPrice', function() {
         assertEqualRounded(gauss.irForwardPrice(cashflows, flatDiscCurve, 0), 3.91, 2);
         assert(gauss.irForwardPrice(cashflows, flatDiscCurveRoundedUp, 0) < 0); // true IRR is in rounding interval
     });
+
+    it('floater should be par', function() {
+        const notional = 100,
+            cashflows = [
+                {t: 0, T: 1, notional: notional},
+                {t: 1, T: 2, notional: notional},
+                {t: 2, T: 3, notional: notional},
+                {t: 3, T: 4, notional: notional},
+                {t: 4, T: 5, notional: notional},
+                {t: 5, value: notional}
+            ];
+        for (var rate = 0.0; rate <= 0.1; rate += 0.01) {
+            const curve = gauss.irFlatDiscountCurve(rate);
+            assertEqualRounded(gauss.irForwardPrice(cashflows, curve, 0), notional, 2);
+        }
+    });
 });
 
 describe('irFlatDiscountCurve', function() {
