@@ -612,6 +612,25 @@ class Bond {
         cashflows.unshift({t: 0, value: -npv});
         return irInternalRateOfReturn(cashflows);
     }
+
+    /**
+     * Calculates the bond duration given npv. There is no difference between Macaulay duration
+     * and Modified duration here as we use continuous yields for discounting.
+     * 
+     * @param {number} [npv=this.notional] present value of the bond for yield calculation, defaults to 100% (i.e. notional)
+     * @returns {number} bond duration given npv
+     */
+    duration(npv) {
+        if (typeof npv === 'undefined') {
+            npv = this.notional;
+        }
+        const y = this.yieldToMaturity(npv);
+        var time_weighted_cfs = 0;
+        for (const cf of this.cashflows) {
+            time_weighted_cfs += cf.t * cf.value * Math.exp(-y * cf.t);
+        }
+        return time_weighted_cfs / npv;
+    }
 }
 
 export {Bond};
