@@ -139,7 +139,7 @@ known as the Black 76 model.</p>
 <p>See Fischer Black <a href="https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246">The pricing of commodity contracts</a>,
 Journal of Financial Economics, 3 (1976), 167-179.</p>
 </dd>
-<dt><a href="#irBlack76BondOption">irBlack76BondOption(bond, K, T, sigma, spotCurve)</a></dt>
+<dt><a href="#irBlack76BondOption">irBlack76BondOption(bond, K, T, sigma, spotCurve)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black 76 model for an option on a coupon-paying bond (asset class interest rates).</p>
 </dd>
 <dt><a href="#irForwardPrice">irForwardPrice(cashflows, discountCurve, t)</a> ⇒ <code>number</code></dt>
@@ -424,14 +424,15 @@ Journal of Financial Economics, 3 (1976), 167-179.
 
 <a name="irBlack76BondOption"></a>
 
-#### irBlack76BondOption(bond, K, T, sigma, spotCurve)
+#### irBlack76BondOption(bond, K, T, sigma, spotCurve) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black 76 model for an option on a coupon-paying bond (asset class interest rates).
 
 **Kind**: global function  
+**Returns**: [<code>PricingResult</code>](#PricingResult) - prices of bond options  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| bond | [<code>Bond</code>](#Bond) |  |
+| bond | [<code>Bond</code>](#Bond) | underlying bond of the option |
 | K | <code>number</code> | (dirty) strike price of the option |
 | T | <code>number</code> | time to maturity (typically expressed in years) |
 | sigma | <code>number</code> | volatility of the bond forward price |

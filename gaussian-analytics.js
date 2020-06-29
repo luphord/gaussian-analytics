@@ -316,11 +316,12 @@ export function irBlack76(F, K, T, sigma, r) {
 /**
  * Black 76 model for an option on a coupon-paying bond (asset class interest rates).
  * 
- * @param {Bond} bond 
+ * @param {Bond} bond underlying bond of the option
  * @param {number} K (dirty) strike price of the option
  * @param {number} T time to maturity (typically expressed in years)
  * @param {number} sigma volatility of the bond forward price
  * @param {SpotCurve} spotCurve risk-less spot curve (used for forwards and discounting)
+ * @returns {PricingResult} prices of bond options
  */
 export function irBlack76BondOption(bond, K, T, sigma, spotCurve) {
     const bondForward = bond.forwardDirtyPrice(irSpotCurve2DiscountCurve(spotCurve), T);
