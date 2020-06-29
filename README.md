@@ -142,6 +142,9 @@ Journal of Financial Economics, 3 (1976), 167-179.</p>
 <dt><a href="#irBlack76BondOption">irBlack76BondOption(bond, K, T, sigma, spotCurve)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black 76 model for an option on a coupon-paying bond (asset class interest rates).</p>
 </dd>
+<dt><a href="#irBlack76CapletFloorlet">irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
+<dd><p>Black 76 model for a caplet / floorlet (asset class interest rates).</p>
+</dd>
 <dt><a href="#irForwardPrice">irForwardPrice(cashflows, discountCurve, t)</a> ⇒ <code>number</code></dt>
 <dd><p>Calculates the forward price at time t for a series of cashflows.
 Cashflows before t are ignored (i.e. do not add any value).</p>
@@ -436,6 +439,21 @@ Black 76 model for an option on a coupon-paying bond (asset class interest rates
 | K | <code>number</code> | (dirty) strike price of the option |
 | T | <code>number</code> | time to maturity (typically expressed in years) |
 | sigma | <code>number</code> | volatility of the bond forward price |
+| spotCurve | [<code>SpotCurve</code>](#SpotCurve) | risk-less spot curve (used for forwards and discounting) |
+
+<a name="irBlack76CapletFloorlet"></a>
+
+#### irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) ⇒ [<code>PricingResult</code>](#PricingResult)
+Black 76 model for a caplet / floorlet (asset class interest rates).
+
+**Kind**: global function  
+**Returns**: [<code>PricingResult</code>](#PricingResult) - prices of caplet / floorlet  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| floatingRate | <code>FloatingRate</code> | underlying floating rate of the option |
+| K | <code>number</code> | strike price of the option |
+| sigma | <code>number</code> | volatility of the floating rate |
 | spotCurve | [<code>SpotCurve</code>](#SpotCurve) | risk-less spot curve (used for forwards and discounting) |
 
 <a name="irForwardPrice"></a>

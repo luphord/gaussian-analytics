@@ -329,6 +329,21 @@ export function irBlack76BondOption(bond, K, T, sigma, spotCurve) {
 }
 
 /**
+ * Black 76 model for a caplet / floorlet (asset class interest rates).
+ * 
+ * @param {FloatingRate} floatingRate underlying floating rate of the option 
+ * @param {number} K strike price of the option
+ * @param {number} sigma volatility of the floating rate
+ * @param {SpotCurve} spotCurve risk-less spot curve (used for forwards and discounting)
+ * @returns {PricingResult} prices of caplet / floorlet
+ */
+export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
+    const yearfraction = floatingRate.T - floatingRate.t,
+        forwardRate = irForwardPrice([floatingRate], irSpotCurve2DiscountCurve(spotCurve), floatingRate.t) / yearfraction;
+    return irBlack76(forwardRate, K, floatingRate.t, sigma, spotCurve(floatingRate.t));
+}
+
+/**
  * Calculates the forward price at time t for a series of cashflows.
  * Cashflows before t are ignored (i.e. do not add any value).
  * 
