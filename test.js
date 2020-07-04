@@ -849,6 +849,16 @@ describe('Bond', function() {
         }
     });
 
+    it('duration should be positive and less than maturity', function() {
+        for (const bond of bonds) {
+            for (const npv of [10, 20, 50, 80, 100, 120, 150]) {
+                const duration = bond.duration(npv);
+                assert.ok(duration > 0);
+                assert.ok(duration < bond.end);
+            }
+        }
+    });
+
     it('numerically differentiating bond price by yield should match with duration', function() {
         for (const bond of bonds) {
             for (const npv of [10, 20, 50, 80, 100, 120, 150]) {
