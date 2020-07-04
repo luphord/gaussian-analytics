@@ -848,4 +848,18 @@ describe('Bond', function() {
             assertEqualRounded(zeroBond.duration(npv), zeroBond.end, 8);
         }
     });
+
+    it('numerically differentiating bond price by yield should match with duration', function() {
+        for (const bond of bonds) {
+            for (const npv of [10, 20, 50, 80, 100, 120, 150]) {
+                const y0 = bond.yieldToMaturity(npv),
+                    fnpv = function(y) {
+                        const curve = gauss.irFlatDiscountCurve(y);
+                        return bond.dirtyPrice(curve);
+                    };
+                assertEqualRounded(fnpv(y0), npv, 7);
+                assertEqualRounded(bond.duration(npv), -diffquot(fnpv, y0)/npv, 7);
+            }
+        }
+    });
 });
