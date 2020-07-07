@@ -331,7 +331,7 @@ export function irBlack76BondOption(bond, K, T, sigma, spotCurve) {
 /**
  * Black 76 model for a caplet / floorlet (asset class interest rates).
  * 
- * @param {FloatingRate} floatingRate underlying floating rate of the option 
+ * @param {FloatingCashflow} floatingRate underlying floating rate of the option 
  * @param {number} K strike price of the option
  * @param {number} sigma volatility of the floating rate
  * @param {SpotCurve} spotCurve risk-less spot curve (used for forwards and discounting)
