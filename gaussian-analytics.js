@@ -342,7 +342,16 @@ export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
         forwardRate = irForwardPrice([{t: floatingRate.t, T: floatingRate.T, notional: 1}],
             irSpotCurve2DiscountCurve(spotCurve),
             floatingRate.t) / yearfraction;
-    return irBlack76(forwardRate, K, floatingRate.t, sigma, spotCurve(floatingRate.t));
+    if (floatingRate.t > 0) {
+        return irBlack76(forwardRate, K, floatingRate.t, sigma, spotCurve(floatingRate.t));
+    } else {
+        // ToDo: handle fixed rate
+        return {
+            call: {
+                price: 0
+            }
+        };
+    }
 }
 
 /**
