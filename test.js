@@ -463,6 +463,38 @@ describe('irBlack76', function() {
     });
 });
 
+describe('irBlack76CapletFloorlet', function() {
+    it('should match cap example from https://financetrainingcourse.com/education/2010/06/online-finance-interest-rate-options-pricing-caps-floors/', function() {
+        const discreteCurve = [
+                {t: 0.59, rate: 0.12150},
+                {t: 1.59, rate: 0.12225},
+                {t: 2.59, rate: 0.12349},
+                {t: 3.59, rate: 0.12418}
+            ],
+            spotCurve = gauss.irLinearInterpolationSpotCurve(discreteCurve.map(rt => ({t: rt.t, rate: Math.log(1 + rt.rate)}))),
+            notional = 100000,
+            strike = 0.1250,
+            volatility = 0.0313,
+            libors = [
+                {t: -0.41, T: 0.59, notional: notional},
+                {t: 0.59, T: 1.59, notional: notional},
+                {t: 1.59, T: 2.59, notional: notional},
+                {t: 2.59, T: 3.59, notional: notional}
+            ],
+            options = libors.map(libor => gauss.irBlack76CapletFloorlet(libor, strike, volatility, spotCurve)),
+            targetValues = [
+                0,
+                31.02,
+                178.77,
+                198.53,
+            ];
+        for (let i=0; i<targetValues.length; i++) {
+            console.log(options[i].call.price);
+            //assertEqualRounded(options[i].call.price, targetValues[i], 2);
+        }
+    });
+});
+
 describe('irForwardPrice', function() {
     const rate = 0.05;
     const flatDiscCurve = gauss.irFlatDiscountCurve(rate);
