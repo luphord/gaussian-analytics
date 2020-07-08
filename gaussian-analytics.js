@@ -349,6 +349,9 @@ export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
         return {
             call: {
                 price: 0
+            },
+            put: {
+                price: 0
             }
         };
     }
