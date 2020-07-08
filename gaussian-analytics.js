@@ -341,7 +341,7 @@ export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
     const yearfraction = floatingRate.T - floatingRate.t,
         forwardRate = irForwardPrice([{t: floatingRate.t, T: floatingRate.T, notional: 1}],
             irSpotCurve2DiscountCurve(spotCurve),
-            floatingRate.t) / yearfraction;
+            floatingRate.T) / yearfraction;
     if (floatingRate.t > 0) {
         return irBlack76(forwardRate, K, floatingRate.t, sigma, spotCurve(floatingRate.t));
     } else {
