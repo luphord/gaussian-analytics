@@ -358,6 +358,16 @@ export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
 }
 
 /**
+ * Calculates the linear forward rate given a floating cashflow and a discount curve.
+ * 
+ * @param {FloatingCashflow} floatingRate floating rate (notional is ignored)
+ * @param {DiscountCurve} discountCurve discount curve used for forwards
+ */
+function irForwardLinearRate(floatingRate, discountCurve) {
+    return (discountCurve(floatingRate.t) / discountCurve(floatingRate.T) - 1) / (floatingRate.T - floatingRate.t);
+}
+
+/**
  * Calculates the forward price at time t for a series of cashflows.
  * Cashflows before t are ignored (i.e. do not add any value).
  * 
@@ -374,8 +384,9 @@ export function irForwardPrice(cashflows, discountCurve, t) {
         if (typeof cf.notional === 'number') { // FloatingCashflow
             if (cf.T >= t) {
                 const df_T = discountCurve(cf.T),
-                    forwardLinearRate = discountCurve(cf.t) / df_T - 1;
-                fw += cf.notional * forwardLinearRate * df_T / df_t;
+                    forwardLinearRate = irForwardLinearRate(cf, discountCurve),
+                    yearfraction = cf.T - cf.t;
+                fw += cf.notional * forwardLinearRate * yearfraction * df_T / df_t;
             }
 
         } else { // FixedCashflow

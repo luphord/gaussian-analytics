@@ -145,6 +145,9 @@ Journal of Financial Economics, 3 (1976), 167-179.</p>
 <dt><a href="#irBlack76CapletFloorlet">irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black 76 model for a caplet / floorlet (asset class interest rates).</p>
 </dd>
+<dt><a href="#irForwardLinearRate">irForwardLinearRate(floatingRate, discountCurve)</a></dt>
+<dd><p>Calculates the linear forward rate given a floating cashflow and a discount curve.</p>
+</dd>
 <dt><a href="#irForwardPrice">irForwardPrice(cashflows, discountCurve, t)</a> ⇒ <code>number</code></dt>
 <dd><p>Calculates the forward price at time t for a series of cashflows.
 Cashflows before t are ignored (i.e. do not add any value).</p>
@@ -451,10 +454,22 @@ Black 76 model for a caplet / floorlet (asset class interest rates).
 
 | Param | Type | Description |
 | --- | --- | --- |
-| floatingRate | <code>FloatingRate</code> | underlying floating rate of the option |
+| floatingRate | [<code>FloatingCashflow</code>](#FloatingCashflow) | underlying floating rate of the option |
 | K | <code>number</code> | strike price of the option |
 | sigma | <code>number</code> | volatility of the floating rate |
 | spotCurve | [<code>SpotCurve</code>](#SpotCurve) | risk-less spot curve (used for forwards and discounting) |
+
+<a name="irForwardLinearRate"></a>
+
+#### irForwardLinearRate(floatingRate, discountCurve)
+Calculates the linear forward rate given a floating cashflow and a discount curve.
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| floatingRate | [<code>FloatingCashflow</code>](#FloatingCashflow) | floating rate (notional is ignored) |
+| discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve used for forwards |
 
 <a name="irForwardPrice"></a>
 
