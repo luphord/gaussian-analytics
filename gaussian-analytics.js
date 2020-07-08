@@ -374,9 +374,8 @@ export function irForwardPrice(cashflows, discountCurve, t) {
         if (typeof cf.notional === 'number') { // FloatingCashflow
             if (cf.T >= t) {
                 const df_T = discountCurve(cf.T),
-                    forwardLinearRate = discountCurve(cf.t) / df_T - 1,
-                    yearfraction = cf.T - cf.t;
-                fw += cf.notional * forwardLinearRate * yearfraction * df_T / df_t;
+                    forwardLinearRate = discountCurve(cf.t) / df_T - 1;
+                fw += cf.notional * forwardLinearRate * df_T / df_t;
             }
 
         } else { // FixedCashflow
