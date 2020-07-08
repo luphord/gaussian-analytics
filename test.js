@@ -471,8 +471,10 @@ describe('irBlack76CapletFloorlet', function() {
             libor = {t: 1, T: 1.25, notional: notional},
             strike = 0.08,
             res = gauss.irBlack76CapletFloorlet(libor, strike, volatility, gauss.irDiscountCurve2SpotCurve(discCurve));
+        console.log();
         assertEqualRounded(res.d1, -0.5677, 4);
         assertEqualRounded(res.d2, -0.7677, 4);
+        assertEqualRounded(res.call.price * (libor.T - libor.t) * notional * discCurve(libor.T) / discCurve(libor.t), 5.162, 2); // rounding in source
     });
 
     it('should match cap / floor example from https://financetrainingcourse.com/education/2010/06/online-finance-interest-rate-options-pricing-caps-floors/', function() {
