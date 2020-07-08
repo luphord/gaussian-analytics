@@ -338,10 +338,7 @@ export function irBlack76BondOption(bond, K, T, sigma, spotCurve) {
  * @returns {PricingResult} prices of caplet / floorlet
  */
 export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
-    const yearfraction = floatingRate.T - floatingRate.t,
-        forwardRate = irForwardPrice([{t: floatingRate.t, T: floatingRate.T, notional: 1}],
-            irSpotCurve2DiscountCurve(spotCurve),
-            floatingRate.T) / yearfraction;
+    const forwardRate = irForwardLinearRate(floatingRate, irSpotCurve2DiscountCurve(spotCurve));
     if (floatingRate.t > 0) {
         return irBlack76(forwardRate, K, floatingRate.t, sigma, spotCurve(floatingRate.t));
     } else {
