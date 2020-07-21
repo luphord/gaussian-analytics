@@ -313,10 +313,11 @@ export function fxBlackScholes(S, K, T, sigma, rFor, rDom) {
  * @param {number} T time to maturity (typically expressed in years)
  * @param {number} sigma volatility of the underlying forward price
  * @param {number} r risk-less rate of return
+ * @param {number} [scale=1.0] scaling of all money amount and sensitivity results; think "number of options", but with fractional parts allowed
  * @returns {PricingResult} prices of forward / future option
  */
-export function irBlack76(F, K, T, sigma, r) {
-    return margrabesFormulaShort(discountFactor(r, T) * F, K, T, sigma, 0, r);
+export function irBlack76(F, K, T, sigma, r, scale) {
+    return margrabesFormulaShort(discountFactor(r, T) * F, K, T, sigma, 0, r, scale);
 }
 
 /**
@@ -346,7 +347,7 @@ export function irBlack76BondOption(bond, K, T, sigma, spotCurve) {
 export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
     const forwardRate = irForwardLinearRate(floatingRate, irSpotCurve2DiscountCurve(spotCurve));
     if (floatingRate.t > 0) {
-        return irBlack76(forwardRate, K, floatingRate.t, sigma, spotCurve(floatingRate.t));
+        return irBlack76(forwardRate, K, floatingRate.t, sigma, spotCurve(floatingRate.t), floatingRate.notional);
     } else {
         // ToDo: handle fixed rate
         return {

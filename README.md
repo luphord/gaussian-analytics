@@ -133,7 +133,7 @@ This is also known as the Garman–Kohlhagen model.</p>
 <p>See Mark B. Garman and Steven W. Kohlhagen <a href="https://www.sciencedirect.com/science/article/pii/S0261560683800011">Foreign currency option values</a>,
 Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.</p>
 </dd>
-<dt><a href="#irBlack76">irBlack76(F, K, T, sigma, r)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
+<dt><a href="#irBlack76">irBlack76(F, K, T, sigma, r, [scale])</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for European option on forward / future (asset class interest rates),
 known as the Black 76 model.</p>
 <p>See Fischer Black <a href="https://www.sciencedirect.com/science/article/abs/pii/0304405X76900246">The pricing of commodity contracts</a>,
@@ -412,7 +412,7 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 
 <a name="irBlack76"></a>
 
-#### irBlack76(F, K, T, sigma, r) ⇒ [<code>PricingResult</code>](#PricingResult)
+#### irBlack76(F, K, T, sigma, r, [scale]) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black-Scholes formula for European option on forward / future (asset class interest rates),
 known as the Black 76 model.
 
@@ -422,13 +422,14 @@ Journal of Financial Economics, 3 (1976), 167-179.
 **Kind**: global function  
 **Returns**: [<code>PricingResult</code>](#PricingResult) - prices of forward / future option  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| F | <code>number</code> | forward price of the underlying |
-| K | <code>number</code> | strike price of the option |
-| T | <code>number</code> | time to maturity (typically expressed in years) |
-| sigma | <code>number</code> | volatility of the underlying forward price |
-| r | <code>number</code> | risk-less rate of return |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| F | <code>number</code> |  | forward price of the underlying |
+| K | <code>number</code> |  | strike price of the option |
+| T | <code>number</code> |  | time to maturity (typically expressed in years) |
+| sigma | <code>number</code> |  | volatility of the underlying forward price |
+| r | <code>number</code> |  | risk-less rate of return |
+| [scale] | <code>number</code> | <code>1.0</code> | scaling of all money amount and sensitivity results; think "number of options", but with fractional parts allowed |
 
 <a name="irBlack76BondOption"></a>
 
