@@ -679,6 +679,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 ### 0.7.0 (not yet)
 * introduce [`FloatingCashflows`](#FloatingCashflow), supported by [`irForwardPrice`](#irForwardPrice)
 * implement [`duration`][#Bond+duration] method for [`Bonds`](#Bond)
+* add `scale` parameter to option pricing functions
 
 ### 0.6.1 (2020-06-24)
 * assert parameter types and numerical ranges of [`Bond`](#Bond) [`irRollFromEnd`](#irRollFromEnd), [Bond.yieldToMaturity](#Bond+yieldToMaturity), [`cdf`](#cdf), [`pdf`](#pdf), [`irFlatDiscountCurve`](#irFlatDiscountCurve), [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve), [`irInternalRateOfReturn`](#irInternalRateOfReturn) and curve conversion methods
