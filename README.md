@@ -122,7 +122,7 @@ Journal of Finance, Vol. 33, No. 1, (March 1978), pp. 177-186.</p>
 Equivalent to <code>margrabesFormula</code> but accepting only the volatility corresponding
 to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 </dd>
-<dt><a href="#eqBlackScholes">eqBlackScholes(S, K, T, sigma, q, r)</a> ⇒ <code><a href="#EqPricingResult">EqPricingResult</a></code></dt>
+<dt><a href="#eqBlackScholes">eqBlackScholes(S, K, T, sigma, q, r, [scale])</a> ⇒ <code><a href="#EqPricingResult">EqPricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for a European vanilla option on a stock (asset class equity).</p>
 <p>See Fischer Black and Myron Scholes, <a href="https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf">The Pricing of Options and Corporate Liabilities</a>,
 The Journal of Political Economy, Vol. 81, No. 3 (May - June 1973), pp. 637-654.</p>
@@ -373,7 +373,7 @@ to the ratio `S1/S2` instead of their individual volatilities.
 
 <a name="eqBlackScholes"></a>
 
-#### eqBlackScholes(S, K, T, sigma, q, r) ⇒ [<code>EqPricingResult</code>](#EqPricingResult)
+#### eqBlackScholes(S, K, T, sigma, q, r, [scale]) ⇒ [<code>EqPricingResult</code>](#EqPricingResult)
 Black-Scholes formula for a European vanilla option on a stock (asset class equity).
 
 See Fischer Black and Myron Scholes, [The Pricing of Options and Corporate Liabilities](https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf),
@@ -381,14 +381,15 @@ The Journal of Political Economy, Vol. 81, No. 3 (May - June 1973), pp. 637-654.
 
 **Kind**: global function  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| S | <code>number</code> | spot value of the stock |
-| K | <code>number</code> | strike price of the option |
-| T | <code>number</code> | time to maturity (typically expressed in years) |
-| sigma | <code>number</code> | volatility of the underlying stock |
-| q | <code>number</code> | dividend rate of the underlying stock |
-| r | <code>number</code> | risk-less rate of return |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| S | <code>number</code> |  | spot value of the stock |
+| K | <code>number</code> |  | strike price of the option |
+| T | <code>number</code> |  | time to maturity (typically expressed in years) |
+| sigma | <code>number</code> |  | volatility of the underlying stock |
+| q | <code>number</code> |  | dividend rate of the underlying stock |
+| r | <code>number</code> |  | risk-less rate of return |
+| [scale] | <code>number</code> | <code>1.0</code> | scaling of all money amount and sensitivity results; think "number of options", but with fractional parts allowed |
 
 <a name="fxBlackScholes"></a>
 

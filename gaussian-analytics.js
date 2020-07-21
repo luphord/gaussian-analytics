@@ -253,19 +253,24 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2, scale) {
  * @param {number} sigma volatility of the underlying stock
  * @param {number} q dividend rate of the underlying stock
  * @param {number} r risk-less rate of return
+ * @param {number} [scale=1.0] scaling of all money amount and sensitivity results; think "number of options", but with fractional parts allowed
  * @returns {EqPricingResult}
  */
-export function eqBlackScholes(S, K, T, sigma, q, r) {
-    const res = margrabesFormulaShort(S, K, T, sigma, q, r);
+export function eqBlackScholes(S, K, T, sigma, q, r, scale) {
+    if (typeof scale === 'undefined') {
+        scale = 1.0;
+    }
+    assertNumber(scale);
+    const res = margrabesFormulaShort(S, K, T, sigma, q, r, scale);
     const df = discountFactor(r, T);
     const sigmaSqrtT = sigma * Math.sqrt(T);
     const digitalCall = {
-        price: df * res.N_d2,
-        delta: df * pdf(res.d2) / sigmaSqrtT / S,
-        gamma: -df * res.d1 * pdf(res.d1) / S / K / (sigmaSqrtT**2)
+        price: scale * df * res.N_d2,
+        delta: scale * df * pdf(res.d2) / sigmaSqrtT / S,
+        gamma: -scale * df * res.d1 * pdf(res.d1) / S / K / (sigmaSqrtT**2)
     };
     const digitalPut = {
-        price: df * (1 - res.N_d2),
+        price: scale * df * (1 - res.N_d2),
         delta: -digitalCall.delta,
         gamma: -digitalCall.gamma
     };
