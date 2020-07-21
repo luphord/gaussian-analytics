@@ -512,7 +512,7 @@ describe('irBlack76CapletFloorlet', function() {
         console.log();
         assertEqualRounded(res.d1, -0.5677, 4);
         assertEqualRounded(res.d2, -0.7677, 4);
-        assertEqualRounded(res.call.price * (libor.T - libor.t) * discCurve(libor.T) / discCurve(libor.t), 5.162, 2); // rounding in source
+        assertEqualRounded(res.call.price, 5.162, 2); // rounding in source
     });
 
     it('should match cap / floor example from https://financetrainingcourse.com/education/2010/06/online-finance-interest-rate-options-pricing-caps-floors/', function() {
@@ -546,9 +546,8 @@ describe('irBlack76CapletFloorlet', function() {
                 136.26,
             ];
         for (let i=0; i<targetCaplets.length; i++) {
-            const fdf = Math.exp(spotCurve(libors[i].t)*libors[i].t-spotCurve(libors[i].T)*libors[i].T);
-            console.log(options[i].call.price * fdf, targetCaplets[i]);
-            console.log(options[i].put.price * fdf, targetFloorlets[i]);
+            console.log(options[i].call.price, targetCaplets[i]);
+            console.log(options[i].put.price, targetFloorlets[i]);
             //assertEqualRounded(options[i].call.price, targetValues[i], 2);
         }
     });
