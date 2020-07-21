@@ -172,14 +172,15 @@ function assertCorrelation(value, name) {
  * @param {number} rho correlation of the Brownian motions driving the asset prices
  * @param {number} q1 dividend yield of the first asset
  * @param {number} q2 dividend yield of the second asset
+ * @param {number} [scale=1.0] scaling of all money amount and sensitivity results; think "number of options", but with fractional parts allowed
  * @returns {PricingResult}
  */
-export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
+export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2, scale) {
     assertPositive(sigma1, 'sigma1');
     assertPositive(sigma2, 'sigma2');
     assertCorrelation(rho, 'rho');
     const sigma = Math.sqrt(sigma1**2 + sigma2**2 - 2*sigma1*sigma2*rho);
-    return margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
+    return margrabesFormulaShort(S1, S2, T, sigma, q1, q2, scale);
 }
 
 /**
@@ -194,15 +195,20 @@ export function margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2) {
  * @param {number} sigma volatility of the ratio of both assets
  * @param {number} q1 dividend yield of the first asset
  * @param {number} q2 dividend yield of the second asset
+ * @param {number} [scale=1.0] scaling of all money amount and sensitivity results; think "number of options", but with fractional parts allowed
  * @returns {PricingResult}
  */
-export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
+export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2, scale) {
     assertPositive(S1, 'S1');
     assertPositive(S2, 'S2');
     assertPositive(T, 'T');
     assertPositive(sigma, 'sigma');
     assertNumber(q1, 'q1');
     assertNumber(q2, 'q2');
+    if (typeof scale === 'undefined') {
+        scale = 1.0;
+    }
+    assertNumber(scale);
     const sigmaSqrtT = sigma * Math.sqrt(T);
     const d1 = (Math.log(S1 / S2) + (q2 - q1 + sigma**2/2)*T) / sigmaSqrtT;
     const d2 = d1 - sigmaSqrtT;
@@ -215,13 +221,13 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2) {
     const asset1OrNothingPut = df1 * S1 * (1-N_d1);
     const asset2OrNothingPut = df2 * S2 * (1-N_d2);
     const call = {
-        price: asset1OrNothingCall - asset2OrNothingCall,
-        delta: df1 * N_d1,
-        gamma: df1 * pdf(d1) / sigmaSqrtT / S1
+        price: scale * (asset1OrNothingCall - asset2OrNothingCall),
+        delta: scale * df1 * N_d1,
+        gamma: scale * df1 * pdf(d1) / sigmaSqrtT / S1
     };
     const put = {
-        price: asset2OrNothingPut - asset1OrNothingPut,
-        delta: df1 * (N_d1 - 1),
+        price: scale * (asset2OrNothingPut - asset1OrNothingPut),
+        delta: scale * df1 * (N_d1 - 1),
         gamma: call.gamma
     };
     return {
