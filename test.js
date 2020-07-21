@@ -7,7 +7,11 @@ function round(value, digits) {
 }
 
 function assertEqualRounded(actual, expected, digits) {
-    assert.strictEqual(round(actual, digits), round(expected, digits));
+    const roundedActual = round(actual, digits),
+        roundedExpected = round(expected, digits);
+    if (roundedActual !== roundedExpected) { // prevent silly signed zero behaviour
+        assert.strictEqual(roundedActual, roundedExpected);
+    }
 }
 
 const eps = 2.2 * 1E-16;
@@ -189,12 +193,12 @@ describe('margrabesFormula()', function() {
         }
         // add 1 and subtract one to prevent sign of 0 issues
         const res0 = gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2, 0);
-        assert.strictEqual(1 + res0.call.price - 1, 0);
-        assert.strictEqual(1 + res0.call.delta - 1, 0);
-        assert.strictEqual(1 + res0.call.gamma - 1, 0);
-        assert.strictEqual(1 + res0.put.price - 1, 0);
-        assert.strictEqual(1 + res0.put.delta - 1, 0);
-        assert.strictEqual(1 + res0.put.gamma - 1, 0);
+        assertEqualRounded(res0.call.price, 0, 16);
+        assertEqualRounded(res0.call.delta, 0, 16);
+        assertEqualRounded(res0.call.gamma, 0, 16);
+        assertEqualRounded(res0.put.price, 0, 16);
+        assertEqualRounded(res0.put.delta, 0, 16);
+        assertEqualRounded(res0.put.gamma, 0, 16);
     });
 });
 
