@@ -187,6 +187,14 @@ describe('margrabesFormula()', function() {
             assertEqualRounded(resScaled.put.delta, scale * res1.put.delta, 11);
             assertEqualRounded(resScaled.put.gamma, scale * res1.put.gamma, 11);
         }
+        // add 1 and subtract one to prevent sign of 0 issues
+        const res0 = gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2, 0);
+        assert.strictEqual(1 + res0.call.price - 1, 0);
+        assert.strictEqual(1 + res0.call.delta - 1, 0);
+        assert.strictEqual(1 + res0.call.gamma - 1, 0);
+        assert.strictEqual(1 + res0.put.price - 1, 0);
+        assert.strictEqual(1 + res0.put.delta - 1, 0);
+        assert.strictEqual(1 + res0.put.gamma - 1, 0);
     });
 });
 
