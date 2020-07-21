@@ -127,7 +127,7 @@ to the ratio <code>S1/S2</code> instead of their individual volatilities.</p>
 <p>See Fischer Black and Myron Scholes, <a href="https://www.cs.princeton.edu/courses/archive/fall09/cos323/papers/black_scholes73.pdf">The Pricing of Options and Corporate Liabilities</a>,
 The Journal of Political Economy, Vol. 81, No. 3 (May - June 1973), pp. 637-654.</p>
 </dd>
-<dt><a href="#fxBlackScholes">fxBlackScholes(S, K, T, sigma, rFor, rDom)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
+<dt><a href="#fxBlackScholes">fxBlackScholes(S, K, T, sigma, rFor, rDom, [scale])</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
 <dd><p>Black-Scholes formula for a European vanilla currency option (asset class foreign exchange).
 This is also known as the Garman–Kohlhagen model.</p>
 <p>See Mark B. Garman and Steven W. Kohlhagen <a href="https://www.sciencedirect.com/science/article/pii/S0261560683800011">Foreign currency option values</a>,
@@ -392,7 +392,7 @@ The Journal of Political Economy, Vol. 81, No. 3 (May - June 1973), pp. 637-654.
 
 <a name="fxBlackScholes"></a>
 
-#### fxBlackScholes(S, K, T, sigma, rFor, rDom) ⇒ [<code>PricingResult</code>](#PricingResult)
+#### fxBlackScholes(S, K, T, sigma, rFor, rDom, [scale]) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black-Scholes formula for a European vanilla currency option (asset class foreign exchange).
 This is also known as the Garman–Kohlhagen model.
 
@@ -402,14 +402,15 @@ Journal of International Money and Finance, Vol. 2, Issue 3 (1983), pp. 231-237.
 **Kind**: global function  
 **Returns**: [<code>PricingResult</code>](#PricingResult) - prices in domestic currency  
 
-| Param | Type | Description |
-| --- | --- | --- |
-| S | <code>number</code> | spot value of the currency exchange rate; this has to be expressed in unit of domestic currency / unit of foreign currency |
-| K | <code>number</code> | strike price of the option |
-| T | <code>number</code> | time to maturity (typically expressed in years) |
-| sigma | <code>number</code> | volatility of the currency exchange rate |
-| rFor | <code>number</code> | risk-less rate of return in the foreign currency |
-| rDom | <code>number</code> | risk-less rate of return in the domestic currency |
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| S | <code>number</code> |  | spot value of the currency exchange rate; this has to be expressed in unit of domestic currency / unit of foreign currency |
+| K | <code>number</code> |  | strike price of the option |
+| T | <code>number</code> |  | time to maturity (typically expressed in years) |
+| sigma | <code>number</code> |  | volatility of the currency exchange rate |
+| rFor | <code>number</code> |  | risk-less rate of return in the foreign currency |
+| rDom | <code>number</code> |  | risk-less rate of return in the domestic currency |
+| [scale] | <code>number</code> | <code>1.0</code> | scaling of all money amount and sensitivity results; think "number of options", but with fractional parts allowed |
 
 <a name="irBlack76"></a>
 

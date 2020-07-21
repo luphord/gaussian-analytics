@@ -295,10 +295,11 @@ export function eqBlackScholes(S, K, T, sigma, q, r) {
  * @param {number} sigma volatility of the currency exchange rate
  * @param {number} rFor risk-less rate of return in the foreign currency
  * @param {number} rDom risk-less rate of return in the domestic currency
+ * @param {number} [scale=1.0] scaling of all money amount and sensitivity results; think "number of options", but with fractional parts allowed
  * @returns {PricingResult} prices in domestic currency
  */
-export function fxBlackScholes(S, K, T, sigma, rFor, rDom) {
-    return margrabesFormulaShort(S, K, T, sigma, rFor, rDom);
+export function fxBlackScholes(S, K, T, sigma, rFor, rDom, scale) {
+    return margrabesFormulaShort(S, K, T, sigma, rFor, rDom, scale);
 }
 
 /**
