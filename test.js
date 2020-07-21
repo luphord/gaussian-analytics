@@ -158,6 +158,36 @@ describe('margrabesFormula()', function() {
         assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, '1', q2));
         assert.throws(() => gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, '1'));
     });
+
+    it('should properly scale parameters', function() {
+        const S1 = 100,
+            S2 = 100,
+            T = 0.5,
+            sigma1 = 0.2,
+            sigma2 = 0,
+            rho = 0.2,
+            q1 = -0.01,
+            q2 = 0.03;
+        const res = gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2),
+            res1 = gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2, 1);
+        assert.deepStrictEqual(res, res1); // default scale parameter is 1
+        for (var scale of [-1, -1/3, 1/5, 1/2, 2, 10000]) {
+            const resScaled = gauss.margrabesFormula(S1, S2, T, sigma1, sigma2, rho, q1, q2, scale);
+            // scale invariant results
+            assert.strictEqual(resScaled.sigma, res1.sigma);
+            assert.strictEqual(resScaled.d1, res1.d1);
+            assert.strictEqual(resScaled.d2, res1.d2);
+            assert.strictEqual(resScaled.N_d1, res1.N_d1);
+            assert.strictEqual(resScaled.N_d2, res1.N_d2);
+            // scale dependent results
+            assertEqualRounded(resScaled.call.price, scale * res1.call.price, 11);
+            assertEqualRounded(resScaled.call.delta, scale * res1.call.delta, 11);
+            assertEqualRounded(resScaled.call.gamma, scale * res1.call.gamma, 11);
+            assertEqualRounded(resScaled.put.price, scale * res1.put.price, 11);
+            assertEqualRounded(resScaled.put.delta, scale * res1.put.delta, 11);
+            assertEqualRounded(resScaled.put.gamma, scale * res1.put.gamma, 11);
+        }
+    });
 });
 
 describe('margrabesFormulaShort()', function() {
