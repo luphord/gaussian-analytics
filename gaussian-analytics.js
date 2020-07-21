@@ -337,6 +337,7 @@ export function irBlack76BondOption(bond, K, T, sigma, spotCurve) {
 
 /**
  * Black 76 model for a caplet / floorlet (asset class interest rates).
+ * Notional is retrieved from floatingRate.notional.
  * 
  * @param {FloatingCashflow} floatingRate underlying floating rate of the option 
  * @param {number} K strike price of the option

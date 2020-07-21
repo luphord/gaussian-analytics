@@ -143,7 +143,8 @@ Journal of Financial Economics, 3 (1976), 167-179.</p>
 <dd><p>Black 76 model for an option on a coupon-paying bond (asset class interest rates).</p>
 </dd>
 <dt><a href="#irBlack76CapletFloorlet">irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve)</a> ⇒ <code><a href="#PricingResult">PricingResult</a></code></dt>
-<dd><p>Black 76 model for a caplet / floorlet (asset class interest rates).</p>
+<dd><p>Black 76 model for a caplet / floorlet (asset class interest rates).
+Notional is retrieved from floatingRate.notional.</p>
 </dd>
 <dt><a href="#irForwardLinearRate">irForwardLinearRate(floatingRate, discountCurve)</a></dt>
 <dd><p>Calculates the linear forward rate given a floating cashflow and a discount curve.</p>
@@ -451,6 +452,7 @@ Black 76 model for an option on a coupon-paying bond (asset class interest rates
 
 #### irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) ⇒ [<code>PricingResult</code>](#PricingResult)
 Black 76 model for a caplet / floorlet (asset class interest rates).
+Notional is retrieved from floatingRate.notional.
 
 **Kind**: global function  
 **Returns**: [<code>PricingResult</code>](#PricingResult) - prices of caplet / floorlet  
