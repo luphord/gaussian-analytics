@@ -397,22 +397,25 @@ describe('eqBlackScholes', function() {
             sigma = 0.23,
             q = 0.012,
             r = 0.023;
-        const digits = 7;
+        const digits = 6;
         const digits2 = 3;
-        for (let K=80; K<=160; K+=5) {
-            const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
-            const digiCallPrice = function(s) {
-                return gauss.eqBlackScholes(s, K, T, sigma, q, r).digitalCall.price;
-            };
-            const digiPutPrice = function(s) {
-                return gauss.eqBlackScholes(s, K, T, sigma, q, r).digitalPut.price;
-            };
-            // delta
-            assertEqualRounded(res.digitalCall.delta, diffquot(digiCallPrice, S), digits);
-            assertEqualRounded(res.digitalPut.delta, diffquot(digiPutPrice, S), digits);
-            // gamma
-            assertEqualRounded(res.digitalCall.gamma, diffquot2(digiCallPrice, S), digits2);
-            assertEqualRounded(res.digitalPut.gamma, diffquot2(digiPutPrice, S), digits2);
+        for (var scale of [-1, 0, 0.5, 1, 2])
+        {
+            for (let K=80; K<=160; K+=5) {
+                const res = gauss.eqBlackScholes(S, K, T, sigma, q, r, scale);
+                const digiCallPrice = function(s) {
+                    return gauss.eqBlackScholes(s, K, T, sigma, q, r, scale).digitalCall.price;
+                };
+                const digiPutPrice = function(s) {
+                    return gauss.eqBlackScholes(s, K, T, sigma, q, r, scale).digitalPut.price;
+                };
+                // delta
+                assertEqualRounded(res.digitalCall.delta, diffquot(digiCallPrice, S), digits);
+                assertEqualRounded(res.digitalPut.delta, diffquot(digiPutPrice, S), digits);
+                // gamma
+                assertEqualRounded(res.digitalCall.gamma, diffquot2(digiCallPrice, S), digits2);
+                assertEqualRounded(res.digitalPut.gamma, diffquot2(digiPutPrice, S), digits2);
+            }
         }
     });
 });
