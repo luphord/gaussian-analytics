@@ -228,6 +228,23 @@ describe('margrabesFormulaShort()', function() {
             );
         }
     });
+
+    it('should handle zero vol', function() {
+        const S1 = 123,
+            T = 2.5,
+            q1 = 0.012,
+            q2 = 0.023;
+        for (let S2=80; S2<=160; S2+=5) {
+            const res = gauss.margrabesFormulaShort(S1, S2, T, 0, q1, q2),
+                fwdMoneyness = Math.log(S1 / S2) + (q2 - q1)*T,
+                fwdInTheMoney = fwdMoneyness >= 0;
+            assertEqualRounded(res.sigma, 0);
+            assertEqualRounded(res.d1, fwdInTheMoney ? Infinity : -Infinity);
+            assertEqualRounded(res.d2, res.d1);
+            assertEqualRounded(res.N_d1, fwdInTheMoney ? 1 : 0);
+            assertEqualRounded(res.N_d2, res.N_d1);
+        }
+    });
     
     it('should be symmetric regarding switch of assets and put call', function() {
         const S1 = 123,
