@@ -236,6 +236,8 @@ describe('margrabesFormulaShort()', function() {
             q2 = 0.023;
         for (let S2=80; S2<=160; S2+=5) {
             const res = gauss.margrabesFormulaShort(S1, S2, T, 0, q1, q2),
+                fwd1 = Math.exp(-q1*T)*S1,
+                fwd2 = Math.exp(-q2*T)*S2,
                 fwdMoneyness = Math.log(S1 / S2) + (q2 - q1)*T,
                 fwdInTheMoney = fwdMoneyness >= 0;
             assertEqualRounded(res.sigma, 0);
@@ -243,6 +245,8 @@ describe('margrabesFormulaShort()', function() {
             assertEqualRounded(res.d2, res.d1);
             assertEqualRounded(res.N_d1, fwdInTheMoney ? 1 : 0);
             assertEqualRounded(res.N_d2, res.N_d1);
+            assertEqualRounded(res.call.price, fwdInTheMoney ? fwd1 - fwd2 : 0);
+            assertEqualRounded(res.put.price, fwdInTheMoney ? 0 : fwd2 - fwd1);
         }
     });
     
