@@ -7,7 +7,7 @@ function round(value, digits) {
 }
 
 function assertEqualRounded(actual, expected, digits) {
-    if (digits === 'undefined') {
+    if (typeof digits === 'undefined') {
         digits = 16;
     }
     const roundedActual = round(actual, digits),
