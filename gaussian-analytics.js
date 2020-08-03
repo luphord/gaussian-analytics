@@ -210,7 +210,9 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2, scale) {
     }
     assertNumber(scale);
     const sigmaSqrtT = sigma * Math.sqrt(T);
-    const d1 = (Math.log(S1 / S2) + (q2 - q1 + sigma**2/2)*T) / sigmaSqrtT;
+    const callLogSimpleMoneyness = Math.log(S1 / S2) + (q2 - q1 + sigma**2/2)*T;
+    const isMoneynessEdgeCase = callLogSimpleMoneyness === 0 &&  sigmaSqrtT === 0;
+    const d1 = isMoneynessEdgeCase ? Infinity : callLogSimpleMoneyness / sigmaSqrtT;
     const d2 = d1 - sigmaSqrtT;
     const N_d1 = cdf(d1);
     const N_d2 = cdf(d2);
