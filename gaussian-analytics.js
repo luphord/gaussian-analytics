@@ -121,6 +121,7 @@ function assertCorrelation(value, name) {
  * @property {number} delta delta, i.e. derivative by (first) underlying of the option
  * @property {number} gamma gamma, i.e. second derivative by (first) underlying of the option
  * @property {number} logSimpleMoneyness logarithm of simple moneyness, i.e. ln(forward / strike)
+ * @property {number} standardizedMoneyness standardized logSimpleMoneyness, i.e. ln(forward / strike) / (sigma * sqrt(T))
  */
 
 /**
@@ -227,13 +228,15 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2, scale) {
         price: scale * (asset1OrNothingCall - asset2OrNothingCall),
         delta: scale * df1 * N_d1,
         gamma: scale * df1 * pdf(d1) / sigmaSqrtT / S1,
-        logSimpleMoneyness: callLogSimpleMoneyness
+        logSimpleMoneyness: callLogSimpleMoneyness,
+        standardizedMoneyness: callLogSimpleMoneyness / sigmaSqrtT
     };
     const put = {
         price: scale * (asset2OrNothingPut - asset1OrNothingPut),
         delta: scale * df1 * (N_d1 - 1),
         gamma: call.gamma,
-        logSimpleMoneyness: -callLogSimpleMoneyness
+        logSimpleMoneyness: -callLogSimpleMoneyness,
+        standardizedMoneyness: -call.logSimpleMoneyness
     };
     return {
         call: call,
