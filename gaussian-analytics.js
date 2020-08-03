@@ -120,6 +120,7 @@ function assertCorrelation(value, name) {
  * @property {number} price price of the option
  * @property {number} delta delta, i.e. derivative by (first) underlying of the option
  * @property {number} gamma gamma, i.e. second derivative by (first) underlying of the option
+ * @property {number} logSimpleMoneyness logarithm of simple moneyness, i.e. ln(forward / strike)
  */
 
 /**
@@ -210,9 +211,9 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2, scale) {
     }
     assertNumber(scale);
     const sigmaSqrtT = sigma * Math.sqrt(T);
-    const callLogSimpleMoneyness = Math.log(S1 / S2) + (q2 - q1 + sigma**2/2)*T;
+    const callLogSimpleMoneyness = Math.log(S1 / S2) + (q2 - q1)*T;
     const isMoneynessEdgeCase = callLogSimpleMoneyness === 0 &&  sigmaSqrtT === 0;
-    const d1 = isMoneynessEdgeCase ? Infinity : callLogSimpleMoneyness / sigmaSqrtT;
+    const d1 = isMoneynessEdgeCase ? Infinity : (callLogSimpleMoneyness + sigma**2/2*T) / sigmaSqrtT;
     const d2 = d1 - sigmaSqrtT;
     const N_d1 = cdf(d1);
     const N_d2 = cdf(d2);
@@ -225,12 +226,14 @@ export function margrabesFormulaShort(S1, S2, T, sigma, q1, q2, scale) {
     const call = {
         price: scale * (asset1OrNothingCall - asset2OrNothingCall),
         delta: scale * df1 * N_d1,
-        gamma: scale * df1 * pdf(d1) / sigmaSqrtT / S1
+        gamma: scale * df1 * pdf(d1) / sigmaSqrtT / S1,
+        logSimpleMoneyness: callLogSimpleMoneyness
     };
     const put = {
         price: scale * (asset2OrNothingPut - asset1OrNothingPut),
         delta: scale * df1 * (N_d1 - 1),
-        gamma: call.gamma
+        gamma: call.gamma,
+        logSimpleMoneyness: -callLogSimpleMoneyness
     };
     return {
         call: call,

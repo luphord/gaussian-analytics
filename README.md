@@ -615,6 +615,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 | price | <code>number</code> | price of the option |
 | delta | <code>number</code> | delta, i.e. derivative by (first) underlying of the option |
 | gamma | <code>number</code> | gamma, i.e. second derivative by (first) underlying of the option |
+| logSimpleMoneyness | <code>number</code> | logarithm of simple moneyness, i.e. ln(forward / strike) |
 
 <a name="DiscountCurve"></a>
 
@@ -680,6 +681,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 * introduce [`FloatingCashflows`](#FloatingCashflow), supported by [`irForwardPrice`](#irForwardPrice)
 * implement [`duration`][#Bond+duration] method for [`Bonds`](#Bond)
 * add `scale` parameter to option pricing functions
+* add `logSimpleMoneyness` to [OptionPricingResult](#OptionPricingResult)
 
 ### 0.6.1 (2020-06-24)
 * assert parameter types and numerical ranges of [`Bond`](#Bond) [`irRollFromEnd`](#irRollFromEnd), [Bond.yieldToMaturity](#Bond+yieldToMaturity), [`cdf`](#cdf), [`pdf`](#pdf), [`irFlatDiscountCurve`](#irFlatDiscountCurve), [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve), [`irInternalRateOfReturn`](#irInternalRateOfReturn) and curve conversion methods
