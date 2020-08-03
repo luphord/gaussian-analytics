@@ -247,6 +247,16 @@ describe('margrabesFormulaShort()', function() {
             assertEqualRounded(res.call.price, callInTheMoney ? fwd1 - fwd2 : 0);
             assertEqualRounded(res.put.price, callInTheMoney ? 0 : fwd2 - fwd1);
         }
+
+        const S2 = 111,
+            T_fwdMatch = (Math.log(S2) - Math.log(S1)) / (q1 - q2),
+            res = gauss.margrabesFormulaShort(S1, S2, T_fwdMatch, 0, q1, q2);
+        assertEqualRounded(Math.exp(q1*T_fwdMatch)*S1, Math.exp(q2*T_fwdMatch)*S2, 12);
+        assertEqualRounded(res.sigma, 0);
+        assertEqualRounded(res.d1, Infinity);
+        assertEqualRounded(res.d2, res.d1);
+        assertEqualRounded(res.N_d1, 1);
+        assertEqualRounded(res.N_d2, res.N_d1);
     });
 
     it('should handle zero time-to-maturity', function() {
