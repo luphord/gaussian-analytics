@@ -288,6 +288,21 @@ describe('margrabesFormulaShort()', function() {
             assertEqualRounded(res.put.price, callInTheMoney ? 0 : S2 - S1);
         }
     });
+
+    it('should properly relate d1, d2 and standardizedMoneyness', function() {
+        const S1 = 120,
+            T = 5,
+            sigma = 0.4,
+            q1 = 0.012,
+            q2 = 0.023,
+            sigmaSqrtThalf = sigma * Math.sqrt(T) / 2,
+            digits = 14;
+        for (let S2=80; S2<=160; S2+=5) {
+            const res = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
+            assertEqualRounded(res.call.standardizedMoneyness, res.d1 - sigmaSqrtThalf, digits);
+            assertEqualRounded(res.call.standardizedMoneyness, res.d2 + sigmaSqrtThalf, digits);
+        }
+    });
     
     it('should be symmetric regarding switch of assets and put call', function() {
         const S1 = 123,
@@ -593,6 +608,17 @@ describe('irBlack76', function() {
         // second step is to evaluate the option
         const result = gauss.irBlack76BondOption(bond, strike1, optionMaturity, forwardVolatility, impliedSpotCurve);
         assertEqualRounded(result.call.price, expectedOptionPremium1, 2);
+    });
+
+    it('should match standardized moneyness', function() {
+        const F = 20,
+            r = .15,
+            T = 9 / 12,
+            sigma = 0.40;
+        for (let K=10; K<=30; K+=1) {
+            const res = gauss.irBlack76(F, K, T, sigma, r);
+            assertEqualRounded(res.call.standardizedMoneyness, Math.log(F / K) / sigma / Math.sqrt(T), 12);
+        }
     });
 });
 
