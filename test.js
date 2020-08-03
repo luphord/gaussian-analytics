@@ -249,6 +249,23 @@ describe('margrabesFormulaShort()', function() {
             assertEqualRounded(res.put.price, fwdInTheMoney ? 0 : fwd2 - fwd1);
         }
     });
+
+    it('should handle zero time-to-maturity', function() {
+        const S1 = 123,
+            sigma = 0.2,
+            q1 = 0.012,
+            q2 = 0.023;
+        for (let S2=80; S2<=160; S2+=5) {
+            const res = gauss.margrabesFormulaShort(S1, S2, 0, sigma, q1, q2),
+                callInTheMoney = S1 >= S2;
+            assertEqualRounded(res.d1, callInTheMoney ? Infinity : -Infinity);
+            assertEqualRounded(res.d2, res.d1);
+            assertEqualRounded(res.N_d1, callInTheMoney ? 1 : 0);
+            assertEqualRounded(res.N_d2, res.N_d1);
+            assertEqualRounded(res.call.price, callInTheMoney ? S1 - S2 : 0);
+            assertEqualRounded(res.put.price, callInTheMoney ? 0 : S2 - S1);
+        }
+    });
     
     it('should be symmetric regarding switch of assets and put call', function() {
         const S1 = 123,
