@@ -268,6 +268,8 @@ describe('margrabesFormulaShort()', function() {
         assertEqualRounded(res2.d2, res.d1);
         assertEqualRounded(res2.N_d1, 1);
         assertEqualRounded(res2.N_d2, res.N_d1);
+        assertEqualRounded(res2.call.logSimpleMoneyness, 0, 15);
+        assertEqualRounded(res2.put.logSimpleMoneyness, 0, 15);
     });
 
     it('should handle zero time-to-maturity', function() {
@@ -322,6 +324,18 @@ describe('margrabesFormulaShort()', function() {
             // gamma
             assertEqualRounded(res.call.gamma, diffquot2(callPrice, S1), digits);
             assertEqualRounded(res.put.gamma, diffquot2(putPrice, S1), digits);
+        }
+    });
+
+    it('should logSimpleMoneyness relate to d1 / d2', function() {
+        const S1 = 123,
+            T = 2.5,
+            sigma = 0.23,
+            q1 = 0.012,
+            q2 = 0.023;
+        for (let S2=80; S2<=160; S2+=5) {
+            const res = gauss.margrabesFormulaShort(S1, S2, T, sigma, q1, q2);
+            assertEqualRounded(res.call.logSimpleMoneyness / res.sigma / Math.sqrt(T), (res.d1 + res.d2) / 2, 12);
         }
     });
 });
@@ -415,6 +429,7 @@ describe('eqBlackScholes', function() {
             const fwdPrice = S - Math.exp(-r*T)*K;
             const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
             assertEqualRounded(res.call.price - res.put.price, fwdPrice, digits);
+            assertEqualRounded(res.call.logSimpleMoneyness, -res.put.logSimpleMoneyness, digits);
         }
         // with dividends
         const q = 0.05;
@@ -422,7 +437,19 @@ describe('eqBlackScholes', function() {
             const fwdPrice = Math.exp(-q*T)*S - Math.exp(-r*T)*K;
             const res = gauss.eqBlackScholes(S, K, T, sigma, q, r);
             assertEqualRounded(res.call.price - res.put.price, fwdPrice, digits);
+            assertEqualRounded(res.call.logSimpleMoneyness, -res.put.logSimpleMoneyness, digits);
         }
+    });
+
+    it('at-the-mony logSimpleMoneyness should be zero', function() {
+        const S = 100,
+            T = 0.75,
+            sigma = 0.18,
+            r = 0.025,
+            K = Math.exp(r*T)*S;
+        const res = gauss.eqBlackScholes(S, K, T, sigma, 0, r);
+        assertEqualRounded(res.call.logSimpleMoneyness, 0, 15);
+        assertEqualRounded(res.put.logSimpleMoneyness, 0, 15);
     });
 
     it('Synthetic forward without dividends should be delta 1', function() {
