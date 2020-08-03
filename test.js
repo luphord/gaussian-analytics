@@ -257,6 +257,17 @@ describe('margrabesFormulaShort()', function() {
         assertEqualRounded(res.d2, res.d1);
         assertEqualRounded(res.N_d1, 1);
         assertEqualRounded(res.N_d2, res.N_d1);
+
+        const S3 = 142,
+            T_pvMatch = (Math.log(S3) - Math.log(S1)) / (q2 - q1),
+            res2 = gauss.margrabesFormulaShort(S1, S3, T_pvMatch, 0, q1, q2);
+        assertEqualRounded(Math.exp(-q1*T_pvMatch)*S1, Math.exp(-q2*T_pvMatch)*S3, 12);
+        assert.ok(Math.exp(-q1*T_pvMatch)*S1 > Math.exp(-q2*T_pvMatch)*S3); // check we are on the right side of zero
+        assertEqualRounded(res2.sigma, 0);
+        assertEqualRounded(res2.d1, Infinity);
+        assertEqualRounded(res2.d2, res.d1);
+        assertEqualRounded(res2.N_d1, 1);
+        assertEqualRounded(res2.N_d2, res.N_d1);
     });
 
     it('should handle zero time-to-maturity', function() {
