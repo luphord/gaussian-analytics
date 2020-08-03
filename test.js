@@ -250,7 +250,7 @@ describe('margrabesFormulaShort()', function() {
     });
 
     it('should handle zero time-to-maturity', function() {
-        const S1 = 123,
+        const S1 = 120,
             sigma = 0.2,
             q1 = 0.012,
             q2 = 0.023;
