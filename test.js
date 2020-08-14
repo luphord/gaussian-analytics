@@ -672,6 +672,24 @@ describe('irBlack76CapletFloorlet', function() {
             //assertEqualRounded(options[i].call.price, targetValues[i], 2);
         }
     });
+
+    it('should handle fixed caplets/floorlets', function() {
+        const digits = 10,
+            notional = 10000,
+            discountCurve = gauss.irFlatDiscountCurve(0.02);
+        for (let start = -1.0; start <= 0.0; start += 0.1) {
+            for (let yearFraction = Math.max(0.2, -start); yearFraction <= 2.0; yearFraction += 0.4) {
+                for (let strike = 0.0; strike <= 0.1; strike += 0.02) {
+                    const libor = {t: start, T: start + yearFraction, notional: notional};
+                    const res = gauss.irBlack76CapletFloorlet(libor, strike, 0.1, gauss.irDiscountCurve2SpotCurve(discountCurve)),
+                        fixingRate = gauss.irForwardLinearRate(libor, discountCurve),
+                        fixedCaplet = Math.max(fixingRate - strike, 0) * notional * yearFraction;
+                    assertEqualRounded(gauss.irForwardPrice([{t: libor.t, value: fixedCaplet}], discountCurve, libor.t), fixedCaplet);
+                    assertEqualRounded(res.call.price, gauss.irForwardPrice([{t: libor.T, value: fixedCaplet}], discountCurve, 0), digits);
+                }
+            }
+        }
+    });
 });
 
 describe('irForwardPrice', function() {
