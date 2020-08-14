@@ -361,22 +361,15 @@ export function irBlack76BondOption(bond, K, T, sigma, spotCurve) {
  */
 export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
     const discCurve = irSpotCurve2DiscountCurve(spotCurve),
-        forwardRate = irForwardLinearRate(floatingRate, discCurve);
+        forwardRate = irForwardLinearRate(floatingRate, discCurve),
+        yearFraction = floatingRate.T - floatingRate.t;
     if (floatingRate.t > 0) {
-        const yearFraction = floatingRate.T - floatingRate.t,
-            forwardDiscountFactor = discCurve(floatingRate.T) / discCurve(floatingRate.t),
+        const forwardDiscountFactor = discCurve(floatingRate.T) / discCurve(floatingRate.t),
             scale = floatingRate.notional * yearFraction * forwardDiscountFactor;
         return irBlack76(forwardRate, K, floatingRate.t, sigma, spotCurve(floatingRate.t), scale);
     } else {
-        // ToDo: handle fixed rate
-        return {
-            call: {
-                price: 0
-            },
-            put: {
-                price: 0
-            }
-        };
+        return irBlack76(forwardRate, K, floatingRate.T, 0, spotCurve(floatingRate.T),
+            floatingRate.notional * yearFraction);
     }
 }
 
