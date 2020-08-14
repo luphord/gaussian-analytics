@@ -379,7 +379,7 @@ export function irBlack76CapletFloorlet(floatingRate, K, sigma, spotCurve) {
  * @param {FloatingCashflow} floatingRate floating rate (notional is ignored)
  * @param {DiscountCurve} discountCurve discount curve used for forwards
  */
-function irForwardLinearRate(floatingRate, discountCurve) {
+export function irForwardLinearRate(floatingRate, discountCurve) {
     return (discountCurve(floatingRate.t) / discountCurve(floatingRate.T) - 1) / (floatingRate.T - floatingRate.t);
 }
 
