@@ -674,7 +674,7 @@ describe('irBlack76CapletFloorlet', function() {
     });
 
     it('should handle fixed caplets/floorlets', function() {
-        const digits = 10,
+        const digits = 9,
             notional = 10000,
             curves = [
                 gauss.irFlatDiscountCurve(0.000001),
@@ -698,9 +698,12 @@ describe('irBlack76CapletFloorlet', function() {
                         const libor = {t: start, T: start + yearFraction, notional: notional};
                         const res = gauss.irBlack76CapletFloorlet(libor, strike, 0.1, gauss.irDiscountCurve2SpotCurve(discountCurve)),
                             fixingRate = gauss.irForwardLinearRate(libor, discountCurve),
-                            fixedCaplet = Math.max(fixingRate - strike, 0) * notional * yearFraction;
+                            fixedCaplet = Math.max(fixingRate - strike, 0) * notional * yearFraction,
+                            fixedFloorlet = Math.max(strike - fixingRate, 0) * notional * yearFraction;
                         assertEqualRounded(gauss.irForwardPrice([{t: libor.t, value: fixedCaplet}], discountCurve, libor.t), fixedCaplet);
                         assertEqualRounded(res.call.price, gauss.irForwardPrice([{t: libor.T, value: fixedCaplet}], discountCurve, 0), digits);
+                        assertEqualRounded(gauss.irForwardPrice([{t: libor.t, value: fixedFloorlet}], discountCurve, libor.t), fixedFloorlet, 12);
+                        assertEqualRounded(res.put.price, gauss.irForwardPrice([{t: libor.T, value: fixedFloorlet}], discountCurve, 0), digits);
                     }
                 }
             }
