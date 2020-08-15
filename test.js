@@ -679,7 +679,17 @@ describe('irBlack76CapletFloorlet', function() {
             curves = [
                 gauss.irFlatDiscountCurve(0.000001),
                 gauss.irFlatDiscountCurve(0.01),
-                gauss.irFlatDiscountCurve(0.02)
+                gauss.irFlatDiscountCurve(0.02),
+                gauss.irSpotCurve2DiscountCurve(gauss.irLinearInterpolationSpotCurve([
+                    {t: -1, rate: 0.015},
+                    {t: 1, rate: 0.02},
+                    {t: 2, rate: 0.03},
+                ])),
+                gauss.irSpotCurve2DiscountCurve(gauss.irLinearInterpolationSpotCurve([
+                    {t: -2, rate: 0.015},
+                    {t: 0, rate: 0.01},
+                    {t: 2, rate: 0.005},
+                ]))
             ];
         for (let discountCurve of curves) {
             for (let start = -1.0; start <= 0.0; start += 0.1) {
