@@ -1,7 +1,7 @@
 # gaussian-analytics
 
 [![npm version](http://img.shields.io/npm/v/gaussian-analytics.svg)](https://npmjs.org/package/gaussian-analytics "View gaussian-analytics on npm")
-[![Build status](https://img.shields.io/travis/luphord/gaussian-analytics)](https://travis-ci.org/luphord/gaussian-analytics)
+[![Build status](https://travis-ci.com/luphord/gaussian-analytics.svg)](https://travis-ci.com/github/luphord/gaussian-analytics)
 
 JavaScript library for analytical pricings of financial derivatives under (log)normal distribution assumptions.
 
@@ -724,7 +724,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 ### 0.1.3 (2020-05-09)
 * extract normalizing constant for improved performance
 * test pdf example values
-* set up `eslint` linting (also on [Travis CI](https://travis-ci.org/luphord/gaussian-analytics))
+* set up `eslint` linting (also on [Travis CI](https://travis-ci.com/github/luphord/gaussian-analytics))
 
 ### 0.1.2 (2020-05-09)
 * integrate API doc in README
@@ -733,7 +733,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 
 ### 0.1.1 (2020-05-09)
 * add first tests
-* set up CI infrastructure with [Travis CI](https://travis-ci.org/luphord/gaussian-analytics) for testing
+* set up CI infrastructure with [Travis CI](https://travis-ci.com/github/luphord/gaussian-analytics) for testing
 
 ### 0.1.0 (2020-05-09)
 * `pdf` (probability density function) for a standard normal distribution
