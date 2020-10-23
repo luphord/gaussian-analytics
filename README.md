@@ -680,7 +680,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 
 ### 0.7.0 (not yet)
 * introduce [`FloatingCashflows`](#FloatingCashflow), supported by [`irForwardPrice`](#irForwardPrice)
-* implement [`duration`][#Bond+duration] method for [`Bonds`](#Bond)
+* implement [duration][#Bond+duration] method for [`Bonds`](#Bond)
 * add `scale` parameter to option pricing functions
 * add `logSimpleMoneyness` and `standardizedMoneyness` to [OptionPricingResult](#OptionPricingResult)
 
