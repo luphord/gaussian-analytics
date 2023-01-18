@@ -683,6 +683,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 * implement [`duration`](#Bond+duration) method for [`Bonds`](#Bond)
 * add `scale` parameter to option pricing functions
 * add `logSimpleMoneyness` and `standardizedMoneyness` to [OptionPricingResult](#OptionPricingResult)
+* upgrade development dependencies
 
 ### 0.6.1 (2020-06-24)
 * assert parameter types and numerical ranges of [`Bond`](#Bond) [`irRollFromEnd`](#irRollFromEnd), [Bond.yieldToMaturity](#Bond+yieldToMaturity), [`cdf`](#cdf), [`pdf`](#pdf), [`irFlatDiscountCurve`](#irFlatDiscountCurve), [`irLinearInterpolationSpotCurve`](#irLinearInterpolationSpotCurve), [`irInternalRateOfReturn`](#irInternalRateOfReturn) and curve conversion methods
