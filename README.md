@@ -1,6 +1,7 @@
 # gaussian-analytics
 
 [![npm version](http://img.shields.io/npm/v/gaussian-analytics.svg)](https://npmjs.org/package/gaussian-analytics "View gaussian-analytics on npm")
+[![Test and Lint](https://github.com/luphord/gaussian-analytics/actions/workflows/test-lint.yml/badge.svg)](https://github.com/luphord/gaussian-analytics/actions/workflows/test-lint.yml)
 
 JavaScript library for analytical pricings of financial derivatives under (log)normal distribution assumptions.
 
