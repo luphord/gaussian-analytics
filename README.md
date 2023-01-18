@@ -174,9 +174,9 @@ Inverse of <a href="#irDiscountCurve2SpotCurve">irDiscountCurve2SpotCurve</a>.</
 Inverse of <a href="#irSpotCurve2DiscountCurve">irSpotCurve2DiscountCurve</a>.</p>
 </dd>
 <dt><a href="#irInternalRateOfReturn">irInternalRateOfReturn(cashflows, [r0], [r1], [abstol], [maxiter])</a> ⇒ <code>number</code></dt>
-<dd><p>Calculates the internal rate of return (IRR) of the given series of cashflow,
+<dd><p>Calculates the internal rate of return (IRR) of the given series of cashflows,
 i.e. the flat discount rate (continuously compounded) for which the total NPV of
-the given cashflows is 0. The secant method is used. If not IRR can be found
+the given cashflows is 0. The secant method is used. If no IRR can be found
 after <a href="maxiter">maxiter</a> iteration, an exception is thrown.</p>
 </dd>
 </dl>
@@ -491,7 +491,7 @@ Cashflows before t are ignored (i.e. do not add any value).
 | --- | --- | --- |
 | cashflows | [<code>Array.&lt;Cashflow&gt;</code>](#Cashflow) | future cashflows to be paid |
 | discountCurve | [<code>DiscountCurve</code>](#DiscountCurve) | discount curve (used for discounting and forwards) |
-| t | <code>number</code> | time point of the forward (typicall expressed in years) |
+| t | <code>number</code> | time point of the forward (typically expressed in years) |
 
 <a name="irRollFromEnd"></a>
 
@@ -559,9 +559,9 @@ Inverse of [irSpotCurve2DiscountCurve](#irSpotCurve2DiscountCurve).
 <a name="irInternalRateOfReturn"></a>
 
 #### irInternalRateOfReturn(cashflows, [r0], [r1], [abstol], [maxiter]) ⇒ <code>number</code>
-Calculates the internal rate of return (IRR) of the given series of cashflow,
+Calculates the internal rate of return (IRR) of the given series of cashflows,
 i.e. the flat discount rate (continuously compounded) for which the total NPV of
-the given cashflows is 0. The secant method is used. If not IRR can be found
+the given cashflows is 0. The secant method is used. If no IRR can be found
 after [maxiter](maxiter) iteration, an exception is thrown.
 
 **Kind**: global function  

@@ -389,7 +389,7 @@ export function irForwardLinearRate(floatingRate, discountCurve) {
  * 
  * @param {Array<Cashflow>} cashflows future cashflows to be paid 
  * @param {DiscountCurve} discountCurve discount curve (used for discounting and forwards)
- * @param {number} t time point of the forward (typicall expressed in years)
+ * @param {number} t time point of the forward (typically expressed in years)
  * @returns {number} forward price of given cashflows
  */
 export function irForwardPrice(cashflows, discountCurve, t) {
@@ -542,9 +542,9 @@ export function irDiscountCurve2SpotCurve(discountCurve) {
 }
 
 /**
- * Calculates the internal rate of return (IRR) of the given series of cashflow,
+ * Calculates the internal rate of return (IRR) of the given series of cashflows,
  * i.e. the flat discount rate (continuously compounded) for which the total NPV of
- * the given cashflows is 0. The secant method is used. If not IRR can be found
+ * the given cashflows is 0. The secant method is used. If no IRR can be found
  * after {@link maxiter} iteration, an exception is thrown.
  * 
  * @param {Array<FixedCashflow>} cashflows cashflows for which the IRR is to be calculated
