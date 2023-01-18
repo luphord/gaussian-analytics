@@ -683,6 +683,7 @@ after [maxiter](maxiter) iteration, an exception is thrown.
 * implement [`duration`](#Bond+duration) method for [`Bonds`](#Bond)
 * add `scale` parameter to option pricing functions
 * add `logSimpleMoneyness` and `standardizedMoneyness` to [OptionPricingResult](#OptionPricingResult)
+- migrate from Travis-CI to [GitHub Actions]((https://github.com/luphord/gaussian-analytics/actions/workflows/test-lint.yml))
 * upgrade development dependencies
 
 ### 0.6.1 (2020-06-24)
