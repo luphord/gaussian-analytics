@@ -79,6 +79,13 @@ gauss.eqBlackScholes(100, 100, 1.0, 0.2, 0.0, 0.02);
 
 This should work at least for Firefox and Chrome.
 
+### Development
+
+Please make sure to have a recent version of [Node.js with npm](https://nodejs.org/en/download/) installed, at least [v13.2.0](https://medium.com/@nodejs/announcing-core-node-js-support-for-ecmascript-modules-c5d6dc29b663).
+
+Run `npm install` in the top-level folder of this repository to create a development environment.
+Then, `npm run lint && npm run test` will run the linter and tests.
+
 ## API Documentation
 
 #### Classes
